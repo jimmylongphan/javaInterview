@@ -1,17 +1,13 @@
 package TreeInterview;
 
-
-public class Node {
-    public int value;
-    public Node left;
-    public Node right;
-}
-
-
 public class BinaryTree {
-    public static const Integer MIN = Integer.MIN;
-    public static const Integer MAX = Integer.MAX;
-    
+
+    public class Node {
+        public int value;
+        public Node left;
+        public Node right;
+    }
+
     public boolean isBST( Node root, Integer min, Integer max) {
         if ( root == null ) {
             return true;
@@ -19,6 +15,7 @@ public class BinaryTree {
         
         // check the current node
         if ( root.value > max || root.value < min ) {
+            System.out.println( String.format("%d is > %d or < %d", root.value, max, min) );
             return false;
         }
         
@@ -27,9 +24,13 @@ public class BinaryTree {
         if ( !left ) {
             return false;
         }
+        
+        System.out.println( "left node is bst" );
 
         // right child must be BST
         boolean right = isBST( root.right, root.value, max);
+        System.out.println( String.format("right node is %b bst", right) );
+        
         return right;
     }
 }
