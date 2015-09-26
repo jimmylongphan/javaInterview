@@ -1,4 +1,4 @@
-package TreeInterview;
+package com.javainterview.app.treeInterview;
 
 public class BinaryTree {
 

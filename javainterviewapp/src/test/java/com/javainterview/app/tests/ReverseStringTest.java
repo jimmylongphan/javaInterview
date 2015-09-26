@@ -1,13 +1,14 @@
+package com.javainterview.app.tests;
 
 import static org.testng.Assert.*;
 
+import com.javainterview.app.ArrayInterview.ReverseString;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
-import ArrayInterview.ReverseString;
 
 public class ReverseStringTest {
     

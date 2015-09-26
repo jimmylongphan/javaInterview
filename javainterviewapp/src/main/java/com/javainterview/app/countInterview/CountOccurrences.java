@@ -1,4 +1,4 @@
-package CountOccurrences;
+package com.javainterview.app.countInterview;
 
 import java.util.HashMap;
 import java.util.Map;

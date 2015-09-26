@@ -1,4 +1,4 @@
-package ArrayInterview;
+package com.javainterview.app.ArrayInterview;
 
 /**
  * Reverse a string

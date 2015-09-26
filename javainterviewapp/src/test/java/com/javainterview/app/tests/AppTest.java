@@ -1,4 +1,4 @@
-package com.javainterview.app;
+package com.javainterview.app.tests;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

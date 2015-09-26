@@ -1,3 +1,4 @@
+package com.javainterview.app.tests;
 
 import static org.testng.Assert.*;
 
@@ -7,7 +8,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
-import CountOccurrences.CountOccurrences;
+import com.javainterview.app.countInterview.CountOccurrences;
 
 public class CountOccurrencesTest {
     
