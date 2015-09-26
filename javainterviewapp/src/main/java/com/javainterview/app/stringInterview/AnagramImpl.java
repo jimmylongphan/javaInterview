@@ -1,6 +1,6 @@
 package com.javainterview.app.stringInterview;
 
-public class AnagramImpl implements Anagram<Anagram>  {
+public class AnagramImpl implements Anagram<Anagram> {
     public String value;
 
     public AnagramImpl(String s) {
@@ -14,5 +14,5 @@ public class AnagramImpl implements Anagram<Anagram>  {
     public int compareTo(Anagram o) {
         return value.compareTo(o.getValue());
     }
-    
+
 }
