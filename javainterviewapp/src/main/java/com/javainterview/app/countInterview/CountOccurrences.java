@@ -9,7 +9,7 @@ import java.lang.Integer;
  * at least x occurrences of a number.
  * T: O(n)
  * S: O(n)
- * <p>
+ *
  * Assume proper values for count such as greater than 1.
  */
 public class CountOccurrences {
@@ -34,6 +34,44 @@ public class CountOccurrences {
                 countTracker.put(num, 1);
             }
         }
+        return false;
+    }
+
+
+    /**
+     * This is a modification of the above problem.
+     * Instead of asking if there are existence of numbers.
+     *
+     * We want an incrementing consecutive array.
+     * [1,2,3] is of size 3
+     */
+    public boolean hasNConsecutive(int[] array, int count) {
+        // base case where array is of size 1
+        if (array.length == 1) {
+            if (count ==1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        int tempCount = 1;
+        int leftVal = array[0];
+        for (int i=1; i<array.length; i++) {
+            // check if the index value is 1 greater
+            if (array[i] - leftVal == 1) {
+                tempCount++;
+                if (tempCount == count) {
+                    return true;
+                }
+            } else {
+                // not consecutive so reset the count
+                tempCount = 1;
+            }
+            // update the leftVal
+            leftVal = array[i];
+        }
+
         return false;
     }
 }

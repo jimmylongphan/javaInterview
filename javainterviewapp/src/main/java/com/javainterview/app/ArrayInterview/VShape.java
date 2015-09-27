@@ -3,7 +3,7 @@ package com.javainterview.app.ArrayInterview;
 /**
  * Created on 9/26/2015.
  * From Apple
- * <p>
+ *
  * Problem
  * There is a v shape array
  * Find the smallest element in the array

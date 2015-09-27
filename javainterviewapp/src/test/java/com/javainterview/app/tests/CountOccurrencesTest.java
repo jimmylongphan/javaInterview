@@ -31,4 +31,22 @@ public class CountOccurrencesTest {
         int[] input = {1};
         assertFalse(countOccurrences.hasNOccurrences(input, 5));
     }
+
+    @Test
+    public void checkConsecutive() {
+        int[] input = {1,2,3};
+        assertTrue(countOccurrences.hasNConsecutive(input,3));
+    }
+
+    @Test
+    public void checkConsecutive2() {
+        int[] input = {1,1,1};
+        assertFalse(countOccurrences.hasNConsecutive(input, 1));
+    }
+
+    @Test
+    public void checkConsecutive3() {
+        int[] input = {1,1,1,5,6,7,8,9,9,9};
+        assertTrue(countOccurrences.hasNConsecutive(input,5));
+    }
 }
