@@ -2,7 +2,6 @@ package com.javainterview.app.ArrayInterview;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,7 +14,7 @@ public class FindCommonElement {
     /**
      * Method to find the common elements between two arrays
      * Uses sort which is n log n, and space to list common elements
-     * <p>
+     *
      * Space O(n)
      * Runtime O(n log n)
      */
@@ -56,7 +55,7 @@ public class FindCommonElement {
     /**
      * Method to find if common element exists
      * If not using sorting, then we need to check all elements, which is more runtime
-     * <p>
+     *
      * Space: O(0)
      * Runtime: O(n^2)
      */
