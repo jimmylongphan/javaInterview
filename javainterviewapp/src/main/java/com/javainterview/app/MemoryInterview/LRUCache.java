@@ -39,7 +39,7 @@ public class LRUCache<K, V> {
     /**
      * Adding a new entry into the cache
      */
-    private void add(K k, V v) {
+    public void add(K k, V v) {
         // check if already hit this value
         if (map.containsKey(k)) {
             // retrieve current nodes
@@ -76,7 +76,7 @@ public class LRUCache<K, V> {
     /**
      * Retrieve the node from the cache given a key
      */
-    private Node get(K k) {
+    public Node get(K k) {
         // cache contains this key
         if (map.containsKey(k)) {
             Node node = map.get(k);
@@ -115,7 +115,7 @@ public class LRUCache<K, V> {
     /**
      * Check if the cache has reached capacity
      */
-    private boolean isFull() {
+    public boolean isFull() {
         return size == capacity;
     }
 
