@@ -89,13 +89,13 @@ public class WaterFlow {
 
         // initialize all points for pacific side
         HashMap<Point, Boolean> visitedPacific = new HashMap<Point, Boolean>();
-        // search every path from the vertical line along left side of matrix
+        // search every path from the vertical line along top side of matrix
         for (int i = 0; i < length; ++i) {
             Point p = new Point(0, i);
             visitedPacific.put(p, true);
             search(p, visitedPacific, matrix);
         }
-        // search every path from the horizontal line along top side of matrix
+        // search every path from the horizontal line along left side of matrix
         for (int i = 0; i < length; ++i) {
             Point p = new Point(i, 0);
             visitedPacific.put(p, true);
@@ -104,13 +104,13 @@ public class WaterFlow {
 
         // initialize all visited points for atlantic side
         HashMap<Point, Boolean> visitedAtlantic = new HashMap<Point, Boolean>();
-        // search every path from the vertical line along right side of matrix
+        // search every path from the vertical line along bottom side of matrix
         for (int i = 0; i < length; ++i) {
             Point p = new Point(length - 1, i);
             visitedAtlantic.put(p, true);
             search(p, visitedAtlantic, matrix);
         }
-        // search every path from the horizontal line along bottom side of matrix
+        // search every path from the horizontal line along right side of matrix
         for (int i = 0; i < length; ++i) {
             Point p = new Point(i, length - 1);
             visitedAtlantic.put(p, true);
