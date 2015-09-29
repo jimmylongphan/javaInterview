@@ -33,4 +33,13 @@ public class BinaryTree {
 
         return right;
     }
+
+    public void insert(Node root) {
+
+    }
+
+    public void delete(Node root) {
+
+    }
+
 }
