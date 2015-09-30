@@ -1,5 +1,7 @@
 package com.javainterview.app.treeInterview;
 
+import java.util.HashMap;
+
 /**
  * Created on 9/28/2015.
  * http://www.programcreek.com/2014/05/leetcode-implement-trie-prefix-tree-java/
