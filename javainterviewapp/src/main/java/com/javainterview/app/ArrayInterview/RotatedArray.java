@@ -33,6 +33,8 @@ public class RotatedArray {
      * than the middle number. Then we just check the other side because we know it's been
      * rotated.
      *
+     * Runtime: O(log n)
+     *
      * @param nums   array of numbers
      * @param left   leftmost index
      * @param right  rightmost index
