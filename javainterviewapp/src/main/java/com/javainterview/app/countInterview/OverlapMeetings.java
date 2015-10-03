@@ -11,6 +11,7 @@ import java.util.PriorityQueue;
  */
 public class OverlapMeetings {
 
+    public static int MIN_IN_DAY = 1440;
     public static int MILLI_IN_MIN = 60000;
 
     /**
@@ -26,7 +27,7 @@ public class OverlapMeetings {
      */
     public boolean findOverlap(List<Meetings> meetings, int timeInMinute) {
         // first convert the timeInMinutes to milliseconds
-        int timeInMillis = timeInMinute * MILLI_IN_MIN;
+        int timeInMillis = timeInMinute;
 
         // put all meetings into the priority queueu
         PriorityQueue<Meetings> orderedMeetings = new PriorityQueue<Meetings>(meetings);
@@ -60,4 +61,39 @@ public class OverlapMeetings {
         // no overlaps found
         return false;
     }
+
+
+    /**
+     * Check if the time is in between the meetings from the list.
+     * If it is in between, then fill in the bitmap with true values from the
+     * range in the meetings.
+     *
+     * Meetings are the minutes of the day in start time and end time.
+     *
+     * @param meetings
+     * @param timeInMinute
+     * @return
+     */
+    public boolean findOverlapBitMap(List<Meetings> meetings, int timeInMinute) {
+        int[] countMap = new int[MIN_IN_DAY];
+
+        // loop through all meetings
+        for (Meetings meeting : meetings) {
+            // check if time is in between meetings
+            if (timeInMinute >= meeting.startTime && timeInMinute <= meeting.endTime) {
+                for (int i = meeting.startTime; i <= meeting.endTime; i++) {
+                    // set all values in bitmap to greater than zero
+                    // if it is already set, then we know there is an overlap
+                    if (countMap[i] > 0) {
+                        return true;
+                    } else {
+                        countMap[i] = countMap[i] + 1;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
 }
