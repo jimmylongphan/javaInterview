@@ -77,4 +77,125 @@ public class RotatedArray {
         }
     }
 
+
+    /**
+     * This method searches for the position to insert in a rotated array
+     * If the array is not rotated, then search within the proper range.
+     *
+     * If it is rotated, then perform binary search on the array
+     * If the middle value is less than its neighbors, then start in the middle.
+     * If the middle is greater than both ends, then start after middle
+     * If the middle is less than both ends, then start before middle
+     * If start is less tha end, then use the current range.
+     * Loop until the starting position is greater than end -1.
+     * Using end-1 because we will need to use array.length-1 for later.
+     *
+     * If target is between start and previous, then insert at start.
+     * If target is less than the rightmost digit, then find pos aat end.
+     * Else Try to find target between 0 and start.
+     *
+     * @param array  array that is rotated
+     * @param target value to insert
+     * @return position to insert
+     */
+    public int findPositionToInsert(int[] array, int target) {
+        // the array is not rotated
+        if (array[0] < array[array.length - 1]) {
+            int position = getPositionWithinRange(array, 0, array.length - 1, target);
+            return position;
+        }
+
+        int start = 0;
+        int end = array.length - 1;
+
+        // loop through array
+        // end - 1 because we may insert at end if it is not found
+        while (start < end - 1) {
+            // calculate the middle value
+            int mid = start + (end - start) / 2;
+            int midVal = array[mid];
+
+            // check if the middle value is less than both sides
+            if (midVal < array[mid + 1] &&
+                    midVal < array[mid - 1]) {
+                // then the start is the middle
+                start = mid;
+                break;
+            } else if (midVal > array[start] &&
+                    midVal > array[end]) {
+                // middle is greater than the ends
+                // start from the index after middle
+                start = mid + 1;
+            } else if (midVal < array[start] &&
+                    midVal < array[end]) {
+                // middle is less than the ends
+                // start from the middle minus 1
+                end = mid - 1;
+            } else if (array[start] < array[end]) {
+                // start is less than end, so we can use this range
+                break;
+            }
+        }
+
+        // start is greater than end so we begin at the end
+        if (array[start] > array[end]) {
+            start = end;
+        }
+
+        if (target < array[start] || target > array[start - 1]) {
+            // target is between start and the value before start
+            // so we insert at start
+            return start;
+        } else if (target <= array[array.length - 1]) {
+            // target is less than the very end
+            // so get position from start to end
+            return getPositionWithinRange(array, start, array.length - 1, target);
+        } else {
+            // target is greater than the end
+            // so search from left to start
+            return getPositionWithinRange(array, 0, start - 1, target);
+        }
+    }
+
+
+    /**
+     * Find the position to insert the new value given the array and positions
+     *
+     * @param array  array
+     * @param start  beginning to search
+     * @param end    end to search
+     * @param target value to find
+     * @return position where we can insert the value
+     */
+    private int getPositionWithinRange(int[] array, int start, int end, int target) {
+
+        // loop through the subarray
+        while (start < end) {
+            // get the middle position
+            int mid = start + (end - start) / 2;
+            // if we find the target already exists, we are done
+            if (target == array[mid]) {
+                return mid;
+            } else if (target > array[mid]) {
+                // the target is larger than the middle
+                // search in the right half
+                start = mid + 1;
+            } else {
+                // target is less than the middle
+                // search in the left half
+                end = mid - 1;
+            }
+        }
+
+        // finished looping and did not find the target
+        // we know the target is greater than the start
+        // so return the position after start
+        if (target >= array[start]) {
+            return start + 1;
+        }
+
+        // target is less than start
+        // so return start
+        return start;
+    }
 }
