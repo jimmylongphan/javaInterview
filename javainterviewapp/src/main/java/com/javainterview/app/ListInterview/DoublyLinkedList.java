@@ -8,6 +8,47 @@ public class DoublyLinkedList {
     ListNode head;
 
     /**
+     * This method does 2 things
+     * First it reverse the list recursively.
+     * Also, it creates a copy so the original node is not modified.
+     *
+     * @param node node to reverse
+     * @return the modified node
+     */
+    public ListNode reverseRecursive(ListNode node) {
+        if (node == null) {
+            return null;
+        }
+
+        // we reached the end
+        if (node.next == null) {
+            head = node;
+            // this the new start
+            node.pre = null;
+            return node;
+        }
+
+        // have not reached the end so we can continue
+        ListNode next = node.next;
+
+        // after retrieve the next node, unlink it
+        node.next = null;
+
+        // reverse everything in new node;
+        ListNode reversedNextNode = reverseRecursive(next);
+
+        // join the two lists
+        reversedNextNode.next = node;
+
+        // the currents node previous is now points to next
+        node.pre = reversedNextNode;
+
+        // return the modified node
+        return node;
+    }
+
+
+    /**
      * We only operate on the current node.
      * Modify the two references the current node is using.
      *
@@ -28,6 +69,32 @@ public class DoublyLinkedList {
             this.head = current;
             current = next;
         }
+    }
+
+    /**
+     * Reverse the list with a new copy
+     *
+     * @param node node to reverse
+     * @return a copied and reversed list
+     */
+    public ListNode reverseListCopy(ListNode node) {
+        ListNode current = new ListNode(node);
+        ListNode next;
+        ListNode newHead = null;
+
+        while (current != null) {
+            next = current.next;
+            if (next != null) {
+                next = new ListNode(current.next);
+                next.pre = current;
+            }
+            current.next = current.pre;
+            current.pre = next;
+
+            newHead = current;
+            current = next;
+        }
+        return newHead;
     }
 
 
