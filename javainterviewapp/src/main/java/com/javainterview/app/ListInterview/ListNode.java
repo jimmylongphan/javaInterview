@@ -16,6 +16,12 @@ public class ListNode<T extends Comparable<T>> {
         this.value = value;
     }
 
+    public ListNode( ListNode<T> node ) {
+        this.value = node.value;
+        this.pre = node.pre;
+        this.next = node.next;
+    }
+
     /**
      * High level compareTo
      *
