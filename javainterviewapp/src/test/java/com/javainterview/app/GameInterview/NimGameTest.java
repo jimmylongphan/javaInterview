@@ -15,7 +15,7 @@ public class NimGameTest {
         NimGame game = new NimGame();
         
         int stoneCount = 4;
-        assertTrue( game.canIWin(stoneCount) );
+        assertFalse( game.canIWin(stoneCount) );
     }
     
     
@@ -24,7 +24,7 @@ public class NimGameTest {
         NimGame game = new NimGame();
         
         int stoneCount = 5;
-        assertFalse( game.canIWin(stoneCount) );
+        assertTrue( game.canIWin(stoneCount) );
     }
 
     
