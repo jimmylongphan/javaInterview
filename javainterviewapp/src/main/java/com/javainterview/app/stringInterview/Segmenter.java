@@ -52,7 +52,7 @@ public class Segmenter {
             // check if we are at the end of the input
             // if so, then add the remaining substring and break
             if (index > end) {
-                result.add(s.substring(start, end));
+                result.add(s.substring(start, s.length()));
                 break;
             }
 

@@ -42,4 +42,40 @@ public class CheckParenthesis {
         // if all values popped off successfully then this string is good
         return stack.isEmpty();
     }
+
+
+    /*
+    * input: int n
+    * output: valid parenthesis combinations for n
+    * example: n = 2
+    * ()(),  (())
+    * ())( -> this is not a valid one
+    *
+    * n = 3
+    * ((()))
+    * (()())
+    * (())()
+    * ()(())
+    * ()()()
+    */
+    public void generateParenthesis(List<String> result, String s, int openCountRemaining, int closeCountRemaining) {
+        if ( openCountRemaining > closeCountRemaining ) {
+            return;
+        }
+
+        if (openCountRemaining == 0 && closeCountRemaining == 0) {
+            result.add(s);
+            return;
+        }
+
+        if (openCountRemaining > 0) {
+            generateParenthesis(result, s + "(", openCountRemaining - 1, closeCountRemaining);
+        }
+
+        if (closeCountRemaining > 0) {
+            generateParenthesis(result, s + ")", openCountRemaining, closeCountRemaining - 1);
+        }
+    }
+
+
 }

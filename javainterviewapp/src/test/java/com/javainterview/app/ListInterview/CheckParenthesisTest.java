@@ -2,6 +2,9 @@ package com.javainterview.app.ListInterview;
 
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.testng.Assert.*;
 
 /**
@@ -24,4 +27,12 @@ public class CheckParenthesisTest {
         assertFalse(checkParenthesis.hasValidParenthesis(s4));
     }
 
+    @Test
+    public void testGenerateParenthesis() throws Exception {
+        CheckParenthesis checkParenthesis = new CheckParenthesis();
+
+        List<String> result = new ArrayList<String>();
+        checkParenthesis.generateParenthesis(result, "", 2, 2);
+        System.out.println(result);
+    }
 }
