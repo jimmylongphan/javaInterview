@@ -20,11 +20,11 @@ public class BinaryTreeTest {
 
     @Test
     public void checkSmall() {
-        BinaryTree.Node node = binaryTree.new Node();
+        Node node = new Node();
         node.value = 50;
-        node.left = binaryTree.new Node();
+        node.left = new Node();
         node.left.value = 25;
-        node.right = binaryTree.new Node();
+        node.right = new Node();
         node.right.value = 75;
 
         boolean isBST = binaryTree.isBST(node, Integer.MIN_VALUE, Integer.MAX_VALUE);
@@ -34,9 +34,9 @@ public class BinaryTreeTest {
 
     @Test
     public void negTest() {
-        BinaryTree.Node node = binaryTree.new Node();
+        Node node = new Node();
         node.value = 50;
-        node.left = binaryTree.new Node();
+        node.left = new Node();
         node.left.value = 75;
 
         boolean isBST = binaryTree.isBST(node, Integer.MIN_VALUE, Integer.MAX_VALUE);
@@ -59,7 +59,7 @@ public class BinaryTreeTest {
         bt.insert(75);
 
         bt.delete(75);
-        BinaryTree.Node max = bt.findMax(bt.root);
+        Node max = bt.findMax(bt.root);
         assertEquals(max.value, 50);
     }
 
@@ -69,7 +69,7 @@ public class BinaryTreeTest {
         bt.insert(25);
         bt.insert(75);
 
-        BinaryTree.Node max = bt.findMax(bt.root);
+        Node max = bt.findMax(bt.root);
         assertEquals(max.value, 75);
     }
 
@@ -87,8 +87,8 @@ public class BinaryTreeTest {
         bt.insert(25);
         bt.insert(75);
 
-        BinaryTree.Node common = bt.lowestCommonAncestor(bt.root,
-                bt.new Node(25), bt.new Node(75));
+        Node common = bt.lowestCommonAncestor(bt.root,
+                new Node(25), new Node(75));
         assertEquals(common.value, 50);
     }
 }
