@@ -15,19 +15,7 @@ public class BinaryTree {
         root = new Node(value);
     }
 
-    public class Node {
-        public int value;
-        public Node left;
-        public Node right;
 
-        public Node() {
-
-        }
-
-        public Node(int value) {
-            this.value = value;
-        }
-    }
 
     /**
      * Runtime: O(n) have to visit all nodes to verify
