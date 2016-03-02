@@ -17,6 +17,11 @@ import java.util.List;
  */
 public class Permutations {
 
+    /**
+     * Get permutations of characters in ta string
+     * @param s
+     * @return
+     */
     public List<String> getPermutations(String s) {
         // base case
         if (s == null) {
@@ -68,5 +73,54 @@ public class Permutations {
     }
 
 
+    /**
+     * Given a collection of distinct numbers, return all possible permutations
+     *
+     * [1,2] -> [2,1], [1,2]
+     *
+     * Complexity: O(n!)
+     *   For every permutation, we need the permutation of the smaller array
+     *
+     * @param num
+     * @return
+     */
+    public List<List<Integer>> permuteNum(int[] num) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
 
+        // no more numbers to permute
+        if (num.length == 0) {
+            return result;
+        }
+
+        // permute the the smaller array
+        List<Integer> subPermutations = new ArrayList<Integer>();
+
+        // get the first number to permute
+        subPermutations.add(num[0]);
+        result.add(subPermutations);
+
+        // loop through all remaining numbers in array
+        for (int i=1; i<num.length; i++) {
+            // temporary result
+            List<List<Integer>> tempResult = new ArrayList<List<Integer>>();
+            // for all numbers up to i
+            for (int j=0; j <= i; j++) {
+
+                // for every current list
+                for (List<Integer> list : result) {
+                    // create a new list with current values
+                    List<Integer> newList = new ArrayList<Integer>(list);
+
+                    // add the remaining number into all positions as described by j
+                    newList.add(j, num[i]);
+
+                    // add this list into the temp result
+                    tempResult.add(newList);
+                }
+            }
+            result = tempResult;
+        }
+
+        return result;
+    }
 }

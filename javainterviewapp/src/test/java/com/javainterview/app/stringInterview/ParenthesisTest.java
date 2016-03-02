@@ -1,12 +1,11 @@
 package com.javainterview.app.stringInterview;
 
-import org.junit.Assert;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.testng.Assert.*;
 
 /**
  * Created on 2/29/2016.
