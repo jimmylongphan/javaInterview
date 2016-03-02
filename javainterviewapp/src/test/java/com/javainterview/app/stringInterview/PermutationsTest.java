@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -41,5 +42,19 @@ public class PermutationsTest {
         expectedResults.add("cba");
 
         Assert.assertEquals(expectedResults, results);
+    }
+
+    @Test
+    public void testPermuteNum() throws Exception {
+        int[] num = {1, 2};
+
+        Permutations p = new Permutations();
+        List<List<Integer>> result = p.permuteNum(num);
+
+        List<List<Integer>> expectedResults = new ArrayList<List<Integer>>();
+        expectedResults.add(Arrays.asList(2,1));
+        expectedResults.add(Arrays.asList(1,2));
+
+        Assert.assertEquals(expectedResults, result);
     }
 }
