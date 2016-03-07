@@ -3,6 +3,8 @@ package com.javainterview.app.stringInterview;
 import java.util.*;
 
 /**
+ * LinkedIn
+ *
  * Strings are isomorphic if the letters in one word can be remapped to form the
  * second word.
  *
