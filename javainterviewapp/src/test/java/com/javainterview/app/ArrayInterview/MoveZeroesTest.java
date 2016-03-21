@@ -1,9 +1,8 @@
 package com.javainterview.app.ArrayInterview;
 
-import org.junit.Assert;
-import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 /**
  * Created on 3/16/2016.
@@ -18,6 +17,6 @@ public class MoveZeroesTest {
         mz.moveZeroes(numbers);
 
         int expected[] = {9, 7, 2, 2, 4, 0, 0};
-        Assert.assertArrayEquals(expected, numbers);
+        Assert.assertEquals(numbers, expected);
     }
 }
