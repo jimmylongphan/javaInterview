@@ -1,6 +1,8 @@
 package com.javainterview.app.treeInterview;
 
 
+import java.util.*;
+
 /**
  * Company Tag: Facebook
  * 
@@ -48,80 +50,80 @@ package com.javainterview.app.treeInterview;
  *  Return the result list
  */
 public class VerticalOrder {
-    
+
     public List<List<Integer>> verticalOrder(Node root) {
-        List<List<Integer>> result = new ArrayList<>();
-        
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+
         // error check
         if (root == null) {
             return result;
-        } 
-        
-        Map<Integer, ArrayList<Integer>> map = new HashMap<>();
-        
+        }
+
+        Map<Integer, ArrayList<Integer>> columnNodeMap = new HashMap<Integer, ArrayList<Integer>>();
+
         // Implementing breadth-first-search and we are using
         // a queue
-        Queue<Node> q = new LinkedList<>();
-        
+        Queue<Node> nodeQ = new LinkedList<Node>();
+
         // this variable keeps track of which column the node belongs to
-        Queue<Integer> columns = new LinkedList<>();
-        
-        q.add(root);
+        Queue<Integer> columnQ = new LinkedList<Integer>();
+
+        nodeQ.add(root);
         // the root node belongs to column 0
-        columns.add(0);
-        
+        columnQ.add(0);
+
         int min = 0, max = 0;
-        while(!q.isEmpty()) {
-            Node node = q.poll();
-            
+        while (!nodeQ.isEmpty()) {
+            Node currentNode = nodeQ.poll();
+
             // get the current column value
-            int column = columns.poll();
-            
+            int column = columnQ.poll();
+
             // check if we are keeping track of this column
-            if(!map.containsKey(column)) {
-                map.put(column, new ArrayList<Integer>());
+            if (!columnNodeMap.containsKey(column)) {
+                columnNodeMap.put(column, new ArrayList<Integer>());
             }
-            
+
             // add this node to the current column array
-            map.get(column).add(node.value);
-            
+            columnNodeMap.get(column).add(currentNode.value);
+
             // left children are one column to the left
-            if( node.left != null) {
+            if (currentNode.left != null) {
                 // add the child to the queue
-                q.add(node.left);
-                
+                nodeQ.add(currentNode.left);
+
                 // left child is one column to the left
                 int leftColumnNum = column - 1;
-                columns.add(leftColumnNum);
-                
+                columnQ.add(leftColumnNum);
+
                 // keep track of the leftmost column
-                if(column <= min) {
+                if (column <= min) {
                     min = leftColumnNum;
                 }
             }
-            
+
             // right children are one column to the right
-            if( node.right !=null ) {
+            if (currentNode.right != null) {
                 // add the child to the queue
-                q.add(node.right);
+                nodeQ.add(currentNode.right);
                 // right child is one column to the right
                 int rightColumnNum = column + 1;
-                columns.add(rightColumnNum);
-                
+                columnQ.add(rightColumnNum);
+
                 // keep track of the rightmost column
-                if(column >= max) {
+                if (column >= max) {
                     max = rightColumnNum;
                 }
             }
         }  // end-while
-        
+
         // loop through all the columns from left to right
-        for(int i=min; i <= max; i++) {
+        for (int i = min; i <= max; i++) {
             // add the array of nodes to the result
             // in the order from left to right
-            result.add(map.get(i));
+            result.add(columnNodeMap.get(i));
         }
-        
+
         return result;
     }
 }
