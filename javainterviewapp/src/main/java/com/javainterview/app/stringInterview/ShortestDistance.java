@@ -31,6 +31,15 @@ package com.javainterview.app.stringInterview;
  * Design a class which receives a list of words in the constructor, and 
  * implements a method that takes two words word1 and word2 and
  * Return shortest distance between these two words.
+ *
+ * Runtime: O(n + m)
+ * 
+ * 
+ * Problem 3:
+ * New restrictions.
+ * word1 and word2 have the same value, but are in different positions
+ * in the list.
+ * 
  * 
  */
 public class ShortestDistance {
@@ -92,9 +101,58 @@ public class ShortestDistance {
         List<Integer> positionsForWord2 = map.get(word2);
         
         int result = Integer.MAX_VALUE;
+        // loop through all positions for the given words
         for(int i=0, j=0; i < positionsForWord1.size() && j < positionsForWord2.size(); ) {
-            
+            int index1 = positionsForWord1.get(i);
+            int index2 = positionsForWord2.get(j);
+            // if word1 is before word2
+            if ( index1 < index2 ) {
+                // then we can get the distance between the two words
+                result = Math.min(result, index2 - index1);
+                // increment i to see if we can get a closer word1
+                i++;
+            } else {
+                // if word1 is after word2
+                // get distance between the words
+                result = Math.min(result, index1 - index2);
+                // increment word2 to see if we can get a closer word2
+                j++;
+            }
         }
+        return result;
+    }
+    
+    
+    public int shortestWordDistanceSame(String[] words, String word1, String word2) {
+        int index1 = Integer.MAX_VALUE;
+        // index2 will have a negative value
+        int index2 = -Integer.MAX_VALUE;
+        int distance = Integer.MAX_VALUE;
+        
+        boolean same = word1.equals(word2);
+        // loop through all words in the list
+        for (int i=0; i < words.length(); i++) {
+            // found word1
+            if (words[i].equals(word1)) {
+                // if both words are the same
+                // in this algorithm, we will be updating index2 to the found word
+                // then update index1 to the last time we saw the word
+                if (same) {
+                    // index1 will be the previous index we saw the word
+                    index1 = index2;
+                    // save the index in index2;
+                    index2 = i;
+                } else {
+                    // save index in index1
+                    index1 = i;
+                }
+            } else if (words[i].equals(word2)) {
+                // found word2
+                index2 = i;
+            }
+            distance = Math.min(distance, Math.abs(index1 - index2));
+        }
+        return distance;
     }
     
     
