@@ -117,29 +117,29 @@ public class LongestSubstring {
      * 
      */
     public int lengthOfLongestSubstringKDistinct(String s, int k) {
-       int[] letterCount = new int[256];
-       int currentDistinctCount = 0;
-       int startPos = 0;
-       int length = 0;
+        int[] letterCount = new int[256];
+        int currentDistinctCount = 0;
+        int startPos = 0;
+        int length = 0;
        
-       for (int endPos = 0; endPos < s.length(); endPos++) {
-           // see character for first time
-           if ( letterCount[s.charAt(endPos)]++ == 0 ) {
-               currentDistinctCount++;
-           }
+        for (int endPos = 0; endPos < s.length(); endPos++) {
+            // see character for first time
+            if ( letterCount[s.charAt(endPos)]++ == 0 ) {
+                currentDistinctCount++;
+            }
            
-           // reached the limit
-           if ( currentDistinctCount > k ) {
+            // reached the limit
+            if ( currentDistinctCount > k ) {
                // move the startPos forward and decrement count
                while( --letterCount[s.charAt(startPos++)] > 0 ) {
                    // do nothing
                }
-               
-               // find our max length
-               length = Math.max(length, endPos - startPos + 1);
-           }
-       }
+               currentDistinctCount--;
+            }
+            // find our max length
+            length = Math.max(length, endPos - startPos + 1);
+        }
        
-       return length;
+        return length;
     }    
 }
