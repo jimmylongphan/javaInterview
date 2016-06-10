@@ -6,12 +6,16 @@ import java.util.List;
 
 /**
  * Created on 3/1/2016.
- *
+ * Leetcode 39
+ * Company: Snapchat, Uber
+ * Tags: Array, Backtracking
+ * 
  * Given a unique set of numbers C and a target number T.
  * Find all unique combinations in C where they sum to T
  *
  * Note: We can use duplicate numbers
  *
+ * Runtime: O(n!)
  */
 public class CombinationSumDuplicates {
 
