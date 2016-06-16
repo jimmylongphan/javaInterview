@@ -17,6 +17,11 @@ import java.util.List;
  *
  * To limit this, we will only accept a k amount of integers in the combination.
  *
+ * 
+ * Solutions:
+ * http://www.sigmainfy.com/blog/k-sum-problem-analysis-recursive-implementation-lower-bound.html
+ * http://rafal.io/posts/k-numbers-sum-to-c.html
+ * 
  */
 public class KSum {
 
