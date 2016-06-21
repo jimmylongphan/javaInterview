@@ -2,6 +2,12 @@ package com.javainterview.app.ArrayInterview;
 
 
 /**
+ * LeetCode: 283
+ * Tags: Array, Two Pointers
+ * Company: Facebook, Bloomberg
+ * 
+ * 
+ * 
  * Given an array of integers.
  * Move all non-zeroes to the front of the array.
  *
@@ -22,18 +28,25 @@ package com.javainterview.app.ArrayInterview;
 public class MoveZeroes {
 
     public void moveZeroes(int[] numbers) {
+        // boundary checks
         if (numbers == null || numbers.length == 0) {
             return;
         }
 
+        // keep track where we can insert
         int insertPos = 0;
+        
         // move all numbers up in the array
         for (int num : numbers) {
+            // nonzero numbers are where we can insert
             if (num != 0) {
                 numbers[insertPos++] = num;
             }
+            // if the number is a zero, we go to next number
+            // but do not increment insertPos
         }
 
+        // after the loop, we have moved all numbers to front
         // fill all leftover spaces with zeroes
         while (insertPos < numbers.length) {
             numbers[insertPos++] = 0;
