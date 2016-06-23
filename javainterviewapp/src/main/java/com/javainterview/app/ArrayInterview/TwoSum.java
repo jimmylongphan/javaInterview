@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * LeetCode: 1
+ * Company: Google, Uber, Apple, LinkedIn
+ * Tags: Array, HashTable
+ * 
  * Created on 1/16/2016.
  *
  * Given an array. Find two numbers that add up to a sum.

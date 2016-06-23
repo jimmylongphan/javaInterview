@@ -5,6 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * LeetCode: 15
+ * Company: Amazon, Microsoft, Bloomberg, Facebook, Adobe
+ * Tags: Array, Two Pointers
+ * 
  * Created on 4/3/2016.
  *
  * Given an array of integers.
