@@ -1,6 +1,9 @@
 package com.javainterview.app.countInterview;
 
 /**
+ * LeetCode: 338
+ * Tags: Dynamic programming, bit manipulation
+ * 
  * Created on 3/20/2016.
  *
  * Problem:
