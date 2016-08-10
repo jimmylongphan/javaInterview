@@ -4,6 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * LeetCode 340
+ *
+ * Company Google
+ * Tags: Hash Table, String
+ *
  * Created on 9/26/2015.
  *
  * Given a string, find the longest substring that contains only two unique characters.
@@ -96,5 +101,44 @@ public class LongestSubstring {
 
         // return the new maxSubstring
         return maxSubstring;
+    }
+
+
+    /**
+     * Runtime: O(n * n)
+     *
+     * Keep an array Count where the index is the ascii code
+     * and the value is the count.
+     *
+     * Move the end position until we reached our max k.
+     * Then move the start position forward until we are less than k.
+     *
+     * After every update, calculate the new max length
+     */
+    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+        int[] letterCount = new int[256];
+        int currentDistinctCount = 0;
+        int startPos = 0;
+        int length = 0;
+
+        for (int endPos = 0; endPos < s.length(); endPos++) {
+            // see character for first time
+            if (letterCount[s.charAt(endPos)]++ == 0) {
+                currentDistinctCount++;
+            }
+
+            // reached the limit
+            if (currentDistinctCount > k) {
+                // move the startPos forward and decrement count
+                while (--letterCount[s.charAt(startPos++)] > 0) {
+                    // do nothing
+                }
+                currentDistinctCount--;
+            }
+            // find our max length
+            length = Math.max(length, endPos - startPos + 1);
+        }
+
+        return length;
     }
 }
