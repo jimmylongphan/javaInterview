@@ -4,6 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * LeetCode: 36
+ * Company: Snapchat, Uber, Apple
+ * Tags: Hash Table
+ * 
  * Created on 10/3/2015.
  * Validate sudoku
  *

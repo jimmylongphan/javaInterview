@@ -4,6 +4,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
+ * LeetCode: 286
+ * Company: Google, Facebook
+ * Tags: Breadth-first search
+ * 
  * Given a m x n 2D grid with initialized values
  * -1: obstacle
  * 0:  gate
