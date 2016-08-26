@@ -1,6 +1,10 @@
 package com.javainterview.app.GameInterview;
 
 /**
+ * LeetCode: 292
+ * Company: Adobe
+ * Tags: Brainteaser
+ * 
  * The definition of the nim game is where 2 players take turns removing
  * stones from a heap.
  * 
