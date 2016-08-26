@@ -6,6 +6,10 @@ import java.util.Map;
 /**
  * Created on 5/8/2016.
  *
+ * LeetCode: 325
+ * Company: Palantir, Facebook
+ * Tags: Hash Table
+ * 
  * Given an array nums and a target value k, find the maximum length of a subarray that sums to k.
  * If there isn't one, return 0 instead.
  *
@@ -15,6 +19,24 @@ import java.util.Map;
  * Given nums = [-2, -1, 2, 1], k = 1,
  * return 2. (because the subarray [-1, 2] sums to 1 and is the longest)
  *
+ * Map:
+ *   Key:  sum of all elements before Index
+ *   Value:  current Index
+ * 
+ * Idea:
+ *   previousExistingSum + currentSum = targetK
+ * 
+ *   In the loop, we subtract currentSum - targetK,
+ *   this gives us a value that will work if we subtract previousExistingSum from
+ *   our currentSum.
+ *   We look up this previousExistingSum for its index.
+ *   To get our new max length, we subtract current index - previousIndex.
+ * 
+ *   Check if this new length is greater than our current i.
+ * 
+ * Solution:
+ * Runtime: O(n)
+ * 
  */
 public class MaxSubArrayLen {
     public int maxSubArrayLen(int[] nums, int k) {

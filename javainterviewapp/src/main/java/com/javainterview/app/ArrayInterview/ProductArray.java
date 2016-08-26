@@ -1,6 +1,10 @@
 package com.javainterview.app.ArrayInterview;
 
 /**
+ * LeetCode: 238
+ * Tags: Array
+ * Company: Amazon, LinkedIn, Apple, Facebook, Microsoft
+ * 
  * Created on 3/20/2016.
  *
  * Given an array of integers.
@@ -15,7 +19,7 @@ package com.javainterview.app.ArrayInterview;
  */
 public class ProductArray {
 
-    public int[] productArray(int[] numbers) {
+    public int[] productExceptSelf(int[] numbers) {
         int length = numbers.length;
         int[] result = new int[length];
         if (numbers == null || length == 0) {
@@ -40,7 +44,7 @@ public class ProductArray {
             // update current number by multiplying suffix
             result[i] = result[i] * runningSuffix;
 
-            // when moving left, update suffixx by multiplying the
+            // when moving left, update suffix by multiplying the
             // current number
             runningSuffix = runningSuffix * numbers[i];
         }

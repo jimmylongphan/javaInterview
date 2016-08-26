@@ -7,6 +7,10 @@ import java.util.List;
 /**
  * Created on 10/5/2015.
  *
+ * LeetCode 18
+ * Company:
+ * Tags: Array, HashTable, Two Pointers
+ * 
  * Given an array of n integers
  * ARe there elements a,b,c, and d such that a +b +c +d = target
  *

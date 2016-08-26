@@ -6,9 +6,16 @@ import java.util.List;
 
 /**
  * Created on 3/2/2016.
- *
+ * 
+ * LeetCode 40
+ * Company: Snapchat, Uber
+ * Tags: Array, Backtracking
+ * 
  * Given a collection C and target T, find all combinations that sum to T.
  * Numbers in each combo can be used only once.
+ *
+ * Runtime: O(n!)
+ *   Each recursive call is 1 less than previous
  *
  */
 public class CombinationSumUnique {
