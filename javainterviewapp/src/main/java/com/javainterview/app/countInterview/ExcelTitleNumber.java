@@ -1,6 +1,10 @@
 package com.javainterview.app.countInterview;
 
 /**
+ * LeetCode: 171
+ * Company: Microsoft Uber
+ * Tags: Math
+ * 
  * Given a Excel title, convert to the column number
  * A -> 1
  * Z -> 26

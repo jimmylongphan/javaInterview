@@ -4,6 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * LeetCode: 202
+ * Company: Uber, Airbnb, Twitter
+ * Tags: Hash, Math
+ * 
  * Created on 10/3/2015.
  *
  * Start with any positive integer.

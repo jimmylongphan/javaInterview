@@ -2,6 +2,10 @@ package com.javainterview.app.countInterview;
 
 
 /**
+ * Leetcode: 136
+ * Company: Palantir, Airbnb
+ * Tags: Hash Table, Bit Manipulation
+ * 
  * Given an array of integers, every element appears twice except one.
  * Find the integer.
  *

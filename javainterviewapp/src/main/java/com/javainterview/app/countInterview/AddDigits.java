@@ -2,6 +2,10 @@ package com.javainterview.app.countInterview;
 
 
 /**
+ * LeetCode: 258
+ * Company: Microsoft
+ * Tag: Math
+ * 
  * Given non-negative integer. Add all digits until only a single digit remains.
  *
  * 38 => 3 + 8 = 11 -> 1 + 1 -> 2
