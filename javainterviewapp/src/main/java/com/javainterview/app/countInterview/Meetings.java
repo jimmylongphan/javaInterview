@@ -1,5 +1,9 @@
 package com.javainterview.app.countInterview;
 
+import com.javainterview.app.ArrayInterview.Interval;
+
+import java.util.Arrays;
+
 /**
  * Created on 9/30/2015.
  *
@@ -50,7 +54,7 @@ public class Meetings implements Comparable<Meetings> {
         // -1 x is less
         // 0 x is equal
         // +1 x is greater
-        Arrays.sort(intervals, (x,y) -> x.start - y.start);
+        Arrays.sort(intervals, (x, y) -> x.start - y.start);
         
         for (int i=1; i < intervals.length; i++) {
             // check if the current end time overlaps the next start time
