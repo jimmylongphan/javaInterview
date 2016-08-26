@@ -1,6 +1,12 @@
 package com.javainterview.app.ArrayInterview;
 
 /**
+ * LeetCode: 162
+ * Company: Microsoft Google
+ * Tags: Binary Search, Array
+ * 
+ * Very similar to Find Peak Element
+ * 
  * Created on 9/26/2015.
  * From Apple
  *
