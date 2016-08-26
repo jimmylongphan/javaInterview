@@ -16,7 +16,7 @@ public class ProductArrayTest {
         int[] expectedResult = {24, 12, 8, 6};
 
         ProductArray pa = new ProductArray();
-        int[] result = pa.productArray(test);
+        int[] result = pa.productExceptSelf(test);
         Assert.assertEquals(result, expectedResult);
     }
 }
