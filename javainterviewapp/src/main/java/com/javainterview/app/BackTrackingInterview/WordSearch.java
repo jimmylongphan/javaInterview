@@ -1,6 +1,5 @@
 package com.javainterview.app.BackTrackingInterview;
 
-// TODO
 
 /**
  * LeetCode 79
@@ -22,27 +21,79 @@ package com.javainterview.app.BackTrackingInterview;
  * word = "SEE", -> returns true,
  * word = "ABCB", -> returns false
  */
- public class Solution {
+ public class WordSearch {
+
+    /**
+     * Method to call to check if word exists in the board
+     *
+     * @param board board to check
+     * @param word  word to find
+     * @return true if found
+     */
     public boolean exist(char[][] board, String word) {
-        for(int i = 0; i < board.length; i++)
-            for(int j = 0; j < board[0].length; j++){
-                if(exist(board, i, j, word, 0))
+        // loop through all rows
+        for (int r = 0; r < board.length; r++) {
+            // loop through all cols
+            for (int c = 0; c < board[0].length; c++) {
+                // check if this word exists at this row, col
+                if (exist(board, r, c, word, 0)) {
                     return true;
+                }
             }
+        }
+
+        // went through all combinations, not found
         return false;
     }
-    
-    private boolean exist(char[][] board, int i, int j, String word, int ind){
-        if(ind == word.length()) return true;
-        if(i > board.length-1 || i <0 || j<0 || j >board[0].length-1 || board[i][j]!=word.charAt(ind))
+
+    /**
+     * Helper method to check if the word exists give the starting row and col
+     *
+     * @param board     board to check
+     * @param r         the current row
+     * @param c         the current col
+     * @param word      the word to find
+     * @param wordIndex current position in the word
+     * @return true if found
+     */
+    private boolean exist(char[][] board, int r, int c, String word, int wordIndex) {
+        // reached the end of the word
+        // the word is found
+        if (wordIndex == word.length()) {
+            return true;
+        }
+
+        // boundary check
+        if (r > board.length - 1 || r < 0 ||
+                c < 0 || c > board[0].length - 1) {
             return false;
-        board[i][j]='*';
-        boolean result =    exist(board, i-1, j, word, ind+1) ||
-                            exist(board, i, j-1, word, ind+1) ||
-                            exist(board, i, j+1, word, ind+1) ||
-                            exist(board, i+1, j, word, ind+1);
-        board[i][j] = word.charAt(ind);
+        }
+
+        // the position in this board does not match the current word index
+        if (board[r][c] != word.charAt(wordIndex)) {
+            return false;
+        }
+
+        // visited the current position in the board
+        // this will prevent cycles when visiting next positions
+        board[r][c] = '*';
+
+        // now that we have found the current char
+        // search for the next char using its position
+        int nextIndex = wordIndex + 1;
+
+        // see if any of the adjacent positions contain the next char
+        boolean result = exist(board, r - 1, c, word, nextIndex) || // previous row
+                exist(board, r, c - 1, word, nextIndex) || // previous col
+                exist(board, r, c + 1, word, nextIndex) || // next col
+                exist(board, r + 1, c, word, nextIndex); // next row
+
+        // reset the value at the current board position
+        // to allow backtracking
+        board[r][c] = word.charAt(wordIndex);
+
+        // returns true if any of the adjacent positions contains the next char
         return result;
     }
-    
+
 }
