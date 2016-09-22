@@ -10,12 +10,22 @@ import static org.testng.Assert.*;
 public class IsomorphicTest {
 
     @Test
+    public void testisIsomorphic() throws Exception {
+        String s1 = "rat";
+        String s2 = "tar";
+
+        Isomorphic isomorphic = new Isomorphic();
+        boolean isIso = isomorphic.isIsomorphic(s1, s2);
+        assertTrue(isIso);
+    }
+
+    @Test
     public void testAreIso() throws Exception {
         String s1 = "rat";
         String s2 = "tar";
 
         Isomorphic isomorphic = new Isomorphic();
-        boolean isIso = isomorphic.areIso(s1, s2);
+        boolean isIso = isomorphic.isIsomorphicEncoding(s1, s2);
         assertTrue(isIso);
     }
 
@@ -25,7 +35,7 @@ public class IsomorphicTest {
         String s2 = "bar";
 
         Isomorphic isomorphic = new Isomorphic();
-        boolean isIso = isomorphic.areIso(s1, s2);
+        boolean isIso = isomorphic.isIsomorphicEncoding(s1, s2);
         assertFalse(isIso);
     }
 
