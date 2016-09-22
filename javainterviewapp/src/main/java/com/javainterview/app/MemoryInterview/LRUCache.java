@@ -1,9 +1,15 @@
 package com.javainterview.app.MemoryInterview;
 
+import com.javainterview.app.ListInterview.DoubleLinkedNode;
+
 import java.util.HashMap;
 
-
 /**
+ * LeetCode: 146
+ *
+ * Company: All
+ * Tags: Design
+ *
  * Created on 9/27/2015.
  *
  * There are 2 parts to this cache.
@@ -14,142 +20,132 @@ import java.util.HashMap;
  * Everytime a key is accessed, it is moved to the front of the list.
  * If we need to remove a node, then we remove it from the end.
  *
- * The header is a place holder for the linked list.
+ * The head is a place holder for the linked list.
+ * The tail is a place holder for the end of the list.
  */
-public class LRUCache<K, V> {
-    // keys are the values and nodes is a linked list
-    HashMap<K, Node> map = new HashMap<K, Node>();
+public class LRUCache {
+    private HashMap<Integer, DoubleLinkedNode> cache;
+    private int count;
+    private int capacity;
+    private DoubleLinkedNode head = null;
+    private DoubleLinkedNode tail = null;
 
-    int capacity;
-    int size;
+    /**
+     * Add the new node after the head
+     * @param node the new node at beginning
+     */
+    private void addNode(DoubleLinkedNode node) {
+        node.pre = head;
+        node.next = head.next;
 
-    Node header;
-
-    public LRUCache(int capacity) {
-        // set the settings for the cache
-        this.capacity = capacity;
-
-        // current size
-        this.size = 0;
-
-        // create a dummy header
-        header = new Node(-1, -1);
+        head.next.pre = node;
+        head.next = node;
     }
 
     /**
-     * Adding a new entry into the cache
+     * Remove this node from the data structure
+     *
+     * @param node node to remove
      */
-    public void add(K k, V v) {
-        // check if already hit this value
-        if (map.containsKey(k)) {
-            // retrieve current nodes
-            Node node = map.get(k);
+    private void removeNode(DoubleLinkedNode node) {
+        DoubleLinkedNode pre = node.pre;
+        DoubleLinkedNode next = node.next;
 
-            // update node value
-            node.setValue(v);
-
-            // retrieve the node from the linked list
-            isolate(node);
-
-            // add this value front of the list
-            addFirst(node);
-        } else {
-            // create new node since it has not been seen before
-            Node node = new Node(k, v);
-            // put node into the map
-            map.put(k, node);
-
-            // if this cache is full, remove and add nodes
-            if (isFull()) {
-                // remove the last node
-                // size is already at max
-                removeLast();
-            } else {
-                // just add the node and update size
-                size++;
-            }
-            // add the node into the linked list
-            addFirst(node);
-        }
-    }
-
-    /**
-     * Retrieve the node from the cache given a key
-     */
-    public Node get(K k) {
-        // cache contains this key
-        if (map.containsKey(k)) {
-            Node node = map.get(k);
-
-            // move the node to the front of the list
-            isolate(node);
-            addFirst(node);
-            return node;
-        } else {
-            // element not in the cache
-            return null;
-        }
-    }
-
-    /**
-     * Remove the last node.
-     * Occurs when the cache is full.
-     */
-    private void removeLast() {
-        // retrieve neighboring nodes
-        Node last = header.pre;
-        Node pre = last.pre;
-
-        // detach last node
-        header.pre = pre;
-        pre.next = header;
-
-        // reset links
-        last.pre = last;
-        last.next = last;
-
-        // remove node from map
-        map.remove(last.getKey());
-    }
-
-    /**
-     * Check if the cache has reached capacity
-     */
-    public boolean isFull() {
-        return size == capacity;
-    }
-
-    /**
-     * Insert the node at the head
-     * The very first node is a dummy node
-     */
-    private void addFirst(Node node) {
-        Node next = header.next;
-        // new node is the first after the dummy
-        header.next = node;
-        next.pre = node;
-
-        // set the new nodes links
-        node.pre = header;
-        node.next = next;
-    }
-
-
-    /**
-     * Detach this node from the link
-     */
-    private void isolate(Node node) {
-        // retrieve neighbor nodes
-        Node pre = node.pre;
-        Node next = node.next;
-
-        // detach node
         pre.next = next;
         next.pre = pre;
-
-        // reset links
-        node.next = node;
-        node.pre = node;
     }
 
+    /**
+     * Move this node to the head of the list
+     * @param node node to move
+     */
+    private void moveToHead(DoubleLinkedNode node) {
+        this.removeNode(node);
+        this.addNode(node);
+    }
+
+    /**
+     * Remove the tail from the list
+     * @return the removed tail node
+     */
+    private DoubleLinkedNode popTail() {
+        DoubleLinkedNode result = tail.pre;
+        this.removeNode(result);
+        return result;
+    }
+
+    /**
+     * Initialize the cache
+     * @param capacity size of the cache
+     */
+    public LRUCache(int capacity) {
+        this.cache = new HashMap<>();
+        this.count = 0;
+        this.capacity = capacity;
+
+        // create the absolute head node
+        head = new DoubleLinkedNode();
+        head.pre = null;
+
+        tail = new DoubleLinkedNode();
+        tail.next = null;
+
+        head.next = tail;
+        tail.pre = head;
+    }
+
+    /**
+     * retrieve the value given a key in this cache
+     * @param key key to find
+     * @return value of cache
+     */
+    public int get(int key) {
+        DoubleLinkedNode node = cache.get(key);
+        if (node == null) {
+            return -1;
+        }
+
+        // using least recently used, move this to head
+        this.moveToHead(node);
+
+        // return the value
+        return node.value;
+    }
+
+    /**
+     * If there is no node, then create and add to list and cache.
+     * Remove the tail if we reached capacity.
+     * If there is a node, then update its value, move to head because least recently used
+     * @param key key of cache
+     * @param value value to retrieve
+     */
+    public void set(int key, int value) {
+        DoubleLinkedNode node = cache.get(key);
+
+        if (node == null) {
+            DoubleLinkedNode newNode = new DoubleLinkedNode(key, value);
+            this.cache.put(key, newNode);
+            this.addNode(newNode);
+            ++count;
+
+            if (count > capacity) {
+                // pop the tail node
+                DoubleLinkedNode tail = this.popTail();
+                this.cache.remove(tail.key);
+                --count;
+            }
+        } else {
+            // update the value in the node
+            node.value = value;
+            this.moveToHead(node);
+        }
+    }
+
+    /**
+     * Check if the lru is full
+     * @return true if full
+     */
+    public boolean isFull() {
+        return this.count == this.capacity;
+    }
 }
