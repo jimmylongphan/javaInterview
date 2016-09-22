@@ -6,8 +6,12 @@ import java.util.List;
 import java.util.Stack;
 
 /**
+ * LeetCode: 341
+ * 
  * Company:
- * Google
+ * Google, Facebook, Twitter
+ * 
+ * Tags: Stack, Design
  *
  * Problem:
  * Given a nested list of integers, implement an iterator to flatten it.

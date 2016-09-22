@@ -1,9 +1,16 @@
 package com.javainterview.app.ListInterview;
 
 /**
+ * LeetCode: 141
+ * Company: Amazon, Microsoft, Bloomberg, Yahoo
+ * Tags: Linked List, Two Pointers
+ * 
  * Created on 2/28/2016.
  *
  * Given a list, determine if there is a cycle in the list.
+ * 
+ * Space: O(1)
+ * Time: O(n)
  */
 public class DetectCycle {
 
@@ -19,27 +26,20 @@ public class DetectCycle {
      * @return boolean
      */
     public boolean hasCycle( ListNode node ) {
-        ListNode firstNode = node;
-        ListNode secondNode = node;
-
         // boundary checking
         if (node == null) {
             return false;
         }
 
+        ListNode firstNode = node;
+        ListNode secondNode = node;
+        
         // loop through the list
         // The two nodes must move at different rates
-        while (secondNode != null) {
+        while (firstNode.next != null && secondNode.next != null && second.next.next != null) {
             // move the first node by one
             firstNode = firstNode.next;
-
-            // move the second node by two if possible
-            if (secondNode.next != null) {
-                secondNode = secondNode.next.next;
-            } else {
-                // reached the end, there is no cycle
-                return false;
-            }
+            secondNode = secondNode.next.next;
 
             // compare the nodes
             if (firstNode == secondNode) {
