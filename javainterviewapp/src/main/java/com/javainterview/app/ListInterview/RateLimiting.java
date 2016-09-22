@@ -1,8 +1,7 @@
 package com.javainterview.app.ListInterview;
 
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * Leetcode: 359
@@ -20,6 +19,12 @@ import java.util.Queue;
  * 
  */
 public class RateLimiting {
+
+    public RateLimiting(int maxRequest, int timeLimitSeconds) {
+        this.fitBitArray = new Long[maxRequest+1];
+        this.fitBitTimeLimit = timeLimitSeconds * 1000;
+        this.fitBitArrayIndex = 0;
+    }
 
     /**
      *
@@ -64,5 +69,30 @@ public class RateLimiting {
         ok.put(message, timestamp + 10);
         return true;
     }
-    
+
+    private Long[] fitBitArray;
+    private int fitBitTimeLimit;
+    private int fitBitArrayIndex;
+
+    /**
+     * Idea: use a fixed size array for requests. This index will wrap around. The next index will be the previous
+     * max requests.  If the time limit is within our limit, then success.
+     *
+     * @return true if we can process
+     */
+    public boolean fitBitRequest() {
+        long currentTime = System.currentTimeMillis();
+
+        if (currentTime - fitBitArray[fitBitArrayIndex] < fitBitTimeLimit) {
+            return false;
+        }
+
+        // can still process the request
+        fitBitArray[fitBitArrayIndex++] = currentTime;
+        if (fitBitArrayIndex >= fitBitArray.length) {
+            // wrap the index around
+            fitBitArrayIndex = 0;
+        }
+        return true;
+    }
 }
