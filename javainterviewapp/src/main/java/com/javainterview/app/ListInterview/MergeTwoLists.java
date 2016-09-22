@@ -2,9 +2,13 @@ package com.javainterview.app.ListInterview;
 
 
 /**
+ * LeetCode: 21
+ * 
  * Company:
  * Amazon, LinkedIn, Microsoft
  *
+ * Tags: Linked List
+ * 
  * Merge two sorted linked lists and return a new list
  *
  * Solution:
@@ -47,7 +51,7 @@ public class MergeTwoLists {
         // beginning of the list
         // and the next node shall be the smaller of 
         // node1.next or node2
-        if (node1.compareTo(node2) == -1) {
+        if (node1.value < node2.value) {
             node1.next = mergeTwoLists(node1.next, node2);
 
             // return the result of the merge
