@@ -1,5 +1,7 @@
 package com.javainterview.app.ListInterview;
 
+import java.util.PriorityQueue;
+
 /**
  * LeetCode: 23
  * 
@@ -33,7 +35,7 @@ public class MergeKLists {
         // use a priority queue
         // this case is sorted from least to greatest
         // use java 8 lambda for the comparator
-        PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(lists.length, 
+        PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(lists.length,
             (ListNode x, ListNode y) -> x.val - y.val);
         
         // create a dummy to be the head

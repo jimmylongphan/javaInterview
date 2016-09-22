@@ -36,7 +36,7 @@ public class DetectCycle {
         
         // loop through the list
         // The two nodes must move at different rates
-        while (firstNode.next != null && secondNode.next != null && second.next.next != null) {
+        while (firstNode.next != null && secondNode.next != null && secondNode.next.next != null) {
             // move the first node by one
             firstNode = firstNode.next;
             secondNode = secondNode.next.next;
