@@ -51,7 +51,7 @@ public class MergeTwoLists {
         // beginning of the list
         // and the next node shall be the smaller of 
         // node1.next or node2
-        if (node1.value < node2.value) {
+        if (node1.val < node2.val) {
             node1.next = mergeTwoLists(node1.next, node2);
 
             // return the result of the merge
