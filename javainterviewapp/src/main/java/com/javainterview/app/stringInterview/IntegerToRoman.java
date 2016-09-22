@@ -1,6 +1,10 @@
 package com.javainterview.app.stringInterview;
 
 /**
+ * LeetCode: 12
+ * Company: Twitter
+ * Tags: Math String
+ *
  * Created on 1/16/2016.
  * Given an integer, convert it to roman numerals.
  *
@@ -20,8 +24,9 @@ public class IntegerToRoman {
     String tens[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
     String ones[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
 
-    public String convert(int num) {
+    public String intToRoman(int num) {
         String result = thousands[num/1000] + hundreds[(num%1000)/100] + tens[(num%100)/10] + ones[num%10];
         return result;
     }
+
 }
