@@ -5,7 +5,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Company Facebook
+ * LeetCode: 17
+ * 
+ * Company:
+ *  Facebook, Amazon, Dropbox, Google, Uber
+ * Tags:
+ *  Backtracking, String
+ * 
  * Problem:
  * Given a digit string, return all possible letter combinations that the
  * number could represent.

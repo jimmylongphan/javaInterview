@@ -17,7 +17,7 @@ public class PermutationsTest {
     public void testGetPermutations() throws Exception {
         String test = "ab";
         Permutations p = new Permutations();
-        List<String> results =  p.getPermutations(test);
+        List<String> results =  p.permuteString(test);
 
         List<String> expectedResults = new ArrayList<String>();
         expectedResults.add("ab");
@@ -31,7 +31,7 @@ public class PermutationsTest {
 
         String test = "abc";
         Permutations p = new Permutations();
-        List<String> results =  p.getPermutations(test);
+        List<String> results =  p.permuteString(test);
 
         List<String> expectedResults = new ArrayList<String>();
         expectedResults.add("abc");
@@ -49,11 +49,11 @@ public class PermutationsTest {
         int[] num = {1, 2};
 
         Permutations p = new Permutations();
-        List<List<Integer>> result = p.permuteNum(num);
+        List<List<Integer>> result = p.permute(num);
 
         List<List<Integer>> expectedResults = new ArrayList<List<Integer>>();
-        expectedResults.add(Arrays.asList(2,1));
         expectedResults.add(Arrays.asList(1,2));
+        expectedResults.add(Arrays.asList(2,1));
 
         Assert.assertEquals(expectedResults, result);
     }
