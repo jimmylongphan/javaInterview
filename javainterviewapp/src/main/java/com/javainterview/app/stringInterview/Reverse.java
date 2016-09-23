@@ -1,6 +1,28 @@
 package com.javainterview.app.stringInterview;
 
+
+
 public class Reverse {
+
+    /**
+     * LeetCode 151
+     * Company: Microsoft, snapchat, apple, bloomberg, yelp
+     * Tags: String
+     *
+     * Remove extra whitespace
+     *
+     * @param s
+     * @return
+     */
+    public String reverseWords(String s) {
+        String[] parts = s.trim().split("\\s+");
+        String out = "";
+        for (int i = parts.length - 1; i > 0; i--) {
+            out += parts[i] + " ";
+        }
+        return out + parts[0];
+    }
+
 
     /**
      * Reverse a string by reversing the order of the words
