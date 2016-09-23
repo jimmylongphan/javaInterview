@@ -19,6 +19,20 @@ import java.util.List;
  *   [3,1,2],
  *   [3,2,1]
  * ]
+ *
+ *
+ * Permute strings
+ * Idea:  Lets say we have 3 characters in a string.
+ * Two get all permutations of the 3 characters, we get permutations of 2 characters.
+ * Then we push that 3rd character into every possible spot of 2 characters.
+ *
+ *
+ * O(n!)
+ * It is factorial because to get 3 characters, we need 2 characters
+ * We need the permutations of the smaller words.
+ *
+ * Divide and Conquer
+ * Backtracking
  */
 public class Permutations {
 
@@ -37,7 +51,7 @@ public class Permutations {
      * Use DFS to generate permutations
      * 
      * @param num
-     * @param beginning position in the num array
+     * @param begin position in the num array
      * @param result list of permutations
      */
     public void permute(int[] num, int begin, List<List<Integer>> result) {
@@ -79,4 +93,60 @@ public class Permutations {
         num[pos1] = num[pos2];
         num[pos2] = temp;
     }
+
+    /**
+     * recursive solution
+     *
+     * @param s String to permute
+     * @return List of all permuted strings
+     */
+    public List<String> permuteString(String s) {
+        if (s == null) {
+            return null;
+        }
+
+        List<String> permutations = new ArrayList<>();
+
+        // base case where string is empty
+        if (s.isEmpty()) {
+            permutations.add("");
+            return permutations;
+        }
+
+        // get the first char to insert at different positions
+        char first = s.charAt(0);
+
+        // get the remaining substring
+        String remainder = s.substring(1);
+
+        // recursively get the permutations of the smaller strings
+        List<String> permutedSubstrings = permuteString(remainder);
+
+        // go through all of the smaller permutations
+        for (String substring : permutedSubstrings) {
+            // for every index in the substring
+            for (int j=0; j <= substring.length(); j++) {
+                // insert the first char at this index
+                String temp = insertCharAt(substring, first, j);
+                permutations.add(temp);
+            }
+        }
+
+        return permutations;
+    }
+
+    /**
+     * Build a new string with the character at position
+     * @param s original string
+     * @param c char to add
+     * @param index position to add
+     * @return the newly built string
+     */
+    public String insertCharAt(String s, char c, int index) {
+        String prefix = s.substring(0, index);
+        String suffix = s.substring(index);
+        return prefix + c + suffix;
+    }
+
+
 }
