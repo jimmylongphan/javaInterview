@@ -1,7 +1,12 @@
 package com.javainterview.app.stringInterview;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
+ * TODO test
+ *
  * LeetCode: 8
  * 
  * Company: LinkedIn, Airbnb
@@ -41,44 +46,51 @@ package com.javainterview.app.stringInterview;
  * 
  */
 public class TextJustification {
-    
+
+    /**
+     *
+     * @param words list of words to format
+     * @param maxWidth maximum width of each line
+     * @return the words for each line
+     */
     public List<String> fullJustify(String[] words, int maxWidth) {
-        List<String> list = new LinkedList<String>();
-        
-        // iterate through all the words
-        // i will be the starting index
-        for (int i=0; w; i < words.length; i = w) {
-            // reset current total length
-            int len = -1;
-            // initialize wordIndex to starting index
-            // loop while word index is within the array
-            // and the current length is less than the max width
-            // NOTE: +1 is for the whitespace before the new word
-            for (w = i; w < words.length && len + words[w].length() + 1 <= maxWidth; w++) {
-                // add the current words length to the total length
-                len += words[w].length() + 1;
+        List<String> result = new ArrayList<>();
+        for (int startWordIndex = 0, endWordIndex; startWordIndex < words.length; ) {
+            // width of words without space
+            int width = 0;
+            for (endWordIndex = startWordIndex; endWordIndex < words.length &&
+                    width + words[endWordIndex].length() + (endWordIndex - startWordIndex) <= maxWidth; endWordIndex++) {
+                width += words[endWordIndex].length();
             }
-            
-            // we now have as much words as possible that can fit within maxWidth
-            StringBuilder strBuilder = new StringBuilder(words[i]);
+
+            // for last line, space=1
             int space = 1, extra = 0;
-            // not 1 word, not last line
-            if (w != i && w != words.length) {
-                // subtract current total length from max width
-                // (w - i - 1) is the number of whitespace between words
-                // example:  foo bar ken
-                // 2 - 0 - 1 = 2  => 2 whitespaces
-                // 
-                space = (maxWidth - len) / (w - i - 1) + 1;
-                
-                
-                extra = (maxWidth - len) % (w - i - 1);
+            // not 1 word (div-by-zero) and not last line
+            if (endWordIndex - startWordIndex != 1 && endWordIndex != words.length) {
+                // minus 1 to exclude skip last word
+                space = (maxWidth - width) / (endWordIndex - startWordIndex - 1);
+                extra = (maxWidth - width) % (endWordIndex - startWordIndex - 1);
             }
-            
-            
-            
+
+            StringBuilder line = new StringBuilder(words[startWordIndex]);
+
+            for (startWordIndex = startWordIndex + 1; startWordIndex < endWordIndex; startWordIndex++) {
+                for (int s = space; s > 0; s--) {
+                    line.append(" ");
+                }
+                if (extra-- > 0) {
+                    line.append(" ");
+                }
+                line.append(words[startWordIndex]);
+            }
+
+            for (int s = maxWidth - line.length(); s > 0; s--) {
+                line.append(" ");
+            }
+            result.add(line.toString());
         }
+        return result;
     }
-    
+
 }
 
