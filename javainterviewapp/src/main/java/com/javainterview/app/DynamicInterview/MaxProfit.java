@@ -30,7 +30,32 @@ package com.javainterview.app.DynamicInterview;
 public class MaxProfit {
 
     public int maxProfit(int[] prices) {
-        
+        // base cases
+        if (prices == null || prices.length < 2) {
+            return 0;
+        }
+
+        // start with profit of 0
+        int maxProfit = 0;
+
+        // minimum price is first indes
+        int minPrice = prices[0];
+
+        // loop through all prices starting at 1
+        for (int i=1; i < prices.length; i++) {
+            // if current price is greater, then we want to sell
+            // calculate the max profit which is current profit or selling from minPrice
+            if (prices[i] > prices[i-1]) {
+                maxProfit = Math.max(maxProfit, prices[i] - minPrice);
+            } else {
+                // if the current price is equal or less than our previous price
+                // we want to keep this price as the minimum
+                // compare current price with minimum
+                minPrice = Math.min(minPrice, prices[i]);
+            }
+        }
+
+        return maxProfit;
     }
 
 }
