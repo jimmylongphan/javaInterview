@@ -1,6 +1,21 @@
 # javaInterview
 Store all my notes for java interviews
 
+## Core Java
+ * Boolean .equals(obj1, obj2)
+   * Default: (shallow comparison) checks if two object references points to the same object
+   * Override: (deep comparison) compares relevant data members
+ * public int hashCode()
+   * Distinct objects have different hashCodes
+   * Returns hash code values as an integer    
+   * Must be overridden if .equals is overridden
+   * Used in Hashtable, HashMap, HashSet etc. as the key
+   * If collisions occur, data is stored in a bucket. Then .equals is applied to find the correct object.
+   * If .equals returns true, then hashCode must be same.
+   * If .equals returns false, then hashCode may be different or same.
+   * If hashCode are equal, do not imply .equals is true
+   
+
 ## Database
 
 ### MemCache (NoSQL In-Memory)
