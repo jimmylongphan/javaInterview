@@ -1,6 +1,9 @@
 package com.javainterview.app.BackTrackingInterview;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * LeetCode 212
  * 
@@ -37,7 +40,7 @@ package com.javainterview.app.BackTrackingInterview;
  * please work on this problem: Implement Trie (Prefix Tree) first.
  * 
  */
-public class Solution {
+public class WordSearch2 {
     class TrieNode {
         // each node is a alphabetical character
         TrieNode[] next = new TrieNode[26];
@@ -98,38 +101,41 @@ public class Solution {
         if (c == '#' || p.next[c - 'a'] == null) {
             return;
         }
-        
+
+        // check if the current character is in the Trie of the root
+        // if it exists, then the index will have a value
+        p = p.next[c - 'a'];
+
         // the current position in the Trie is a word
         // we know because we saved the word at this node
         if (p.word != null) {
             // add the word to the result
             result.add(p.word);
-            
+
             // we found the word, we can remove it from the trie
             p.word = null;
         }
-        
+
         // mark this character as visited
         board[i][j] = '#';
-        
+
         if (i > 0) {
             // go left in the board
             dfs(board, i - 1, j, p, result);
         }
         if (j > 0) {
             // go down in the board
-            dfs(board, i, j-1, p, result);
+            dfs(board, i, j - 1, p, result);
         }
         if (i < board.length - 1) {
             // go right
             dfs(board, i + 1, j, p, result);
         }
         if (j < board[0].length - 1) {
-            dfs(board, i, j+1, p, result);
+            dfs(board, i, j + 1, p, result);
         }
-        
+
         // put the char back into the board
         board[i][j] = c;
     }
-    
 }
