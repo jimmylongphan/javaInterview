@@ -15,13 +15,13 @@ package com.javainterview.app.treeInterview;
  */
 public class InvertTree {
 
-    public Node invertTree(Node root) {
+    public TreeNode invertTree(TreeNode root) {
         if (root == null) {
             return null;
         }
 
-        Node left = root.left;
-        Node right = root.right;
+        TreeNode left = root.left;
+        TreeNode right = root.right;
 
         root.left = invertTree(right);
         root.right = invertTree(left);

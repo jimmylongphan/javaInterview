@@ -3,17 +3,17 @@ package com.javainterview.app.treeInterview;
 /**
  * Created on 2/21/2016.
  */
-public class Node {
+public class TreeNode {
     public int value;
-    public Node left;
-    public Node right;
-    public Node next;
+    public TreeNode left;
+    public TreeNode right;
+    public TreeNode next;
     public boolean visited = false;
 
-    public Node() {
+    public TreeNode() {
     }
 
-    public Node(int value) {
+    public TreeNode(int value) {
         this.value = value;
     }
 
@@ -21,7 +21,7 @@ public class Node {
         System.out.print(" " + value + " ");
     }
 
-    public Node getUnvisitedChild() {
+    public TreeNode getUnvisitedChild() {
         if (left != null && left.visited == false) {
             return left;
         } else if(right != null && right.visited == false) {

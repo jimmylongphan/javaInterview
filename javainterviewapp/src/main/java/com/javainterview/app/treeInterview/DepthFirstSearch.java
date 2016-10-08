@@ -26,8 +26,8 @@ import java.util.*;
  */
 public class DepthFirstSearch {
 
-    public void dfs(Node root) {
-        Stack<Node> s = new Stack<Node>();
+    public void dfs(TreeNode root) {
+        Stack<TreeNode> s = new Stack<TreeNode>();
         // we visit the root node first
         root.visited = true;
         root.print();
@@ -36,8 +36,8 @@ public class DepthFirstSearch {
         while(!s.isEmpty()) {
             // retrieve the current node
             // do not pop because there may be more children
-            Node currentNode = s.peek();
-            Node child = currentNode.getUnvisitedChild();
+            TreeNode currentTreeNode = s.peek();
+            TreeNode child = currentTreeNode.getUnvisitedChild();
 
             if (child != null) {
                 // child is not yet visited
@@ -58,10 +58,10 @@ public class DepthFirstSearch {
      * @param end
      * @return
      */
-    public List<String> findPath(Node start, Node end) {
-        Stack<Node> s = new Stack<Node>();
+    public List<String> findPath(TreeNode start, TreeNode end) {
+        Stack<TreeNode> s = new Stack<TreeNode>();
         List<String> path = new LinkedList<String>();
-        Map<Node, Node> parentMap = new HashMap<Node, Node>();
+        Map<TreeNode, TreeNode> parentMap = new HashMap<TreeNode, TreeNode>();
 
         // visit the root node first
         start.visited = true;
@@ -70,11 +70,11 @@ public class DepthFirstSearch {
         while(!s.isEmpty()) {
             // retrieve the current node
             // do not pop because there may be more children
-            Node currentNode = s.peek();
-            Node child = currentNode.getUnvisitedChild();
+            TreeNode currentTreeNode = s.peek();
+            TreeNode child = currentTreeNode.getUnvisitedChild();
 
             // add the parent mapping
-            parentMap.put(child, currentNode);
+            parentMap.put(child, currentTreeNode);
 
             if (child != null) {
                 // visit child
@@ -83,7 +83,7 @@ public class DepthFirstSearch {
 
                 if (child.value == end.value) {
                     // backtrack to find the node
-                    Node backTrack = child;
+                    TreeNode backTrack = child;
                     while (backTrack != null) {
                         path.add(0, backTrack.toString());
                         backTrack = parentMap.get(backTrack);
