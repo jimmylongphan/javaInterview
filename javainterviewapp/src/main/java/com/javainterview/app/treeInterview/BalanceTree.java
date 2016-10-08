@@ -13,7 +13,7 @@ public class BalanceTree {
      * @param root starting node
      * @return height of tree
      */
-    public int checkHeight(Node root) {
+    public int checkHeight(TreeNode root) {
         // base case
         if (root == null) {
             return 0;
@@ -48,7 +48,7 @@ public class BalanceTree {
      * @param root
      * @return true if balanced
      */
-    public boolean isBalanced(Node root) {
+    public boolean isBalanced(TreeNode root) {
         if (checkHeight(root) == -1) {
             return false;
         }

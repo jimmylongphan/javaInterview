@@ -5,14 +5,14 @@ import java.util.Queue;
 
 public class BinaryTree {
 
-    public Node root;
+    public TreeNode root;
 
     public BinaryTree() {
 
     }
 
     public BinaryTree(int value) {
-        root = new Node(value);
+        root = new TreeNode(value);
     }
 
 
@@ -26,7 +26,7 @@ public class BinaryTree {
      * @param max  highest possible value
      * @return true if BST
      */
-    public boolean isBST(Node root, Integer min, Integer max) {
+    public boolean isBST(TreeNode root, Integer min, Integer max) {
         if (root == null) {
             return true;
         }
@@ -60,34 +60,34 @@ public class BinaryTree {
      */
     public void insert(int value) {
         if (root == null) {
-            root = new Node(value);
+            root = new TreeNode(value);
         }
 
         root = insert(root, value);
     }
 
     /**
-     * Naive algorithm is to check if the value is less than or equal than the current node
+     * Naive algorithm is to check if the value is less than or equal than the current treeNode
      * If it is less, then recursively insert left.
      * If it is greater, then recurisvely insert right.
      *
      * Always insert at a leaf position.
      *
      * Runtime: O(log n) height of tree
-     * Space: O(1) new node
+     * Space: O(1) new treeNode
      */
-    private Node insert(Node node, int value) {
-        if (node == null) {
-            node = new Node(value);
-            return node;
+    private TreeNode insert(TreeNode treeNode, int value) {
+        if (treeNode == null) {
+            treeNode = new TreeNode(value);
+            return treeNode;
         }
 
-        if (value < node.value) {
-            node.left = insert(node.left, value);
-        } else if (value > node.value) {
-            node.right = insert(node.right, value);
+        if (value < treeNode.value) {
+            treeNode.left = insert(treeNode.left, value);
+        } else if (value > treeNode.value) {
+            treeNode.right = insert(treeNode.right, value);
         }
-        return node;
+        return treeNode;
     }
 
 
@@ -105,64 +105,64 @@ public class BinaryTree {
     /**
      * If there is nothing to remove then return null.
      * If the value is less, then we remove on the left.
-     * Since the left side is modified, we replace our left node to the new left.
+     * Since the left side is modified, we replace our left treeNode to the new left.
      *
      * Same is applied to the right side.
      *
      * If the value matches, then we can return one of the nodes if only one of them exist.
      *
      * If there are two children, then we find the max value on the left side, then we replace
-     * the current node with that value. After replacing, we need to remove the maxLeft value
+     * the current treeNode with that value. After replacing, we need to remove the maxLeft value
      * on the left side.
      *
      * Then we recursively call with that new removed value.
      *
-     * Then we return the current node which has been modified.
+     * Then we return the current treeNode which has been modified.
      *
      * Runtime: O(log n) or the height of the tree
      * Space:
      *
-     * @param node  current node
+     * @param treeNode  current treeNode
      * @param value value to delete
-     * @return The modified node
+     * @return The modified treeNode
      */
-    private Node delete(Node node, int value) {
-        // no node to remove
-        if (node == null) {
+    private TreeNode delete(TreeNode treeNode, int value) {
+        // no treeNode to remove
+        if (treeNode == null) {
             return null;
         }
 
-        if (value < node.value) {
+        if (value < treeNode.value) {
             // go to the left of the tree if it exists
-            node.left = delete(node.left, value);
-        } else if (value > node.value) {
-            node.right = delete(node.right, value);
+            treeNode.left = delete(treeNode.left, value);
+        } else if (value > treeNode.value) {
+            treeNode.right = delete(treeNode.right, value);
         } else {
-            // this is the node we want to delete
-            // if only left exists, then we replace the current node with the left child
-            if (node.right == null) {
-                return node.left;
-            } else if (node.left == null) {
-                // only right node exists, so return right
-                return node.right;
+            // this is the treeNode we want to delete
+            // if only left exists, then we replace the current treeNode with the left child
+            if (treeNode.right == null) {
+                return treeNode.left;
+            } else if (treeNode.left == null) {
+                // only right treeNode exists, so return right
+                return treeNode.right;
             }
 
             // there are two children
-            Node temp = node;
+            TreeNode temp = treeNode;
 
             // find the max value on the left side
-            Node maxLeft = findMax(node.left);
+            TreeNode maxLeft = findMax(treeNode.left);
 
-            // replace the current node with the maxLeft
-            node.value = maxLeft.value;
+            // replace the current treeNode with the maxLeft
+            treeNode.value = maxLeft.value;
 
-            // delete the maxLeft node and rebuild the left
-            node.left = delete(temp.left, maxLeft.value);
+            // delete the maxLeft treeNode and rebuild the left
+            treeNode.left = delete(temp.left, maxLeft.value);
         }
 
-        // node has been modified where its children is modified
+        // treeNode has been modified where its children is modified
         // or it has been removed
-        return node;
+        return treeNode;
     }
 
     /**
@@ -171,7 +171,7 @@ public class BinaryTree {
      * Runtime: O(log n)  height of tree
      * Space: 0 not storing
      */
-    public Node findMax(Node root) {
+    public TreeNode findMax(TreeNode root) {
         if (root.right != null) {
             return findMax(root.right);
         }
@@ -193,23 +193,23 @@ public class BinaryTree {
      *
      * @param root starting node
      */
-    public void printLevelOrder(Node root) {
-        Queue<Node> currentLevel = new LinkedList<Node>();
-        Queue<Node> nextLevel = new LinkedList<Node>();
+    public void printLevelOrder(TreeNode root) {
+        Queue<TreeNode> currentLevel = new LinkedList<TreeNode>();
+        Queue<TreeNode> nextLevel = new LinkedList<TreeNode>();
 
         // start with the root
         currentLevel.add(root);
 
         while (!currentLevel.isEmpty()) {
-            for (Node node : currentLevel) {
-                if (node.left != null) {
-                    nextLevel.add(node.left);
+            for (TreeNode treeNode : currentLevel) {
+                if (treeNode.left != null) {
+                    nextLevel.add(treeNode.left);
                 }
-                if (node.right != null) {
-                    nextLevel.add(node.right);
+                if (treeNode.right != null) {
+                    nextLevel.add(treeNode.right);
                 }
                 // print spaces between all the nodes on this level
-                System.out.print(node.value + " ");
+                System.out.print(treeNode.value + " ");
             }
 
             // this is a new level and print a new line
@@ -217,7 +217,7 @@ public class BinaryTree {
 
             // alternate the levels
             currentLevel = nextLevel;
-            nextLevel = new LinkedList<Node>();
+            nextLevel = new LinkedList<TreeNode>();
         }
     }
 
@@ -228,9 +228,9 @@ public class BinaryTree {
      * @param root starting node
      * @param a first node to find
      * @param b second node to find
-     * @return Node if it exists
+     * @return TreeNode if it exists
      */
-    public Node lowestCommonAncestor(Node root, Node a, Node b) {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode a, TreeNode b) {
         if (root == null) {
             return null;
         }
@@ -242,8 +242,8 @@ public class BinaryTree {
         }
 
         // recursively find ancestor for both children
-        Node leftCommon = lowestCommonAncestor(root.left, a, b);
-        Node rightCommon = lowestCommonAncestor(root.right, a, b);
+        TreeNode leftCommon = lowestCommonAncestor(root.left, a, b);
+        TreeNode rightCommon = lowestCommonAncestor(root.right, a, b);
 
         if (leftCommon != null && rightCommon != null) {
             // original root is the common ancestor of both

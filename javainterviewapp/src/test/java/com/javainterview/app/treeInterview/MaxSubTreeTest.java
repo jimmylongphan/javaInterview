@@ -3,8 +3,6 @@ package com.javainterview.app.treeInterview;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
-
 /**
  * Created on 3/6/2016.
  */
@@ -12,15 +10,15 @@ public class MaxSubTreeTest {
 
     @Test
     public void testGetMaxSubtree() throws Exception {
-        Node one = new Node(-1);
-        Node two = new Node(1);
-        Node three = new Node(10000000);
+        TreeNode one = new TreeNode(-1);
+        TreeNode two = new TreeNode(1);
+        TreeNode three = new TreeNode(10000000);
 
         one.left = two;
         one.right = three;
 
         MaxSubTree mst = new MaxSubTree();
-        Node maxSubtree = mst.getMaxSubtree(one);
+        TreeNode maxSubtree = mst.getMaxSubtree(one);
 
         // Should return the right child
         Assert.assertEquals(maxSubtree, three);
@@ -28,13 +26,13 @@ public class MaxSubTreeTest {
 
     @Test
     public void testGetMaxSubtree2() throws Exception {
-        Node one = new Node(-10);
-        Node two = new Node(2);
-        Node three = new Node(-1);
-        Node four = new Node(4);
-        Node five = new Node(5);
-        Node six = new Node(-1);
-        Node seven = new Node(5);
+        TreeNode one = new TreeNode(-10);
+        TreeNode two = new TreeNode(2);
+        TreeNode three = new TreeNode(-1);
+        TreeNode four = new TreeNode(4);
+        TreeNode five = new TreeNode(5);
+        TreeNode six = new TreeNode(-1);
+        TreeNode seven = new TreeNode(5);
 
         one.left = two;
         one.right = three;
@@ -44,7 +42,7 @@ public class MaxSubTreeTest {
         three.right = seven;
 
         MaxSubTree mst = new MaxSubTree();
-        Node maxSubtree = mst.getMaxSubtree(one);
+        TreeNode maxSubtree = mst.getMaxSubtree(one);
 
         // Should return the right child
         Assert.assertEquals(maxSubtree, two);

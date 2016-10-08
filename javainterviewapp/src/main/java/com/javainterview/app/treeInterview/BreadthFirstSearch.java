@@ -31,8 +31,8 @@ import java.util.*;
  */
 public class BreadthFirstSearch {
 
-    public void bfs(Node root) {
-        Queue<Node> q = new LinkedList<Node>();
+    public void bfs(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
 
         // visit the root node first
         root.visited = true;
@@ -42,11 +42,11 @@ public class BreadthFirstSearch {
         q.add(root);
         while (!q.isEmpty()) {
             // get the head of the list
-            Node currentNode = q.remove();
-            Node child = null;
+            TreeNode currentTreeNode = q.remove();
+            TreeNode child = null;
 
             // retrieve all unvisited children
-            while ((child = currentNode.getUnvisitedChild()) != null) {
+            while ((child = currentTreeNode.getUnvisitedChild()) != null) {
                 child.visited = true;
                 child.print();
                 q.add(child);
@@ -65,9 +65,9 @@ public class BreadthFirstSearch {
      * @param end
      * @return List of nodes that lead to the solution
      */
-    public List<String> shortestPath(Node start, Node end) {
-        Queue<Node> q = new LinkedList<Node>();
-        Map<Node, Node> parentMap = new HashMap<Node, Node>();
+    public List<String> shortestPath(TreeNode start, TreeNode end) {
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        Map<TreeNode, TreeNode> parentMap = new HashMap<TreeNode, TreeNode>();
         List<String> path = new LinkedList<String>();
 
         // visit the start node
@@ -79,21 +79,21 @@ public class BreadthFirstSearch {
         q.add(start);
         while (!q.isEmpty()) {
             // get the head of the list
-            Node currentNode = q.remove();
-            Node child = null;
+            TreeNode currentTreeNode = q.remove();
+            TreeNode child = null;
 
             // retrieve all unvisited children
-            while ((child = currentNode.getUnvisitedChild()) != null) {
+            while ((child = currentTreeNode.getUnvisitedChild()) != null) {
                 child.visited = true;
                 child.print();
                 q.add(child);
 
                 // add the parent
-                parentMap.put(child, currentNode);
+                parentMap.put(child, currentTreeNode);
 
                 // check if this is the end node
                 if (child.value == end.value) {
-                    Node backTrack = child;
+                    TreeNode backTrack = child;
                     while (backTrack != null) {
                         // build the backtracking path
                         path.add(0, backTrack.toString());

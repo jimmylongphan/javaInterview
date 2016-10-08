@@ -51,7 +51,7 @@ import java.util.*;
  */
 public class VerticalOrder {
 
-    public List<List<Integer>> verticalOrder(Node root) {
+    public List<List<Integer>> verticalOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
 
         // error check
@@ -63,18 +63,18 @@ public class VerticalOrder {
 
         // Implementing breadth-first-search and we are using
         // a queue
-        Queue<Node> nodeQ = new LinkedList<Node>();
+        Queue<TreeNode> treeNodeQ = new LinkedList<TreeNode>();
 
         // this variable keeps track of which column the node belongs to
         Queue<Integer> columnQ = new LinkedList<Integer>();
 
-        nodeQ.add(root);
+        treeNodeQ.add(root);
         // the root node belongs to column 0
         columnQ.add(0);
 
         int min = 0, max = 0;
-        while (!nodeQ.isEmpty()) {
-            Node currentNode = nodeQ.poll();
+        while (!treeNodeQ.isEmpty()) {
+            TreeNode currentTreeNode = treeNodeQ.poll();
 
             // get the current column value
             int column = columnQ.poll();
@@ -85,12 +85,12 @@ public class VerticalOrder {
             }
 
             // add this node to the current column array
-            columnNodeMap.get(column).add(currentNode.value);
+            columnNodeMap.get(column).add(currentTreeNode.value);
 
             // left children are one column to the left
-            if (currentNode.left != null) {
+            if (currentTreeNode.left != null) {
                 // add the child to the queue
-                nodeQ.add(currentNode.left);
+                treeNodeQ.add(currentTreeNode.left);
 
                 // left child is one column to the left
                 int leftColumnNum = column - 1;
@@ -103,9 +103,9 @@ public class VerticalOrder {
             }
 
             // right children are one column to the right
-            if (currentNode.right != null) {
+            if (currentTreeNode.right != null) {
                 // add the child to the queue
-                nodeQ.add(currentNode.right);
+                treeNodeQ.add(currentTreeNode.right);
                 // right child is one column to the right
                 int rightColumnNum = column + 1;
                 columnQ.add(rightColumnNum);

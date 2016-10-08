@@ -23,9 +23,9 @@ public class MaxSubTree {
      * @param root
      * @return
      */
-    public Node getMaxSubtree(Node root) {
-        Node result;
-        Map<Node, Integer> nodeSumMap = new HashMap<Node, Integer>();
+    public TreeNode getMaxSubtree(TreeNode root) {
+        TreeNode result;
+        Map<TreeNode, Integer> nodeSumMap = new HashMap<TreeNode, Integer>();
 
         result = getMaxSubtreeRecursive(root, nodeSumMap);
         return result;
@@ -34,18 +34,18 @@ public class MaxSubTree {
     /**
      * Find the node that contains the maximum sum.
      *
-     * @param root Node to start the search
+     * @param root TreeNode to start the search
      * @return the node with the highest value
      */
-    protected Node getMaxSubtreeRecursive(Node root, Map<Node,Integer> nodeSumMap) {
+    protected TreeNode getMaxSubtreeRecursive(TreeNode root, Map<TreeNode,Integer> nodeSumMap) {
         if (root==null) {
             return null;
         }
 
         // traverse the tree and calculate all the sums
         // depth first search
-        Node maxLeft = getMaxSubtreeRecursive(root.left, nodeSumMap);
-        Node maxRight = getMaxSubtreeRecursive(root.right, nodeSumMap);
+        TreeNode maxLeft = getMaxSubtreeRecursive(root.left, nodeSumMap);
+        TreeNode maxRight = getMaxSubtreeRecursive(root.right, nodeSumMap);
 
         // get the sums associated with the children
         Integer leftSum = nodeSumMap.get(root.left);
