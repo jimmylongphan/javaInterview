@@ -30,7 +30,7 @@ public class ReverseBits {
         int result = 0;
 
         // go through all digits except for last digit
-        for (int i=0; i < 31; ++i) {
+        for (int i = 0; i < 31; ++i) {
             // use bitwise AND to get the leftmost digit
             // add it to our result
             result += n & 1;
