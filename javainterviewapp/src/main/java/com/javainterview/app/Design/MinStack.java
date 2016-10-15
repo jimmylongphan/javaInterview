@@ -9,6 +9,9 @@ package com.javainterview.app.Design;
  * int param_3 = obj.top();
  * int param_4 = obj.getMin();
  */
+
+import java.util.Stack;
+
 /**
  * LeetCode 155 Min Stack
  * 
