@@ -38,7 +38,8 @@ public class CoveredLengthImpl implements CoveredLengthIntf {
 
             if (current.from <= previous.to) {
                 // intervals overlap so create a new previous
-                previous = new CoveredLengthObj(previous.from, current.to);
+                previous = new CoveredLengthObj(previous.from,
+                        Math.max(previous.to, current.to));
             } else {
                 // intervals do not overlap
                 // update the length with previous
