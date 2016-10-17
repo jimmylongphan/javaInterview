@@ -20,7 +20,7 @@ package com.javainterview.app.Design;
  * 
  * Idea: is it somewhat all even or all odd houses are robbed
  */
-public class Solution {
+public class HouseRobber {
     public int rob(int[] nums) {
         // sum if the previous house was not robbed
         int prevNo = 0;
