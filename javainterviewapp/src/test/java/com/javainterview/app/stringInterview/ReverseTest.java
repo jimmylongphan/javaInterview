@@ -10,6 +10,16 @@ import static org.testng.Assert.*;
 public class ReverseTest {
 
     @Test
+    public void testReverseOrderOfWords() throws Exception {
+        String s = "Mary had a little";
+        String expected = "little a had Mary";
+
+        Reverse rs = new Reverse();
+        String r = rs.reverseOrderOfWords(s);
+        assertEquals(r, expected);
+    }
+
+    @Test
     public void testReverseSentenceByWords() throws Exception {
         String s = "Mary had a little";
         String expected = "little a had Mary";
@@ -45,5 +55,17 @@ public class ReverseTest {
 
         String r = rs.reverseStringArray(s);
         assertEquals(r, "ihgfedcba");
+    }
+
+    @Test
+    public void testReverseWords() throws Exception {
+        String s = "the sky is blue";
+        char[] input = s.toCharArray();
+        String expectedResult = "blue is sky the";
+        char[] expArray = expectedResult.toCharArray();
+
+        Reverse rs = new Reverse();
+        rs.reverseWords(input);
+        assertEquals(input, expArray);
     }
 }

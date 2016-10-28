@@ -13,7 +13,7 @@ public class IntegerToRomanTest {
     public void testConvert() throws Exception {
         int num = 50;
         IntegerToRoman toRoman = new IntegerToRoman();
-        String result = toRoman.convert(num);
+        String result = toRoman.intToRoman(num);
         assertEquals(result, "L");
     }
 
@@ -21,7 +21,7 @@ public class IntegerToRomanTest {
     public void testConvert2() throws Exception {
         int num = 1984;
         IntegerToRoman toRoman = new IntegerToRoman();
-        String result = toRoman.convert(num);
+        String result = toRoman.intToRoman(num);
         assertEquals(result, "MCMLXXXIV");
     }
 }

@@ -16,7 +16,7 @@ package com.javainterview.app.treeInterview;
  */
 public class SameTree {
 
-    public boolean isSameTree(Node root1, Node root2) {
+    public boolean isSameTree(TreeNode root1, TreeNode root2) {
         if (root1 == null && root2 == null) {
             return true;
         }

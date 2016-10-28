@@ -42,7 +42,7 @@ public class LargestBST {
      * @param root root to find the bst
      * @return size of the largest bst
      */
-    public int largestBSTSubtree(Node root) {
+    public int largestBSTSubtree(TreeNode root) {
         Result res = BSTSubtree(root);
 
         // return the size of the BST
@@ -53,7 +53,7 @@ public class LargestBST {
      * @param root root to find bst
      * @return result object which contains the root of the bst and its min and max values
      */
-    protected Result BSTSubtree(Node root) {
+    protected Result BSTSubtree(TreeNode root) {
         // if we are at a null node
         // then return dummy result
         if (root == null) {

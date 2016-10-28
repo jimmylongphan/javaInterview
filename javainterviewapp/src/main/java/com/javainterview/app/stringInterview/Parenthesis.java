@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * LeetCode: 22
  * Created on 2/29/2016.
- * Uber
- *
+ * 
+ * Company:
+ *  Uber, Google, Zenefits
+ * Tags:
+ *  Backtracking, String
+ * 
  * Generate all valid parenthesis combinations of a given number.
  * 1 -> ()
  * 2 -> ()(), (())

@@ -4,8 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created on 2/28/2016.
+ * LeetCode: 46
+ * Company: LinkedIn, Microsoft
+ * Tags: Backtracking
+ * 
+ * Given a collection of distinct numbers, return all possible permutations.
+ * [1,2,3]
+ * 
+ * [
+ *   [1,2,3],
+ *   [1,3,2],
+ *   [2,1,3],
+ *   [2,3,1],
+ *   [3,1,2],
+ *   [3,2,1]
+ * ]
  *
+ *
+ * Permute strings
  * Idea:  Lets say we have 3 characters in a string.
  * Two get all permutations of the 3 characters, we get permutations of 2 characters.
  * Then we push that 3rd character into every possible spot of 2 characters.
@@ -14,113 +30,123 @@ import java.util.List;
  * O(n!)
  * It is factorial because to get 3 characters, we need 2 characters
  * We need the permutations of the smaller words.
+ *
+ * Divide and Conquer
+ * Backtracking
  */
 public class Permutations {
 
     /**
-     * Get permutations of characters in ta string
-     * @param s
-     * @return
+     * Public caller method
+     * @param nums array to generate permutations
+     * @return list of permutations
      */
-    public List<String> getPermutations(String s) {
-        // base case
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        permute(nums, 0, result);
+        return result;
+    }
+    
+    /**
+     * Use DFS to generate permutations
+     * 
+     * @param num
+     * @param begin position in the num array
+     * @param result list of permutations
+     */
+    public void permute(int[] num, int begin, List<List<Integer>> result) {
+        // base case to return
+        // we reached the length of num so this is a complete permutation
+        if (begin >= num.length) {
+            List<Integer> list = new ArrayList<Integer>();
+            for (int i=0; i < num.length; i++) {
+                list.add(num[i]);
+            }
+            result.add(list);
+            return;
+        }
+        
+        // permute starting at begin position and loop to end
+        for (int i=begin; i < num.length; i++) {
+            // swap position with i
+            swap(begin, i, num);
+            
+            // recursively permute
+            permute(num, begin+1, result);
+            
+            // undo swap
+            swap(begin, i, num);
+        }
+    }
+    
+    /**
+     * Primitives are pass by value
+     * The array will store the swapped results
+     * 
+     * @param pos1 position first num to swap
+     * @param pos2 position second num to swap
+     * @param num array to swap
+     * 
+     */
+    public void swap (int pos1, int pos2, int[] num) {
+        int temp = num[pos1];
+        num[pos1] = num[pos2];
+        num[pos2] = temp;
+    }
+
+    /**
+     * recursive solution
+     *
+     * @param s String to permute
+     * @return List of all permuted strings
+     */
+    public List<String> permuteString(String s) {
         if (s == null) {
             return null;
         }
 
-        List<String> permutations = new ArrayList<String>();
+        List<String> permutations = new ArrayList<>();
 
-        // base case
-        if (s.length() == 0) {
+        // base case where string is empty
+        if (s.isEmpty()) {
             permutations.add("");
             return permutations;
         }
 
-        // get the first character
+        // get the first char to insert at different positions
         char first = s.charAt(0);
 
-        // get the remaining string at index 1
+        // get the remaining substring
         String remainder = s.substring(1);
 
-        // recursively generate the permutations for the smaller strings
-        // This is the factorial portion of the algorithm
-        List<String> words = getPermutations(remainder);
+        // recursively get the permutations of the smaller strings
+        List<String> permutedSubstrings = permuteString(remainder);
 
-        // for each of the smaller words
-        for (String word : words) {
-            // for all characters in the smaller word
-            for (int j=0; j <= word.length(); j++) {
-                // we insert the first character into every possible slot in the word
-                String temp = insertCharAt(word, first, j);
+        // go through all of the smaller permutations
+        for (String substring : permutedSubstrings) {
+            // for every index in the substring
+            for (int j=0; j <= substring.length(); j++) {
+                // insert the first char at this index
+                String temp = insertCharAt(substring, first, j);
                 permutations.add(temp);
             }
         }
+
         return permutations;
     }
 
     /**
-     * Insert the character in the given word at position i
-     *
-     * @param word source word
-     * @param c character to insert
-     * @param i position of character
-     * @return new string
+     * Build a new string with the character at position
+     * @param s original string
+     * @param c char to add
+     * @param index position to add
+     * @return the newly built string
      */
-    protected String insertCharAt(String word, char c, int i) {
-        String start = word.substring(0, i);
-        String end = word.substring(i);
-        return start + c + end;
+    public String insertCharAt(String s, char c, int index) {
+        String prefix = s.substring(0, index);
+        String suffix = s.substring(index);
+        return prefix + c + suffix;
     }
 
 
-    /**
-     * Given a collection of distinct numbers, return all possible permutations
-     *
-     * [1,2] -> [2,1], [1,2]
-     *
-     * Complexity: O(n!)
-     *   For every permutation, we need the permutation of the smaller array
-     *
-     * @param num
-     * @return
-     */
-    public List<List<Integer>> permuteNum(int[] num) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-
-        // no more numbers to permute
-        if (num.length == 0) {
-            return result;
-        }
-
-        // permute the the smaller array
-        List<Integer> subPermutations = new ArrayList<Integer>();
-
-        // get the first number to permute
-        subPermutations.add(num[0]);
-        result.add(subPermutations);
-
-        // loop through all remaining numbers in array
-        for (int i=1; i<num.length; i++) {
-            // temporary result
-            List<List<Integer>> tempResult = new ArrayList<List<Integer>>();
-            // for all numbers up to i
-            for (int j=0; j <= i; j++) {
-
-                // for every current list
-                for (List<Integer> list : result) {
-                    // create a new list with current values
-                    List<Integer> newList = new ArrayList<Integer>(list);
-
-                    // add the remaining number into all positions as described by j
-                    newList.add(j, num[i]);
-
-                    // add this list into the temp result
-                    tempResult.add(newList);
-                }
-            }
-            result = tempResult;
-        }
-
-        return result;
-    }
 }

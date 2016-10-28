@@ -1,91 +1,77 @@
 package com.javainterview.app.ListInterview;
 
+import java.util.PriorityQueue;
+
 /**
+ * LeetCode: 23
+ * 
  * Company:
  * LinkedIn, Google, Uber, Airbnb, Facebook, Twitter, Amazon, Microsoft
  *
+ * Tags: Divide and Conquer, Linked List, Heap
+ * 
  * Problem:
  * Merge k sorted Linked lists and return as one sorted list
  *
  * Time complexity:
  * O(n log k)
- * k is number of lists
- * n is total number of nodes
+ * n is number of lists
+ * k is total number of nodes
+ * 
+ * PriorityQueue uses a tree where insertion is log k
  */
 public class MergeKLists {
 
     /**
-     * @param lists all lists to merge
-     * @return
+     * @param lists Array of listNodes.  Each list is already sorted
+     * @return One ListNode with all values
      */
     public ListNode mergeKLists(ListNode[] lists) {
-        return mergeLists(lists, 0, lists.length - 1);
-    }
-
-    /**
-     * @param lists  all lists to merge
-     * @param index1 index of list 1 to merge
-     * @param index2 index of list 2 to merge
-     * @return
-     */
-    protected ListNode mergeLists(ListNode[] lists, int index1, int index2) {
-
-        // passed the boundary
-        if (index2 < index1) {
+        // boundary check
+        if (lists == null || lists.length == 0) {
             return null;
         }
-
-        // indexes have collided
-        // return the second index
-        if (index1 == index2) {
-            return lists[index2];
-        }
-
-        // get the middle position
-        int mid = (index1 + index2) / 2;
-
-        // merge the left half of the lists
-        ListNode a = mergeLists(lists, index1, mid);
-
-        // merge the right half of the lists
-        ListNode b = mergeLists(lists, mid + 1, index2);
-
-        // create a running node
-        ListNode mergeHead = new ListNode(0);
-        ListNode current = mergeHead;
-
-        // loop through lists and a b
-        while (a != null && b != null) {
-            // if the node in a is smaller
-            // add it into the merged list
-            // increment a to next node
-            if (a.compareTo(b) == -1) {
-                current.next = a;
-                a = a.next;
-            } else {
-                // node b is smaller
-                // add it to the current merged list
-                // increment b to next node
-                current.next = b;
-                b = b.next;
+        
+        // use a priority queue
+        // this case is sorted from least to greatest
+        // use java 8 lambda for the comparator
+        PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(lists.length,
+            (ListNode x, ListNode y) -> x.val - y.val);
+        
+        // create a dummy to be the head
+        ListNode dummyHead = new ListNode(0);
+        
+        // initialize the tail to be the dummy
+        ListNode tail = dummyHead;
+        
+        // go through all lists (size n)
+        // total size of queue shall be k, insertion is log k
+        // because it uses a binary tree
+        for (ListNode listHead : lists) {
+            if (listHead != null) {
+                // insert each list head
+                queue.add(listHead);
             }
-            // we added the next node to current
-            // increment the current node
-            current = current.next;
         }
-
-        // for leftover nodes
-        // check which one is not null 
-        // and add it as next
-        if (a != null) {
-            current.next = a;
-        } else {
-            current.next = b;
+        
+        // at this point all the heads from the list array are in the queue
+        while (!queue.isEmpty()) {
+            // remove the head of the queue
+            // add it to our tail
+            tail.next = queue.poll();
+            
+            // update the tail
+            tail = tail.next;
+            
+            // check for children or next elements in the newly added node
+            if (tail.next != null) {
+                // add them to the queue
+                queue.add(tail.next);
+            }
         }
-
-        // return the merged list
-        // mergeHead(0) is a dummy node so we return the next
-        return mergeHead.next;
+        
+        // dummy points to actual head
+        return dummyHead.next;
     }
-
+    
 }

@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * LeetCode: 243
  * Company: LinkedIn
- * Tags: String
+ * Tags: String, Array
  *
- * Problem 1:
+ * Problem 1 243:
  * Given a list of words and two words word1 and word2
  * Return the shortest distance between these two words in the list.
  *
@@ -28,6 +29,9 @@ import java.util.Map;
  * words. After we find both, then compute the distance.
  *
  *
+ * LeetCode 244:
+ * Company: LinkedIn
+ * Tags: Hash Table, Design
  * Problem 2:
  * New restrictions.
  * Method will be called repeatedly with different parameters.
@@ -39,6 +43,10 @@ import java.util.Map;
  *
  * Runtime: O(n + m)
  *
+ *
+ * LeetCode 245:
+ * Company: LinkedIn
+ * Tags: Array
  *
  * Problem 3:
  * New restrictions.
@@ -52,6 +60,7 @@ public class ShortestDistance {
     private Map<String, List<Integer>> wordMap;
 
     /**
+     * LeetCode 243
      * Solves problem 1
      * Use 2 indices to keep track of both words. Then subtract them.
      *
@@ -87,11 +96,16 @@ public class ShortestDistance {
 
 
     /**
+     * LeetCode 244
      * Constructor for shortest distance problem 2
      * The list can contain duplicates.
      * Hash map
      * key: word
      * value: list of indices that contain this word
+     *
+     * Build a map of the positions of each word
+     * Key: word
+     * Value: List of all positions of the word
      *
      * @param words input list
      */
@@ -123,6 +137,8 @@ public class ShortestDistance {
     }
 
     /**
+     * LeetCode 244:
+     *
      * Solves problem 2
      * There can be duplicates and word1 can match word2
      *
@@ -158,6 +174,10 @@ public class ShortestDistance {
 
 
     /**
+     * LeetCode 245:
+     * Company: LinkedIn
+     * Tags: Array
+     *
      * Solves the 3rd problem.
      * word1 and word2 can be the same
      *

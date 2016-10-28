@@ -20,26 +20,26 @@ public class BinaryTreeTest {
 
     @Test
     public void checkSmall() {
-        Node node = new Node();
-        node.value = 50;
-        node.left = new Node();
-        node.left.value = 25;
-        node.right = new Node();
-        node.right.value = 75;
+        TreeNode treeNode = new TreeNode();
+        treeNode.value = 50;
+        treeNode.left = new TreeNode();
+        treeNode.left.value = 25;
+        treeNode.right = new TreeNode();
+        treeNode.right.value = 75;
 
-        boolean isBST = binaryTree.isBST(node, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        boolean isBST = binaryTree.isBST(treeNode, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
         assertTrue(isBST);
     }
 
     @Test
     public void negTest() {
-        Node node = new Node();
-        node.value = 50;
-        node.left = new Node();
-        node.left.value = 75;
+        TreeNode treeNode = new TreeNode();
+        treeNode.value = 50;
+        treeNode.left = new TreeNode();
+        treeNode.left.value = 75;
 
-        boolean isBST = binaryTree.isBST(node, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        boolean isBST = binaryTree.isBST(treeNode, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
         assertFalse(isBST);
     }
@@ -59,7 +59,7 @@ public class BinaryTreeTest {
         bt.insert(75);
 
         bt.delete(75);
-        Node max = bt.findMax(bt.root);
+        TreeNode max = bt.findMax(bt.root);
         assertEquals(max.value, 50);
     }
 
@@ -69,7 +69,7 @@ public class BinaryTreeTest {
         bt.insert(25);
         bt.insert(75);
 
-        Node max = bt.findMax(bt.root);
+        TreeNode max = bt.findMax(bt.root);
         assertEquals(max.value, 75);
     }
 
@@ -87,8 +87,8 @@ public class BinaryTreeTest {
         bt.insert(25);
         bt.insert(75);
 
-        Node common = bt.lowestCommonAncestor(bt.root,
-                new Node(25), new Node(75));
+        TreeNode common = bt.lowestCommonAncestor(bt.root,
+                new TreeNode(25), new TreeNode(75));
         assertEquals(common.value, 50);
     }
 }

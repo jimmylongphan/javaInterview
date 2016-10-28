@@ -26,7 +26,7 @@ public class MergeTwoListsTest {
 
         // loop through and compare with expected results
         for (int i = 1; i <= 4; i++) {
-            Assert.assertEquals(current.value, i);
+            Assert.assertEquals(current.val.intValue(), i);
             current = current.next;
         }
     }

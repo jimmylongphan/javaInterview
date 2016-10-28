@@ -33,7 +33,7 @@ public class MergeKListsTest {
         ListNode result = mkl.mergeKLists(listNodes);
 
         for (int i = 1; i <= 6; i++) {
-            Assert.assertEquals(result.value, i);
+            Assert.assertEquals(result.val.intValue(), i);
             result = result.next;
         }
     }

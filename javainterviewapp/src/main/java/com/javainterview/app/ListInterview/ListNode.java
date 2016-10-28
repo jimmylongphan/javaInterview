@@ -7,17 +7,17 @@ package com.javainterview.app.ListInterview;
  * This is so we can compare the values.
  * And use it to compare the ListNode itself.
  */
-public class ListNode<T extends Comparable<T>> {
-    public T value;
-    ListNode<T> pre;
-    ListNode<T> next;
+public class ListNode {
+    public Integer val;
+    ListNode pre;
+    ListNode next;
 
-    public ListNode(T value) {
-        this.value = value;
+    public ListNode(int value) {
+        this.val = value;
     }
 
-    public ListNode( ListNode<T> node ) {
-        this.value = node.value;
+    public ListNode( ListNode node ) {
+        this.val = node.val;
         this.pre = node.pre;
         this.next = node.next;
     }
@@ -28,7 +28,7 @@ public class ListNode<T extends Comparable<T>> {
      * @param node that implements compareTo
      * @return -1 if this is less, 0 if equal, 1 if o is greater
      */
-    public int compareTo(ListNode<T> node) {
-        return value.compareTo(node.value);
+    public int compareTo(ListNode node) {
+        return val.compareTo(node.val);
     }
 }

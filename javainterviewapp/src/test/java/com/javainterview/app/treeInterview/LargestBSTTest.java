@@ -3,8 +3,6 @@ package com.javainterview.app.treeInterview;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
-
 /**
  * Created on 4/16/2016.
  */
@@ -12,12 +10,12 @@ public class LargestBSTTest {
 
     @Test
     public void testLargestBSTSubtree() throws Exception {
-        Node ten = new Node(10);
-        Node five = new Node(5);
-        Node fifteen = new Node(15);
-        Node one = new Node(1);
-        Node eight = new Node(8);
-        Node seven = new Node(7);
+        TreeNode ten = new TreeNode(10);
+        TreeNode five = new TreeNode(5);
+        TreeNode fifteen = new TreeNode(15);
+        TreeNode one = new TreeNode(1);
+        TreeNode eight = new TreeNode(8);
+        TreeNode seven = new TreeNode(7);
 
         ten.left = five;
         ten.right = fifteen;

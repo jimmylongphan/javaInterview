@@ -1,6 +1,28 @@
 package com.javainterview.app.stringInterview;
 
+
+
 public class Reverse {
+
+    /**
+     * LeetCode 151
+     * Company: Microsoft, snapchat, apple, bloomberg, yelp
+     * Tags: String
+     *
+     * Remove extra whitespace
+     *
+     * @param s
+     * @return
+     */
+    public String reverseWords(String s) {
+        String[] parts = s.trim().split("\\s+");
+        String out = "";
+        for (int i = parts.length - 1; i > 0; i--) {
+            out += parts[i] + " ";
+        }
+        return out + parts[0];
+    }
+
 
     /**
      * Reverse a string by reversing the order of the words
@@ -42,6 +64,11 @@ public class Reverse {
 
 
     /**
+     * LeetCode 186
+     *
+     * Company: Amazon, Microsoft, Uber
+     * Tags: String
+     *
      * Reverse the letters of the words in a string.
      * The ordering of the words remain the same.
      * For every word, the letters are reversed.
@@ -87,7 +114,10 @@ public class Reverse {
 
 
     /**
+     * LeetCode: 344
      * Reverse the string using stringbuilder
+     *
+     * Tags: Two Pointers, String
      *
      * Runtime: O(n)
      *
@@ -139,4 +169,51 @@ public class Reverse {
 
         return new String(a);
     }
+
+
+    /**
+     * LeetCode 186
+     *
+     * Company: Amazon, Microsoft, Uber
+     * Tags: String
+     *
+     * Start by reversing the entire array
+     * Then we reverse the words delimited by whitespace
+     *
+     * @param s the char array to reverse
+     */
+    public void reverseWords(char[] s) {
+        // reverse the entire array
+        reverse(s, 0, s.length - 1);
+
+        // with the reversed array
+        // just reverse individual words
+        for (int start=0, end=0; end <= s.length; end++) {
+            if (end==s.length || s[end] == ' ') {
+                reverse(s, start, end-1);
+                start = end+1;
+            }
+        }
+    }
+
+
+    /**
+     * Reverse everything in the char array from beginning to end
+     *
+     * @param s array to reverse
+     * @param start beginning position
+     * @param end end position
+     */
+    public void reverse(char[] s, int start, int end) {
+        char temp;
+        while (start < end) {
+            temp = s[start];
+            s[start] = s[end];
+            s[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+
 }

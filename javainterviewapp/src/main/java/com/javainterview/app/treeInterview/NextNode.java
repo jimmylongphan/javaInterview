@@ -24,13 +24,13 @@ public class NextNode {
      *
      * @param root starting node
      */
-    public void connect(Node root) {
+    public void connect(TreeNode root) {
         // start at the root
-        Node levelStart = root;
+        TreeNode levelStart = root;
         while (levelStart != null) {
 
             // rest current to the leftmost of this level
-            Node current = levelStart;
+            TreeNode current = levelStart;
 
             // loop through all the current nodes on this level
             while (current != null) {
@@ -60,13 +60,13 @@ public class NextNode {
      *
      * @param root starting node
      */
-    public void connectImperfect(Node root) {
+    public void connectImperfect(TreeNode root) {
         // leftmost node in lower level
-        Node leftMost = null;
+        TreeNode leftMost = null;
         // previous node in lower level
-        Node pre = null;
+        TreeNode pre = null;
         // current node in upper level
-        Node current = root;
+        TreeNode current = root;
 
         while (current != null) {
 

@@ -1,6 +1,5 @@
 package com.javainterview.app.BackTrackingInterview;
 
-// TODO test
 
 /**
  * LeetCode 10
@@ -24,13 +23,14 @@ package com.javainterview.app.BackTrackingInterview;
  * isMatch("ab", ".*") → true
  * isMatch("aab", "c*a*b") → true
  */
-public class Solution {
+public class RegularExpression {
     
     /**
-     * 
+     * Recursive method to find if the given string and pattern are a match.
+     *
      * @param s String to check
      * @param p Pattern to compare
-     * 
+     * @return true if match
      */
     public boolean isMatch(String s, String p) {
         // if either string is null, then no match
@@ -63,7 +63,7 @@ public class Solution {
         
         // NOTE
         // Reason setting i+1, j+1 to i,j is because i,j should be true
-        // If i,j is not true, then current and future indicies will be false.
+        // If i,j is not true, then current and future indexes will be false.
         
         // loop through all characters in the input string
         for (int i = 0 ; i < s.length(); i++) {
@@ -90,7 +90,7 @@ public class Solution {
                         // next indices equal the next char and previous pattern
                         dp[i+1][j+1] = dp[i+1][j-1];
                     } else {
-                        // next indicies equal
+                        // next indexes equal
                         // next char and current pattern
                         // OR current char and next pattern
                         // OR next char and previous pattern

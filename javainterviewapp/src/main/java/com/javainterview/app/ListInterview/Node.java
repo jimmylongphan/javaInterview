@@ -1,4 +1,4 @@
-package com.javainterview.app.MemoryInterview;
+package com.javainterview.app.ListInterview;
 
 /**
  * Created on 9/27/2015.

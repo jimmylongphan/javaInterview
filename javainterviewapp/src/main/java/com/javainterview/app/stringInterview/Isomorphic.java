@@ -3,7 +3,9 @@ package com.javainterview.app.stringInterview;
 import java.util.*;
 
 /**
- * LinkedIn
+ * LeetCode: 205
+ * Company: LinkedIn
+ * Tags: Hash Table
  *
  * Strings are isomorphic if the letters in one word can be remapped to form the
  * second word.
@@ -14,6 +16,42 @@ import java.util.*;
  */
 public class Isomorphic {
 
+    public boolean isIsomorphic(String s, String t) {
+        // compare null and length
+        if (s == null || t == null) {
+            return false;
+        } else if (s.length() != t.length()) {
+            return false;
+        }
+
+        // create mappings for possible ASCII
+        int[] m1 = new int[256];
+        int[] m2 = new int[256];
+        // keep track of the encoding
+        int count = 1;
+
+        // both are same length now
+        char sChar;
+        char tChar;
+        for (int i = 0; i < s.length(); i++) {
+            sChar = s.charAt(i);
+            tChar = t.charAt(i);
+
+            // if their mappings are different
+            if (m1[sChar] != m2[tChar]) {
+                return false;
+            }
+            // new mapping
+            if (m1[sChar] == 0) {
+                m1[sChar] = count;
+                m2[tChar] = count;
+                count++;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Test if two strings are isomorphic using encoding method.
      * Two strings that are isomorphic should have the same encoding.
@@ -23,7 +61,7 @@ public class Isomorphic {
      * @param s2 string 2
      * @return true if isomorphic
      */
-    public boolean areIso(String s1, String s2) {
+    public boolean isIsomorphicEncoding(String s1, String s2) {
         if (s1 == null || s2 == null) {
             return false;
         } else if (s1.length() != s2.length()) {

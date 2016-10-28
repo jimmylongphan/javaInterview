@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * LeetCode: 339, 341, 364
  * Company: LinkedIn, Google
  *
  * Implementation of the NestedInteger interface
@@ -12,16 +13,16 @@ public class NestedInteger implements NestedIntegerIntf {
     public List<Object> values;
 
     public NestedInteger() {
-        values = new LinkedList<Object>();
+        values = new LinkedList<>();
     }
 
     public NestedInteger(Integer i) {
-        values = new LinkedList<Object>();
+        values = new LinkedList<>();
         values.add(i);
     }
 
     public NestedInteger(List<NestedInteger> list) {
-        values = new LinkedList<Object>();
+        values = new LinkedList<>();
         values.add(list);
     }
 
@@ -72,4 +73,27 @@ public class NestedInteger implements NestedIntegerIntf {
 
         return null;
     }
+
+    /**
+     * Set this NestedInteger to hold a single integer.
+     *
+     * @param value
+     */
+    public void setInteger(int value) {
+        values = new LinkedList<>();
+        values.add(value);
+    }
+
+    /**
+     * Set this NestedInteger to hold a nested list and adds a nested integer to it.
+     *
+     * @param ni
+     */
+    public void add(NestedInteger ni) {
+        if (values == null) {
+            values = new LinkedList<>();
+        }
+        values.add(ni);
+    }
+
 }
