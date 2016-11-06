@@ -6,6 +6,9 @@ package com.javainterview.app.DynamicInterview;
  * Saw this posted on 3acres for AirBnb
  *
  * http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/
+ *
+ * Runtime: O(rowSize * colSize)
+ *
  */
 public class MinimumCostPath {
 
