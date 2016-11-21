@@ -1,6 +1,8 @@
 package com.javainterview.app.Graph;
 
 
+import java.util.*;
+
 /**
  * TODO test
  * 
@@ -39,7 +41,7 @@ package com.javainterview.app.Graph;
  * 
  * 
  */
-public class Solution {
+public class AlienDictionary {
     public String alienOrder(String[] words) {
         Map<Character, Set<Character>> map = new HashMap<>();
         Map<Character, Integer> degree = new HashMap<>();
