@@ -41,7 +41,7 @@ public class SingleNumber {
      * Used to find two numbers that are different in the array.
      *
      * Solution:
-     * We will use the same XOR value from before.
+     * We will use the same XOR val from before.
      * This gets us the XOR of both numbers.
      * Since we know that having a 1 is where the two numbers diff.
      *

@@ -8,7 +8,7 @@ import java.util.Queue;
  *
  * Leetcode 295 Find Median from Data Stream
  *
- * Median is the middle value in an odered integer list. If the size of the list is even, there is no middle value.
+ * Median is the middle val in an odered integer list. If the size of the list is even, there is no middle val.
  * So the median is the mean of the two middle values.
  *
  * Examples:
@@ -44,7 +44,7 @@ public class MedianFinder {
 
     // Returns the median of current data stream
     public double findMedian() {
-        // if the right side is larger, then we can return the middle value
+        // if the right side is larger, then we can return the middle val
         if (right.size() > left.size()) {
            return right.peek();
         }

@@ -29,7 +29,7 @@ public class HouseRobber {
         
         // loop through all the houses
         for (int n : nums) {
-            // temporarily store if the previous house was not robbed value
+            // temporarily store if the previous house was not robbed val
             int temp = prevNo;
             
             // we will set the previous not robbed to be the max of either
@@ -41,7 +41,7 @@ public class HouseRobber {
             prevYes = n + temp;
         }
         
-        // return the final value all choosing which houses to rob or not
+        // return the final val all choosing which houses to rob or not
         // order does not matter because it is addition
         return Math.max(prevNo, prevYes);
     }

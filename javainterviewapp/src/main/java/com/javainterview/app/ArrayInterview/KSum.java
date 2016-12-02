@@ -69,12 +69,12 @@ public class KSum {
             currentSum += num;
         }
 
-        // Since the target can be any value, we must check if we have any combinations
+        // Since the target can be any val, we must check if we have any combinations
         // If the combo is empty, then we must look for values
         // Our target can be positive or negative, but we must find numbers until we reach our target
         if (currentSum != target || currentCombo.isEmpty()) {
             // loop through from start position to the end of the list of numbers
-            // only loop as long as the target is greater than the value in the current index
+            // only loop as long as the target is greater than the val in the current index
             for (int i=start; i < numbers.length; i++) {
                 // add the number at index to our current list
                 // Try the combination with the current i
@@ -83,7 +83,7 @@ public class KSum {
                 getResultAll(result, currentCombo, numbers, k, target, i);
 
                 // no longer trying the combination with i
-                // remove the i value from the list, or the last item
+                // remove the i val from the list, or the last item
                 currentCombo.remove(currentCombo.size()-1);
             }
         } else if (currentSum == target && currentCombo.size() == k) {

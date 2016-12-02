@@ -44,7 +44,7 @@ public class PalindromePairs {
         
         // keep a map of words and their positions in the array
         // key: word
-        // value: array position
+        // val: array position
         Map<String, Integer> map = new HashMap<String, Integer>();
         for (int i=0; i < words.length; i++) {
             map.put(words[i], i);

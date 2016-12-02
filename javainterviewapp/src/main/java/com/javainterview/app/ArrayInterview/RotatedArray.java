@@ -10,7 +10,7 @@ package com.javainterview.app.ArrayInterview;
  * Suppose a sorted array is rotated at some pivot unknown to you beforehand.
  * (i.e., 0 1 2 4 5 6 7 might become 4 5 6 7 0 1 2).
  *
- * You are given a target value to search. If found in the array return its index,
+ * You are given a target val to search. If found in the array return its index,
  * otherwise return -1.
  *
  * Assume no duplicates in the array.
@@ -87,7 +87,7 @@ public class RotatedArray {
      * If the array is not rotated, then search within the proper range.
      *
      * If it is rotated, then perform binary search on the array
-     * If the middle value is less than its neighbors, then start in the middle.
+     * If the middle val is less than its neighbors, then start in the middle.
      * If the middle is greater than both ends, then start after middle
      * If the middle is less than both ends, then start before middle
      * If start is less tha end, then use the current range.
@@ -99,7 +99,7 @@ public class RotatedArray {
      * Else Try to find target between 0 and start.
      *
      * @param array  array that is rotated
-     * @param target value to insert
+     * @param target val to insert
      * @return position to insert
      */
     public int findPositionToInsert(int[] array, int target) {
@@ -115,11 +115,11 @@ public class RotatedArray {
         // loop through array
         // end - 1 because we may insert at end if it is not found
         while (start < end - 1) {
-            // calculate the middle value
+            // calculate the middle val
             int mid = start + (end - start) / 2;
             int midVal = array[mid];
 
-            // check if the middle value is less than both sides
+            // check if the middle val is less than both sides
             if (midVal < array[mid + 1] &&
                     midVal < array[mid - 1]) {
                 // then the start is the middle
@@ -147,7 +147,7 @@ public class RotatedArray {
         }
 
         if (target < array[start] || target > array[start - 1]) {
-            // target is between start and the value before start
+            // target is between start and the val before start
             // so we insert at start
             return start;
         } else if (target <= array[array.length - 1]) {
@@ -163,13 +163,13 @@ public class RotatedArray {
 
 
     /**
-     * Find the position to insert the new value given the array and positions
+     * Find the position to insert the new val given the array and positions
      *
      * @param array  array
      * @param start  beginning to search
      * @param end    end to search
-     * @param target value to find
-     * @return position where we can insert the value
+     * @param target val to find
+     * @return position where we can insert the val
      */
     private int getPositionWithinRange(int[] array, int start, int end, int target) {
 

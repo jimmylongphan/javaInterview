@@ -81,7 +81,7 @@ public class DepthFirstSearch {
                 child.visited = true;
                 s.push(child);
 
-                if (child.value == end.value) {
+                if (child.val == end.val) {
                     // backtrack to find the node
                     TreeNode backTrack = child;
                     while (backTrack != null) {

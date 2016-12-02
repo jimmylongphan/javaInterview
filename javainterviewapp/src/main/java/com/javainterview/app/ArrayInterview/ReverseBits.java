@@ -22,9 +22,9 @@ package com.javainterview.app.ArrayInterview;
  */
 public class ReverseBits {
     /**
-     * you need treat n as an unsigned value
+     * you need treat n as an unsigned val
      * @param n the number to reverse the bits
-     * @return the final int value
+     * @return the final int val
      */
     public int reverseBits(int n) {
         int result = 0;

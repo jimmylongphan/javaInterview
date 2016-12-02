@@ -11,7 +11,7 @@ import java.util.Set;
  * Company: Palantir, Airbnb, Yahoo
  *
  * Given an array of integers, find if the array contains any duplicates.
- * Your function should return true if any value appears at least twice in
+ * Your function should return true if any val appears at least twice in
  * the array, and it should return false if every element is distinct.
  *
  * Tags: Array, Hash Table
@@ -54,9 +54,9 @@ public class ContainsDuplicate {
     public boolean containsDuplicate(int[] nums) {
         Set<Integer> set = new HashSet<>();
 
-        // loop through array and check if value already exists
+        // loop through array and check if val already exists
         for (int i = 0; i < nums.length; ++i) {
-            // value already exists so we cannot add
+            // val already exists so we cannot add
             if (!set.add(nums[i])) {
                 return true;
             }
@@ -108,12 +108,12 @@ public class ContainsDuplicate {
      *
      * @param nums original array
      * @param k    distance between numbers
-     * @param t    max value between numbers, bucket size will be t
+     * @param t    max val between numbers, bucket size will be t
      * @return
      */
     public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
         // error cases
-        // numbers have to be distinct and t is absolute value
+        // numbers have to be distinct and t is absolute val
         if (k < 1 || t < 0) {
             return false;
         }
@@ -151,9 +151,9 @@ public class ContainsDuplicate {
 
             // maintain our window size of k
             if (map.entrySet().size() >= k) {
-                // get the number at the earliest slot and get its positive value
+                // get the number at the earliest slot and get its positive val
                 long earliestVal = (long) nums[i - k] - Integer.MIN_VALUE;
-                // find the bucket that belongs to the earliest value
+                // find the bucket that belongs to the earliest val
                 long lastBucket = earliestVal / bucketSize;
                 // remove that bucket
                 map.remove(lastBucket);

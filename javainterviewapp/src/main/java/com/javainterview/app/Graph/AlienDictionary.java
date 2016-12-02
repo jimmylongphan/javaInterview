@@ -53,7 +53,7 @@ public class AlienDictionary {
         
         // go through all the words
         for (String s : words) {
-            // for each letter in the word, assign a default value 0
+            // for each letter in the word, assign a default val 0
             for (char c : s.toCharArray()) {
                 degree.put(c, 0);
             }

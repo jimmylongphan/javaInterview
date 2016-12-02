@@ -9,7 +9,7 @@ package com.javainterview.app.treeInterview;
  *
  * The result includes the node and all of its children.
  *
- * The return value is the size of the BST
+ * The return val is the size of the BST
  *
  * Solution:
  * Runtime: O(n)
@@ -28,8 +28,8 @@ public class LargestBST {
 
         /**
          * @param res the size of this tree
-         * @param min the minimum value of this tree
-         * @param max the maximum value of this tree
+         * @param min the minimum val of this tree
+         * @param max the maximum val of this tree
          */
         public Result(int res, int min, int max) {
             this.res = res;
@@ -58,8 +58,8 @@ public class LargestBST {
         // then return dummy result
         if (root == null) {
             // dummy node will have size 0
-            // minimum value is MAX
-            // maximum value is MIN
+            // minimum val is MAX
+            // maximum val is MIN
             return new Result(0, Integer.MAX_VALUE, Integer.MIN_VALUE);
         }
 
@@ -70,11 +70,11 @@ public class LargestBST {
         Result right = BSTSubtree(root.right);
 
         // check if either children is not a BST, from the signs
-        // or if roots value does not satisfy BST
+        // or if roots val does not satisfy BST
         if (left.res < 0 || right.res < 0 ||
-                root.value < left.max || root.value > right.min) {
+                root.val < left.max || root.val > right.min) {
 
-            // convert the size value to absolute value
+            // convert the size val to absolute val
             int leftSize = Math.abs(left.res);
             int rightSize = Math.abs(right.res);
 
@@ -91,8 +91,8 @@ public class LargestBST {
             int maxSize = left.res + right.res + 1;
 
             // set the new min and max values
-            int minVal = Math.min(root.value, left.min);
-            int maxVal = Math.max(root.value, right.max);
+            int minVal = Math.min(root.val, left.min);
+            int maxVal = Math.max(root.val, right.max);
 
             // return a proper BST result
             return new Result(maxSize, minVal, maxVal);

@@ -14,7 +14,7 @@ import java.util.Map;
  * Idea:
  * First build a hashmap to keep counts of all the numbers.
  * Key: number
- * value: count or frequency
+ * val: count or frequency
  * O(n)
  * 
  * Secondly we create a bucket array of nums.length + 1
@@ -57,7 +57,7 @@ public class TopKFrequent {
     	    // get the count of the number
     		int frequency = frequencyMap.get(key);
     		
-    		// add into the bucket the frequency value
+    		// add into the bucket the frequency val
     		if (bucket[frequency] == null) {
     			bucket[frequency] = new ArrayList<>();
     		}

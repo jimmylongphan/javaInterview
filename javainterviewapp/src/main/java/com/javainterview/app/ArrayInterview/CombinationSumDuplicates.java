@@ -51,7 +51,7 @@ public class CombinationSumDuplicates {
         // our target is a positive
         if (target > 0) {
             // loop through from start position to the end of the list of numbers
-            // only loop as long as the target is greater than the value in the current index
+            // only loop as long as the target is greater than the val in the current index
             for (int i=start; i < numbers.length && target >= numbers[i]; i++) {
                 // add the number at index to our current list
                 // Try the combination with the current i
@@ -59,12 +59,12 @@ public class CombinationSumDuplicates {
 
                 // get results with the current number and number subtracted from target
                 // start at index i
-                // get the rest of the combination while using this current value
+                // get the rest of the combination while using this current val
                 // Subtract the current number from the target and try to retrieve the other numbers
                 getResult(result, currentCombo, numbers, target - numbers[i], i);
 
                 // no longer trying the combination with i
-                // remove the i value from the list, or the last item
+                // remove the i val from the list, or the last item
                 currentCombo.remove(currentCombo.size()-1);
             }
         } else if (target == 0) {

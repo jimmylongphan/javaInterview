@@ -95,9 +95,9 @@ public class LRUCache {
     }
 
     /**
-     * retrieve the value given a key in this cache
+     * retrieve the val given a key in this cache
      * @param key key to find
-     * @return value of cache
+     * @return val of cache
      */
     public int get(int key) {
         DoubleLinkedNode node = cache.get(key);
@@ -108,16 +108,16 @@ public class LRUCache {
         // using least recently used, move this to head
         this.moveToHead(node);
 
-        // return the value
+        // return the val
         return node.value;
     }
 
     /**
      * If there is no node, then create and add to list and cache.
      * Remove the tail if we reached capacity.
-     * If there is a node, then update its value, move to head because least recently used
+     * If there is a node, then update its val, move to head because least recently used
      * @param key key of cache
-     * @param value value to retrieve
+     * @param value val to retrieve
      */
     public void set(int key, int value) {
         DoubleLinkedNode node = cache.get(key);
@@ -135,7 +135,7 @@ public class LRUCache {
                 --count;
             }
         } else {
-            // update the value in the node
+            // update the val in the node
             node.value = value;
             this.moveToHead(node);
         }

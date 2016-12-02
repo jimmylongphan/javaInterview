@@ -18,7 +18,7 @@ public class MaximumSubArray {
     /**
      * Linear method to find the max sub array
      * @param nums input of numbers
-     * @return the value of the max sub array
+     * @return the val of the max sub array
      */
     public int maxSubArrayLinear(int[] nums) {
 
@@ -27,14 +27,14 @@ public class MaximumSubArray {
 
         // loop through all elements in the array
         for (int i=1; i < nums.length; i++) {
-            // add the current number to our previous value
+            // add the current number to our previous val
 
             // using the example, 4 is greater than [-2,1,-3] = -4
-            // so we keep the value at index 3 which is value 4
+            // so we keep the val at index 3 which is val 4
             maxEndingHere = Math.max(maxEndingHere + nums[i], nums[i]);
 
-            // only keep the maximum value compared with previous max and the max at this index
-            // this is the return value
+            // only keep the maximum val compared with previous max and the max at this index
+            // this is the return val
             maxSoFar = Math.max(maxSoFar, maxEndingHere);
         }
 
@@ -45,7 +45,7 @@ public class MaximumSubArray {
     /**
      * Dynamic programming method to find the max sub array
      * @param nums input of numbers
-     * @return the value of the max sub array
+     * @return the val of the max sub array
      */
     public int maxSubArray(int[] nums) {
         int n = nums.length;
@@ -60,7 +60,7 @@ public class MaximumSubArray {
         for (int i=1; i < n; i++) {
             // if dp[i-1] is greater than zero, then we have a max solution at i - 1
             // if dp[i-1] is 0, then we do not have a current max
-            // take the value and add it to our current num
+            // take the val and add it to our current num
             // set the max sub array at dp[i] equal to the current num plus the previous max
             dp[i] = nums[i] + (dp[i-1] > 0 ? dp[i-1] : 0);
 

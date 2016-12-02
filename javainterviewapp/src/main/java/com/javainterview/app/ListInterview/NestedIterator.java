@@ -28,7 +28,7 @@ import java.util.Stack;
 public class NestedIterator implements Iterator<Integer> {
     // stack holds the flatten nested list
     Stack<Iterator<NestedInteger>> stack = new Stack<Iterator<NestedInteger>>();
-    // current value
+    // current val
     Integer current = null;
 
     /**
@@ -42,9 +42,9 @@ public class NestedIterator implements Iterator<Integer> {
     }
 
     /**
-     * Execute hasNext to check if there is a value.
-     * If there is a value, then current will be set.
-     * Return the current value and reset it to null.
+     * Execute hasNext to check if there is a val.
+     * If there is a val, then current will be set.
+     * Return the current val and reset it to null.
      *
      * @return
      */
@@ -57,26 +57,26 @@ public class NestedIterator implements Iterator<Integer> {
     }
 
     /**
-     * loop through the stack until we get a NestedInteger value
+     * loop through the stack until we get a NestedInteger val
      *
-     * @return true if there is a value
+     * @return true if there is a val
      */
     public boolean hasNext() {
-        // loop through the stack until we get a current value
+        // loop through the stack until we get a current val
         while (current == null && !stack.isEmpty()) {
-            // retrieve the top value from the stack
+            // retrieve the top val from the stack
             Iterator<NestedInteger> node = stack.peek();
 
-            // if this node does not have a new value
+            // if this node does not have a new val
             // then pop it from the stack
             if (!node.hasNext()) {
                 stack.pop();
                 continue;
             }
 
-            // retrieve the next value from this iterator
+            // retrieve the next val from this iterator
             NestedInteger value = node.next();
-            // if it is an NestedInteger, then set current to its value
+            // if it is an NestedInteger, then set current to its val
             if (value.isInteger()) {
                 current = value.getInteger();
                 return true;

@@ -37,8 +37,8 @@ public class Fibonacci {
      *
      * Runtime: O(n)
      *
-     * @param num value to calculate
-     * @return final value
+     * @param num val to calculate
+     * @return final val
      */
     public int fibonacciIterative(int num) {
         if (num == 1 || num == 2) {
@@ -62,10 +62,10 @@ public class Fibonacci {
 
 
     /**
-     * Check if we already calculated fibonacci and return its value
+     * Check if we already calculated fibonacci and return its val
      *
      * @param num fabionacci to find
-     * @return calculated value
+     * @return calculated val
      */
     public int fibonacciPrecompute(int num) {
         // base case for recursion
@@ -76,12 +76,12 @@ public class Fibonacci {
             return 1;
         }
 
-        // check if we already precomputed the fibonacci value
+        // check if we already precomputed the fibonacci val
         if (fibonacciSave[num] != 0) {
             return fibonacciSave[num];
         }
 
-        // calculate and store the fibonacci value
+        // calculate and store the fibonacci val
         fibonacciSave[num] = fibonacciPrecompute(num - 1) + fibonacciPrecompute(num - 2);
         return fibonacciSave[num];
     }

@@ -16,7 +16,7 @@ package com.javainterview.app.ListInterview;
  * Compare each node from list1 and list2
  * If one of the nodes is null, then return the other
  * For the smaller node, it will be near the beginning of the list
- * Then we set the next value for the smaller node
+ * Then we set the next val for the smaller node
  * by recursively calling merge with smallNode.next and the other node.
  *
  *

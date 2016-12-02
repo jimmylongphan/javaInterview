@@ -49,7 +49,7 @@ public class MovingAverage {
             previousSum -= currentWindow.remove();
         }
 
-        // add the new value
+        // add the new val
         previousSum += val;
 
         // insert into our queue

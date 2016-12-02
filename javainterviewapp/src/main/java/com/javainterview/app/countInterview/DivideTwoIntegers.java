@@ -13,7 +13,7 @@ public class DivideTwoIntegers {
 
     public int divide(int dividend, int divisor) {
 
-        // check if the value is 0
+        // check if the val is 0
         if (dividend == 0) {
             return 0;
         }
@@ -30,7 +30,7 @@ public class DivideTwoIntegers {
             isNegative = true;
         }
 
-        // convert to absolute value long to handle overflow
+        // convert to absolute val long to handle overflow
         long lDividend = Math.abs((long) dividend);
         long lDivisor = Math.abs((long) divisor);
 
@@ -71,7 +71,7 @@ public class DivideTwoIntegers {
         // Restrict boundary to integer size
         result = Math.max(Integer.MIN_VALUE, result);
 
-        // return integer value
+        // return integer val
         return (int) result;
     }
 

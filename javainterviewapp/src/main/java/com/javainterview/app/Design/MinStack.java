@@ -37,9 +37,9 @@ import java.util.Stack;
  * And we set the minimum.
  * 
  * Similar reasoning for pop and top.
- * Get the top value from the stack.
- * If the value is positive, then the current min is valid.
- * If the value is negative, then the current min needs to be updated.
+ * Get the top val from the stack.
+ * If the val is positive, then the current min is valid.
+ * If the val is negative, then the current min needs to be updated.
  * We will subtract the difference from the current min to get the previous min.
  *
  */
@@ -109,7 +109,7 @@ public class MinStack {
         long top = stack.peek();
         // if top is greater
         if (top > 0) {
-            // return the original value
+            // return the original val
             // because top is the difference
             return (int)(top + min);
         } else {

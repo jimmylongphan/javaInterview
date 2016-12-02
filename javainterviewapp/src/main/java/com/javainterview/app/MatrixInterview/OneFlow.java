@@ -13,7 +13,7 @@ import java.util.List;
  * Given an n*n matrix of ones and zeroes. Find if there is a path of ones from
  * the left side to the right side.
  *
- * You can only move if the next point has same value.
+ * You can only move if the next point has same val.
  * If starting point is a 1, then next point is a 1.
  *
  * Bonus if you can return the path as well.
@@ -55,7 +55,7 @@ public class OneFlow {
                 continue;
             }
 
-            // check if the new destination does not have the same value
+            // check if the new destination does not have the same val
             // or if it has already been visited
             if (matrix[destination.x][destination.y] != matrix[pt.x][pt.y] ||
                     visited.containsKey(destination)) {
@@ -117,7 +117,7 @@ public class OneFlow {
                 continue;
             }
 
-            // check if the new destination does not have the same value
+            // check if the new destination does not have the same val
             // or if it has already been visited
             if (matrix[destination.x][destination.y] != matrix[pt.x][pt.y] ||
                     visited.containsKey(destination)) {

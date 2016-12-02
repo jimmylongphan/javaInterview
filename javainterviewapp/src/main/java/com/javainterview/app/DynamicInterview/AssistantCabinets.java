@@ -17,7 +17,7 @@ import java.util.List;
  *
  * The workload is the sum of the cabinets assigned to an assistant.
  * We want to assign the cabinets to the assistants in such a way that the
- * highest workload is the smallest possible value.
+ * highest workload is the smallest possible val.
  *
  * Example: 2 assistants.  Cabinets{10, 10, 40}
  * possibilities:
@@ -37,7 +37,7 @@ public class AssistantCabinets {
 
         // for the current assistant
         // loop through all possible values of workloads of cabinets
-        // end value for loop -> We must leave space for the remaining assistants
+        // end val for loop -> We must leave space for the remaining assistants
         // also subtract startIndex because we are truncating the cabinets
         int takingLimit = cabinets.size() - assistants - startIndex + 1;
         for (int takenCabinets=1; takenCabinets <= takingLimit; takenCabinets++) {

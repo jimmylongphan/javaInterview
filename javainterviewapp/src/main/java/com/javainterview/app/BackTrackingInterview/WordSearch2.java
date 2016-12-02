@@ -70,12 +70,12 @@ public class WordSearch2 {
             // go through all the letters in the word
             for (char c : w.toCharArray()) {
                 // convert to index
-                // all letters are lowercase, subtract the ascii value of a
+                // all letters are lowercase, subtract the ascii val of a
                 int i = c - 'a';
                 // if there is no character at this index
                 if (p.next[i] == null) {
                     // create a new node
-                    // we do not need to store the value of the character
+                    // we do not need to store the val of the character
                     // we know from index what the character is
                     p.next[i] = new TrieNode();
                 }
@@ -103,7 +103,7 @@ public class WordSearch2 {
         }
 
         // check if the current character is in the Trie of the root
-        // if it exists, then the index will have a value
+        // if it exists, then the index will have a val
         p = p.next[c - 'a'];
 
         // the current position in the Trie is a word

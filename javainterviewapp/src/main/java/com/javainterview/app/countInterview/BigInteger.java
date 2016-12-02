@@ -7,8 +7,8 @@ public class BigInteger {
 
     /**
      * Method to add two integers as BigInteger
-     * @param int1 first value
-     * @param int2 second value
+     * @param int1 first val
+     * @param int2 second val
      * @return their sum represented as a string
      */
     public String add(int int1, int int2) {
@@ -58,7 +58,7 @@ public class BigInteger {
     /**
      * Get the length of an integer by converting it to string
      * @param val
-     * @return length of the value
+     * @return length of the val
      */
     private int getLength(int val) {
         return Integer.toString(val).length();
@@ -66,7 +66,7 @@ public class BigInteger {
 
     /**
      * Convert this integer into an array. Reversing the digits
-     * @param val value to convert
+     * @param val val to convert
      * @param valLength length of this integer
      * @param arrayLength Maximum length of the sum
      * @return integer array of the conversion
@@ -89,9 +89,9 @@ public class BigInteger {
 
     /**
      * Get the digit at an index
-     * @param val value of number
+     * @param val val of number
      * @param index position to get
-     * @return int value of the digit
+     * @return int val of the digit
      */
     private int getDigitAtIndex(int val, int index) {
         String intStr = Integer.toString(val);

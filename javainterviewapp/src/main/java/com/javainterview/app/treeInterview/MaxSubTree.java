@@ -35,7 +35,7 @@ public class MaxSubTree {
      * Find the node that contains the maximum sum.
      *
      * @param root TreeNode to start the search
-     * @return the node with the highest value
+     * @return the node with the highest val
      */
     protected TreeNode getMaxSubtreeRecursive(TreeNode root, Map<TreeNode,Integer> nodeSumMap) {
         if (root==null) {
@@ -58,7 +58,7 @@ public class MaxSubTree {
         }
 
         // calculate the current sum and store it
-        int currentSum = root.value + leftSum + rightSum;
+        int currentSum = root.val + leftSum + rightSum;
         nodeSumMap.put(root, currentSum);
 
         // retrieve the sums associated with max left node and max right node

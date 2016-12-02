@@ -54,7 +54,7 @@ public class NumberToWord {
     /**
      * This method is only called if the number is <= 1000
      *
-     * @param num value with 3 digits
+     * @param num val with 3 digits
      * @return
      */
     private String convertLessThanThousand(int num) {
@@ -94,7 +94,7 @@ public class NumberToWord {
      * Convert a given integer to words
      * Handles large and negative numbers
      *
-     * @param num value to convert
+     * @param num val to convert
      * @return string after conversion
      */
     public String convert(int num) {

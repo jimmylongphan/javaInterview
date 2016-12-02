@@ -31,7 +31,7 @@ public class VShape {
                 min = a[i];
             } else {
                 // once the elements become larger, then we know we hit bottom
-                // return the smallest value
+                // return the smallest val
                 break;
             }
         }

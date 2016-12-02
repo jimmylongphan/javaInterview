@@ -50,13 +50,13 @@ import java.util.Map;
  *
  * Problem 3:
  * New restrictions.
- * word1 and word2 have the same value, but are in different positions
+ * word1 and word2 have the same val, but are in different positions
  * in the list.
  */
 public class ShortestDistance {
 
     // key is the word in the list
-    // value is the list of positions that contain this word
+    // val is the list of positions that contain this word
     private Map<String, List<Integer>> wordMap;
 
     /**
@@ -101,7 +101,7 @@ public class ShortestDistance {
      * The list can contain duplicates.
      * Hash map
      * key: word
-     * value: list of indices that contain this word
+     * val: list of indices that contain this word
      *
      * Build a map of the positions of each word
      * Key: word
@@ -191,7 +191,7 @@ public class ShortestDistance {
      */
     public int shortestWordDistanceSame(String[] words, String word1, String word2) {
         long index1 = Integer.MAX_VALUE;
-        // index2 will have a negative value
+        // index2 will have a negative val
         long index2 = -Integer.MAX_VALUE;
         long distance = Integer.MAX_VALUE;
 

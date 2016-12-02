@@ -22,7 +22,7 @@ public class NestedMap {
      * @param map1 first map to compare
      * @param map2 second map to compare
      * @param key  key to check
-     * @return the value of the string if found
+     * @return the val of the string if found
      */
     public int compare(Map<String, Object> map1, Map<String, Object> map2, String key) {
         String val1 = getString(map1, key);
@@ -43,18 +43,18 @@ public class NestedMap {
     }
 
     /**
-     * Get the nested value given a key and a map.
+     * Get the nested val given a key and a map.
      *
      * @param map map to traverse
      * @param key key to check
-     * @return value if found
+     * @return val if found
      */
     private String getString(Map<String, Object> map, String key) {
         // keeping checking the nested maps for the key
         while (map.containsKey(key)) {
             Object val = map.get(key);
             // found a string
-            // return the value
+            // return the val
             if (val instanceof String) {
                 return (String) val;
             } else if (val instanceof Map) {

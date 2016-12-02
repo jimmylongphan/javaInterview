@@ -88,7 +88,7 @@ package com.javainterview.app.BackTrackingInterview;
                 exist(board, r, c + 1, word, nextIndex) || // next col
                 exist(board, r + 1, c, word, nextIndex); // next row
 
-        // reset the value at the current board position
+        // reset the val at the current board position
         // to allow backtracking
         board[r][c] = word.charAt(wordIndex);
 
