@@ -25,76 +25,58 @@ package com.javainterview.app.ArrayInterview;
  */
 public class MedianSortedArrays {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int len1 = nums1.length;
-        int len2 = nums2.length;
+        int length1 = nums1.length;
+        int length2 = nums2.length;
+        if ((length1 + length2) % 2 == 0) {
+            double r1 = (double) findMedianSortedArrays(nums1, 0, length1, nums2, 0, length2, (length1 + length2) / 2);
+            double r2 = (double) findMedianSortedArrays(nums1, 0, length1, nums2, 0, length2, (length1 + length2) / 2 + 1);
+            return (r1 + r2) / 2;
+        } else
+            return findMedianSortedArrays(nums1, 0, length1, nums2, 0, length2, (length1 + length2 + 1) / 2);
+    }
 
-        // if the total length is even
-        boolean isEven = ((len1 + len2) % 2 == 0);
+    public int findMedianSortedArrays(int A[], int startA, int endA, int B[], int startB, int endB, int medianIndexLength) {
+        int lengthA = endA - startA;
+        int lengthB = endB - startB;
 
-        // we want the larger array to be on the right side
-        if (len1 > len2) {
-            return findMedianSortedArrays(nums2, nums1);
-        }
+        if (lengthA <= 0)
+            return B[startB + medianIndexLength - 1];
+        if (lengthB <= 0)
+            return A[startA + medianIndexLength - 1];
+        if (medianIndexLength == 1)
+            return A[startA] < B[startB] ? A[startA] : B[startB];
 
-        // calculate the average on the right side
-        if (len1 == 0) {
-            double average;
-            if (isEven) {
-                // add the two middle numbers of the right side
-                average = nums2[len2/2] + nums2[len2/2 - 1];
-                // calculate their average
-                average /= 2.0;
-            } else {
-                // if it is not even, the return the middle of the right side
-                average = (double) nums2[len2/2];
+        int midA = (startA + endA) / 2;
+        int midB = (startB + endB) / 2;
+
+        // median of left array is smaller
+        if (A[midA] <= B[midB]) {
+            // adding the two halves is larger than our expected median length
+            if (medianIndexLength <= ((lengthA + lengthB) / 2 + 1)) {
+                // searching all of A
+                // searching first half of B
+                return findMedianSortedArrays(A, startA, endA, B, startB, midB, medianIndexLength);
             }
-            return average;
-        }
-
-        // start and end of the left array
-        int start = 0, end = len1;
-
-        // if the two arrays are one array, this is their middle index
-        int mid = (len1+len2+1) / 2;
-
-        while (start <= end) {
-            // middle of left side and move right
-            int i = start + (end - start) / 2;
-
-            // middle of both arrays and move left
-            int j = mid - i;
-
-            if (j >= 1 && i < len1 && nums2[j-1] > nums1[i]) {
-                start = i + 1;
-            } else if (i >= 1 && j < len2 && nums1[i-1] > nums2[j] ) {
-                end = i - 1;
-            } else {
-                int min_right = 0;
-                int max_left = 0;
-
-                if (j == 0) {
-                    max_left = nums1[i-1];
-                } else if (i == 0) {
-                    max_left = nums2[j-1];
-                } else {
-                    max_left = Math.max(nums1[i-1], nums2[j-1]);
-                }
-
-                if (j == len2) {
-                    min_right = nums1[i];
-                } else if (i == len1) {
-                    min_right = nums2[j];
-                } else {
-                    min_right = Math.min(nums1[i], nums2[j]);
-                }
-
-                if (isEven) {
-                    return (min_right + max_left) / 2.0d;
-                }
-                return (double) max_left;
+            else {
+                // searching second half of A
+                // searching all of B
+                return findMedianSortedArrays(A, midA + 1, endA, B, startB, endB, medianIndexLength - (lengthA / 2) - 1);
             }
-        }
+        } else {
+            // median of left array is larger
 
-        return 0d;
+            // adding the two halves is larger than our expected median length
+            if (medianIndexLength <= (lengthA + lengthB) / 2 + 1) {
+                // searching first half of A
+                // searching all of B
+                return findMedianSortedArrays(A, startA, midA, B, startB, endB, medianIndexLength);
+            }
+            else {
+                // searching all of A
+                // searching second half of B
+                return findMedianSortedArrays(A, startA, endA, B, midB + 1, endB, medianIndexLength - (lengthB / 2) - 1);
+            }
+
+        }
     }
 }
