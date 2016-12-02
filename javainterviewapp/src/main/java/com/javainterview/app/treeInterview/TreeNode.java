@@ -4,7 +4,7 @@ package com.javainterview.app.treeInterview;
  * Created on 2/21/2016.
  */
 public class TreeNode {
-    public int value;
+    public int val;
     public TreeNode left;
     public TreeNode right;
     public TreeNode next;
@@ -13,12 +13,12 @@ public class TreeNode {
     public TreeNode() {
     }
 
-    public TreeNode(int value) {
-        this.value = value;
+    public TreeNode(int val) {
+        this.val = val;
     }
 
     public void print() {
-        System.out.print(" " + value + " ");
+        System.out.print(" " + val + " ");
     }
 
     public TreeNode getUnvisitedChild() {
@@ -32,6 +32,6 @@ public class TreeNode {
     }
 
     public String toString() {
-        return Integer.toString(value);
+        return Integer.toString(val);
     }
 }

@@ -12,7 +12,7 @@ import java.util.Set;
  *
  * Start with any positive integer.
  * Replace the number by the sume of the squares of its digits.
- * Repeat until the final value equals 1.
+ * Repeat until the final val equals 1.
  * Or loops in a cycle that does not include 1.
  *
  * If it equals 1 then happy.

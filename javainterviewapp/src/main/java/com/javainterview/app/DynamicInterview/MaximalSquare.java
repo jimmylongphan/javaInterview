@@ -64,7 +64,7 @@ public class MaximalSquare {
                     // compare the minimum of top and max previous
                     maxPrevious = Math.min(maxPrevious, dp[row - 1][col]);
 
-                    // if any of the corner indexes have a one, then they will have a value
+                    // if any of the corner indexes have a one, then they will have a val
                     // set the result to the dp and add 1
                     dp[row][col] = maxPrevious + 1;
 

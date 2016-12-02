@@ -15,7 +15,7 @@ import java.util.*;
  *   BreadthFirstSearch
  *   O(n):  we visit all nodes
  * 
- *  The return value will be a list of columns.
+ *  The return val will be a list of columns.
  *  The columns will be in order from left to right, top to bottom.
  * 
  *  We will keep a map of a column and the node values that belong in that column.
@@ -34,15 +34,15 @@ import java.util.*;
  * 
  *   Visit the left node
  *     Add the left node to the queue
- *     Left node is decremented column value
- *     Add that new column value into the column queue
- *     Keep track of leftmost column value
+ *     Left node is decremented column val
+ *     Add that new column val into the column queue
+ *     Keep track of leftmost column val
  * 
  *   Visit the right node
  *     Add the right node to the queue
- *     Right node is decremented column value
- *     Add that new column value into the column queue
- *     Keep track of the rightmost column value   
+ *     Right node is decremented column val
+ *     Add that new column val into the column queue
+ *     Keep track of the rightmost column val
  * 
  *  Loop through all the columns in the map from leftmost to rightmost
  *    Add the array values into the result list
@@ -76,7 +76,7 @@ public class VerticalOrder {
         while (!treeNodeQ.isEmpty()) {
             TreeNode currentTreeNode = treeNodeQ.poll();
 
-            // get the current column value
+            // get the current column val
             int column = columnQ.poll();
 
             // check if we are keeping track of this column
@@ -85,7 +85,7 @@ public class VerticalOrder {
             }
 
             // add this node to the current column array
-            columnNodeMap.get(column).add(currentTreeNode.value);
+            columnNodeMap.get(column).add(currentTreeNode.val);
 
             // left children are one column to the left
             if (currentTreeNode.left != null) {

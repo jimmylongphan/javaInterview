@@ -45,7 +45,7 @@ public class JumpGame {
         for (int currentDistance = 0; currentDistance <= maxDistance; currentDistance++) {
             // our new max distance is either
             // current max or
-            // currentDistance added with the new value at the currentDistance
+            // currentDistance added with the new val at the currentDistance
             maxDistance = Math.max(maxDistance, currentDistance + nums[currentDistance]);
 
             // if our maximum jump can reach the target

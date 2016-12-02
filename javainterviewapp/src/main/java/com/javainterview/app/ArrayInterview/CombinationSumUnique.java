@@ -51,7 +51,7 @@ public class CombinationSumUnique {
         // our target is positive
         if (target > 0) {
             // loop through from start position to the end of the list of numbers
-            // loop as long as the target is greater than the value in current index
+            // loop as long as the target is greater than the val in current index
             for (int i=start; i < numbers.length && target >= numbers[i]; i++) {
                 // prevent duplicates
                 if ( i > start && numbers[i] == numbers[i-1]) {

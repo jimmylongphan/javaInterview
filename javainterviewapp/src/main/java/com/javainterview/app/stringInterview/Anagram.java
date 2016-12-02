@@ -11,7 +11,7 @@ public class Anagram implements Comparable<Anagram> {
     public String value;
 
     public Anagram(String s) {
-        // save the value
+        // save the val
         this.value = s;
 
         // generate the key

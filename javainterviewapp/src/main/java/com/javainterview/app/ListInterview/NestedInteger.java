@@ -36,7 +36,7 @@ public class NestedInteger implements NestedIntegerIntf {
             return values.get(0) instanceof Integer;
         }
 
-        // not desired value
+        // not desired val
         return false;
     }
 
@@ -45,12 +45,12 @@ public class NestedInteger implements NestedIntegerIntf {
      * Return null if this NestedInteger holds a nested list
      */
     public Integer getInteger() {
-        // check if we can actually get the value
+        // check if we can actually get the val
         if (!isInteger()) {
             return null;
         }
 
-        // it is possible to get the value
+        // it is possible to get the val
         return (Integer) values.get(0);
     }
 

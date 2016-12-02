@@ -80,7 +80,7 @@ public class Permutations {
     }
     
     /**
-     * Primitives are pass by value
+     * Primitives are pass by val
      * The array will store the swapped results
      * 
      * @param pos1 position first num to swap

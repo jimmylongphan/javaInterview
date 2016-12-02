@@ -32,7 +32,7 @@ import java.util.Queue;
  *
  * If we used Depth first search, then we will fill in all the nodes
  * starting at one gate.  This will cause the values to overwrite each other.
- * Still usable if we check if the adjacent node has a larger value.
+ * Still usable if we check if the adjacent node has a larger val.
  */
 public class WallsAndGates {
 

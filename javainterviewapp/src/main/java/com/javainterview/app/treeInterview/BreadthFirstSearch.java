@@ -92,7 +92,7 @@ public class BreadthFirstSearch {
                 parentMap.put(child, currentTreeNode);
 
                 // check if this is the end node
-                if (child.value == end.value) {
+                if (child.val == end.val) {
                     TreeNode backTrack = child;
                     while (backTrack != null) {
                         // build the backtracking path

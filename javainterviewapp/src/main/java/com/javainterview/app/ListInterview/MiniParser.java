@@ -26,11 +26,11 @@ import java.util.Stack;
  * Example 2:
  *      Given s = "[123,[456,[789]]]",
  *      Return a NestedInteger object containing a nested list with 2 elements:
- *      1. An integer containing value 123.
+ *      1. An integer containing val 123.
  *      2. A nested list containing two elements:
- *          i.  An integer containing value 456.
+ *          i.  An integer containing val 456.
  *          ii. A nested list with one element:
- *              a. An integer containing value 789.
+ *              a. An integer containing val 789.
  *
  */
 public class MiniParser {
@@ -77,7 +77,7 @@ public class MiniParser {
 
                 // if our stack is not empty
                 if (!stack.isEmpty()) {
-                    // take the top value and add current to it
+                    // take the top val and add current to it
                     NestedInteger pop = stack.pop();
                     pop.add(current);
 

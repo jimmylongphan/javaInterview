@@ -22,8 +22,8 @@ public class BinaryTree {
      * Storage: 0 not storing
      *
      * @param root starting node
-     * @param min  lowest possible value
-     * @param max  highest possible value
+     * @param min  lowest possible val
+     * @param max  highest possible val
      * @return true if BST
      */
     public boolean isBST(TreeNode root, Integer min, Integer max) {
@@ -32,13 +32,13 @@ public class BinaryTree {
         }
 
         // check the current node
-        if (root.value > max || root.value < min) {
-            System.out.println(String.format("%d is > %d or < %d", root.value, max, min));
+        if (root.val > max || root.val < min) {
+            System.out.println(String.format("%d is > %d or < %d", root.val, max, min));
             return false;
         }
 
         // left child must be BST
-        boolean left = isBST(root.left, min, root.value);
+        boolean left = isBST(root.left, min, root.val);
         if (!left) {
             return false;
         }
@@ -46,7 +46,7 @@ public class BinaryTree {
         System.out.println("left node is bst");
 
         // right child must be BST
-        boolean right = isBST(root.right, root.value, max);
+        boolean right = isBST(root.right, root.val, max);
         System.out.println(String.format("right node is %b bst", right));
 
         return right;
@@ -54,9 +54,9 @@ public class BinaryTree {
 
 
     /**
-     * Insert a value into this tree.
+     * Insert a val into this tree.
      *
-     * @param value value to add
+     * @param value val to add
      */
     public void insert(int value) {
         if (root == null) {
@@ -67,7 +67,7 @@ public class BinaryTree {
     }
 
     /**
-     * Naive algorithm is to check if the value is less than or equal than the current treeNode
+     * Naive algorithm is to check if the val is less than or equal than the current treeNode
      * If it is less, then recursively insert left.
      * If it is greater, then recurisvely insert right.
      *
@@ -82,9 +82,9 @@ public class BinaryTree {
             return treeNode;
         }
 
-        if (value < treeNode.value) {
+        if (value < treeNode.val) {
             treeNode.left = insert(treeNode.left, value);
-        } else if (value > treeNode.value) {
+        } else if (value > treeNode.val) {
             treeNode.right = insert(treeNode.right, value);
         }
         return treeNode;
@@ -92,9 +92,9 @@ public class BinaryTree {
 
 
     /**
-     * Base method to remove a node with value
+     * Base method to remove a node with val
      *
-     * @param value value to delete
+     * @param value val to delete
      * @return true if node was removed
      */
     public void delete(int value) {
@@ -104,18 +104,18 @@ public class BinaryTree {
 
     /**
      * If there is nothing to remove then return null.
-     * If the value is less, then we remove on the left.
+     * If the val is less, then we remove on the left.
      * Since the left side is modified, we replace our left treeNode to the new left.
      *
      * Same is applied to the right side.
      *
-     * If the value matches, then we can return one of the nodes if only one of them exist.
+     * If the val matches, then we can return one of the nodes if only one of them exist.
      *
-     * If there are two children, then we find the max value on the left side, then we replace
-     * the current treeNode with that value. After replacing, we need to remove the maxLeft value
+     * If there are two children, then we find the max val on the left side, then we replace
+     * the current treeNode with that val. After replacing, we need to remove the maxLeft val
      * on the left side.
      *
-     * Then we recursively call with that new removed value.
+     * Then we recursively call with that new removed val.
      *
      * Then we return the current treeNode which has been modified.
      *
@@ -123,7 +123,7 @@ public class BinaryTree {
      * Space:
      *
      * @param treeNode  current treeNode
-     * @param value value to delete
+     * @param value val to delete
      * @return The modified treeNode
      */
     private TreeNode delete(TreeNode treeNode, int value) {
@@ -132,10 +132,10 @@ public class BinaryTree {
             return null;
         }
 
-        if (value < treeNode.value) {
+        if (value < treeNode.val) {
             // go to the left of the tree if it exists
             treeNode.left = delete(treeNode.left, value);
-        } else if (value > treeNode.value) {
+        } else if (value > treeNode.val) {
             treeNode.right = delete(treeNode.right, value);
         } else {
             // this is the treeNode we want to delete
@@ -150,14 +150,14 @@ public class BinaryTree {
             // there are two children
             TreeNode temp = treeNode;
 
-            // find the max value on the left side
+            // find the max val on the left side
             TreeNode maxLeft = findMax(treeNode.left);
 
             // replace the current treeNode with the maxLeft
-            treeNode.value = maxLeft.value;
+            treeNode.val = maxLeft.val;
 
             // delete the maxLeft treeNode and rebuild the left
-            treeNode.left = delete(temp.left, maxLeft.value);
+            treeNode.left = delete(temp.left, maxLeft.val);
         }
 
         // treeNode has been modified where its children is modified
@@ -209,7 +209,7 @@ public class BinaryTree {
                     nextLevel.add(treeNode.right);
                 }
                 // print spaces between all the nodes on this level
-                System.out.print(treeNode.value + " ");
+                System.out.print(treeNode.val + " ");
             }
 
             // this is a new level and print a new line
@@ -237,7 +237,7 @@ public class BinaryTree {
 
         // once the nodes match, then we know that a or b is a descendant of
         // the original root
-        if (root.value == a.value || root.value == b.value) {
+        if (root.val == a.val || root.val == b.val) {
             return root;
         }
 

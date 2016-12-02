@@ -10,7 +10,7 @@ package com.javainterview.app.stringInterview;
  *
  * Keep an array of ints representing the letters of the alphabet.
  * Loop through the first string and convert to num by subtracting lowercase a.
- * Increment the array tracker with that value.
+ * Increment the array tracker with that val.
  *
  * Loop through the second string and convert to int
  * This time we will decrement the array

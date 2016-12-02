@@ -58,7 +58,7 @@ public class CountOccurrences {
         int tempCount = 1;
         int leftVal = array[0];
         for (int i=1; i<array.length; i++) {
-            // check if the index value is 1 greater
+            // check if the index val is 1 greater
             if (array[i] - leftVal == 1) {
                 tempCount++;
                 if (tempCount == count) {

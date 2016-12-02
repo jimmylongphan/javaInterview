@@ -22,7 +22,7 @@ public class TimeHashMap {
      * Method to insert data associated with key and timestamp
      *
      * @param key       key in top map
-     * @param value     value to store
+     * @param value     val to store
      * @param timestamp timestamp of data
      */
     public void insert(String key, String value, int timestamp) {
@@ -36,17 +36,17 @@ public class TimeHashMap {
         }
 
         // after retrieving the time map
-        // push the new value
+        // push the new val
         timeMap.put(timestamp, value);
     }
 
     /**
-     * Returns value at key associated with timestamp
-     * If it does not exist, then get a newer value
+     * Returns val at key associated with timestamp
+     * If it does not exist, then get a newer val
      *
-     * @param key       key of value
-     * @param timestamp timestamp associated with value
-     * @return value associated with key and timestamp
+     * @param key       key of val
+     * @param timestamp timestamp associated with val
+     * @return val associated with key and timestamp
      */
     public String get(String key, int timestamp) {
         if (!map.containsKey(key)) {
@@ -64,10 +64,10 @@ public class TimeHashMap {
 
 
     /**
-     * Returns value associated with key at latest time
+     * Returns val associated with key at latest time
      *
      * @param key key associated with data
-     * @return value of the latest entry
+     * @return val of the latest entry
      */
     public String get(String key) {
         if (!map.containsKey(key)) {

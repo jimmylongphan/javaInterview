@@ -56,7 +56,7 @@ public class Vector2D implements Iterator<Integer> {
 
     /**
      * 
-     * @return gets the next value in the 2d vector
+     * @return gets the next val in the 2d vector
      */
     @Override
     public Integer next() {
@@ -64,13 +64,13 @@ public class Vector2D implements Iterator<Integer> {
         // since the constructor does not set current Iter, we can use this
         hasNext();
         
-        // return the next value from the sub iterator
+        // return the next val from the sub iterator
         return currentIter.next();
     }
 
     /**
      * 
-     * @return true if our current or sub iterator has a value
+     * @return true if our current or sub iterator has a val
      * 
      */
     @Override
@@ -84,7 +84,7 @@ public class Vector2D implements Iterator<Integer> {
             currentIter = iterator.next().iterator();
         }
         
-        // return true if the current iter has a value
+        // return true if the current iter has a val
         return currentIter != null && currentIter.hasNext();
     }
 }

@@ -146,7 +146,7 @@ public class Isomorphic {
 
             if (map1.containsKey(c1)) {
                 // if mapping already exists
-                // then the value must match the other character
+                // then the val must match the other character
                 if (map1.get(c1) != c2) {
                     return false;
                 }
@@ -156,7 +156,7 @@ public class Isomorphic {
 
             if (map2.containsKey(c2)) {
                 // if mapping already exists
-                // then the value must match the other character
+                // then the val must match the other character
                 if (map2.get(c2) != c1) {
                     return false;
                 }

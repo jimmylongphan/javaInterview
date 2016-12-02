@@ -108,7 +108,7 @@ public class LongestSubstring {
      * Runtime: O(n * n)
      *
      * Keep an array Count where the index is the ascii code
-     * and the value is the count.
+     * and the val is the count.
      *
      * Move the end position until we reached our max k.
      * Then move the start position forward until we are less than k.

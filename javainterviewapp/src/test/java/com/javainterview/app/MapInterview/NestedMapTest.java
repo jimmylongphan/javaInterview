@@ -28,7 +28,7 @@ public class NestedMapTest {
         NestedMap nestedMap = new NestedMap();
         int comparison = nestedMap.compare(map1, map2, key);
 
-        // string in map1 has a lower value
+        // string in map1 has a lower val
         assertEquals(comparison, -1);
 
         comparison = nestedMap.compare(map1, map3, key);

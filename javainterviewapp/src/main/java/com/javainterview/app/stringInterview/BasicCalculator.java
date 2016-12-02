@@ -44,7 +44,7 @@ public class BasicCalculator {
             // handles default operation of addition
             if (Character.isDigit(c)) {
                 // shift the current number left
-                // add the current character converted to actual value
+                // add the current character converted to actual val
                 // ASCII of 0 is 48
                 num = num * 10 + c - '0';
             }
@@ -66,7 +66,7 @@ public class BasicCalculator {
 
                 // if the operation is multiply
                 if (operation == '*') {
-                    // multiply the current value to num and put back on stack
+                    // multiply the current val to num and put back on stack
                     stack.push(stack.pop() * num);
                 }
 

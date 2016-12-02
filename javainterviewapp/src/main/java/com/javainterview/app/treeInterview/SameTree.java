@@ -24,7 +24,7 @@ public class SameTree {
             return false;
         }
 
-        if (root1.value == root2.value) {
+        if (root1.val == root2.val) {
             // values are the same so we will compare their children
             boolean leftSame = isSameTree(root1.left, root2.left);
             boolean rightSame = isSameTree(root1.right, root2.right);

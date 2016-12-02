@@ -46,7 +46,7 @@ public class RateLimiting {
 
     // leetCode 359
     // key: log message
-    // value: when it is ok to log message timestamp 
+    // val: when it is ok to log message timestamp
     private Map<String, Integer> ok = new HashMap<>();
 
 

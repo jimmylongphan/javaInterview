@@ -33,7 +33,7 @@ public class CheckParenthesis {
 
         // loop through the characters in the string
         for (char c : s.toCharArray()) {
-            // if value is an opening then add it
+            // if val is an opening then add it
             if (openingChars.contains(c)) {
                 stack.push(c);
             } else if (pairs.containsKey(c)) {

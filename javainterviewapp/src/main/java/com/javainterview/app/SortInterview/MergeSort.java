@@ -48,11 +48,11 @@ public class MergeSort {
 
         // merge the two arrays
         while (left <= middle && right <= high) {
-            // if the value of th left is less, then place into temp
+            // if the val of th left is less, then place into temp
             if (array[left] < array[right]) {
                 tempArray[tempIndex++] = array[left++];
             } else {
-                // put the value from the right array into temp
+                // put the val from the right array into temp
                 tempArray[tempIndex++] = array[right++];
             }
         }

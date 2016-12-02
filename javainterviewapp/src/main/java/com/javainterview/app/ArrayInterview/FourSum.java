@@ -55,7 +55,7 @@ public class FourSum {
                 while (low < high) {
                     int sum = num[i] + num[j] + num[low] + num[high];
                     if (sum == target) {
-                        // this is an accepted value
+                        // this is an accepted val
                         // add the values at i and j and low and high
                         answer.add(Arrays.asList(num[i], num[j], num[low], num[high]));
 
@@ -77,11 +77,11 @@ public class FourSum {
 
                     } else if (sum < target) {
                         // sum is too small
-                        // increment the low value
+                        // increment the low val
                         low++;
                     } else {
                         // sum is too large
-                        // decrement the high value
+                        // decrement the high val
                         high--;
                     }
                 }

@@ -28,7 +28,7 @@ public class CoinChange {
      * Call method to return number of coins
      *
      * @param coins array of denominations
-     * @param amount value we want to sum
+     * @param amount val we want to sum
      * @return the number of coins
      */
     public int coinChange(int[] coins, int amount) {
@@ -44,7 +44,7 @@ public class CoinChange {
     /**
      *
      * @param coins array of denominations
-     * @param rem remaining value from previous step
+     * @param rem remaining val from previous step
      * @param count count[rem] = number of coins used to sum to rem
      * @return number of coins
      */
@@ -63,7 +63,7 @@ public class CoinChange {
         // count[rem-1] refers to using coins in the previous step
         // if count[rem-1] is nonzero, then we have already calculated the coins used
         if (count[rem-1] != 0) {
-            // return the value of coins used
+            // return the val of coins used
             return count[rem-1];
         }
 
@@ -76,7 +76,7 @@ public class CoinChange {
             int result = helper(coins, rem-coin, count);
 
             // result >= 0 means using this coin can be valid
-            // result < min means we have set a coin value, initially it is max
+            // result < min means we have set a coin val, initially it is max
             if (result >=0 && result < min) {
                 // since we can use this coin
                 // add one coin to our result and store it in min

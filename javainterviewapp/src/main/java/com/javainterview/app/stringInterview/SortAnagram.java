@@ -11,7 +11,7 @@ public class SortAnagram {
      * Space O(n):  using two data structures, but one will be emptied
      * Runtime O(log n): Using the poll methods
      *
-     * Taking advantage of priority queues benefits of retrieving highest value.
+     * Taking advantage of priority queues benefits of retrieving highest val.
      */
     public List<String> sortWithPriority(List<String> in) {
         List<String> result = new ArrayList<String>();
@@ -23,7 +23,7 @@ public class SortAnagram {
         }
 
         // the poll method will retrieve the head of the queue
-        // which will be the largest value determined by the String compareTo method
+        // which will be the largest val determined by the String compareTo method
         while (!anaQ.isEmpty()) {
             result.add(anaQ.poll().getValue());
         }

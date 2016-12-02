@@ -19,9 +19,9 @@ package com.javainterview.app.GameInterview;
  *
  * Solution:
  * Keep arrays for every row and column.
- * When a player adds to a row and column, we add that value to that row.
+ * When a player adds to a row and column, we add that val to that row.
  * Example:  Player 1 chooses row 2, then row[1] += 1
- * If the value of row[1] reaches the size of the table, they win.
+ * If the val of row[1] reaches the size of the table, they win.
  * If row[1] == 3, then we know player 1 put 3 x or o in row 2.
  *
  * O(1) runtime
@@ -55,7 +55,7 @@ public class TicTacToe {
      */
     public int move(int row, int col, int player) {
         int toAdd;
-        // set the value to add to the board based on player
+        // set the val to add to the board based on player
         if (player == 1) {
             toAdd = 1;
         } else {

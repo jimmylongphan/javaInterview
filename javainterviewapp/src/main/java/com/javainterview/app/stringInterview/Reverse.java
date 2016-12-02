@@ -122,7 +122,7 @@ public class Reverse {
      * Runtime: O(n)
      *
      * @param s string to reverse
-     * @return value of reversed string
+     * @return val of reversed string
      */
     public String reverseStringBuilder(String s) {
         // Strings are immutable in java so we need to use StringBuilder
@@ -132,7 +132,7 @@ public class Reverse {
         // loop through all the chars in the string
         for (int i = 0; i < s.length() / 2; i++) {
             // replace the left and right side characters
-            // in the stringbuilder value
+            // in the stringbuilder val
             result.setCharAt(i, s.charAt(endPos - i));
             result.setCharAt(endPos - i, s.charAt(i));
         }

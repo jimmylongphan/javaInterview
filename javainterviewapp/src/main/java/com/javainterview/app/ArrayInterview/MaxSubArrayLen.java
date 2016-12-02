@@ -10,7 +10,7 @@ import java.util.Map;
  * Company: Palantir, Facebook
  * Tags: Hash Table
  * 
- * Given an array nums and a target value k, find the maximum length of a subarray that sums to k.
+ * Given an array nums and a target val k, find the maximum length of a subarray that sums to k.
  * If there isn't one, return 0 instead.
  *
  * Given nums = [1, -1, 5, -2, 3], k = 3
@@ -27,7 +27,7 @@ import java.util.Map;
  *   previousExistingSum + currentSum = targetK
  * 
  *   In the loop, we subtract currentSum - targetK,
- *   this gives us a value that will work if we subtract previousExistingSum from
+ *   this gives us a val that will work if we subtract previousExistingSum from
  *   our currentSum.
  *   We look up this previousExistingSum for its index.
  *   To get our new max length, we subtract current index - previousIndex.
@@ -58,19 +58,19 @@ public class MaxSubArrayLen {
             } else if (map.containsKey(previousSum)) {
                 // the map contains (currentSum - target)
                 // use the length of the array that contains that (currentSum - target)
-                // subtract the current value and the index of that previous sum
+                // subtract the current val and the index of that previous sum
 
                 // Solution
                 // we check if this current index and sum can work if we subtract a bad sum
                 // to get the bad sum, we subtract (sum - k)
-                // that value is the one we need to eliminate
-                // Get the index of that bad sum value
+                // that val is the one we need to eliminate
+                // Get the index of that bad sum val
                 // subtract the current index from that bad index
                 // see if it is better than our current max length
                 maxLength = Math.max(maxLength, i - map.get(previousSum));
             }
 
-            // this value is new, add it into the map
+            // this val is new, add it into the map
             if (!map.containsKey(sum)) {
                 map.put(sum, i);
             }
