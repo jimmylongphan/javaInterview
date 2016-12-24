@@ -1,6 +1,9 @@
 package com.javainterview.app.BackTrackingInterview;
 
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * LeetCode 77
  * 
@@ -18,17 +21,17 @@ package com.javainterview.app.BackTrackingInterview;
  * O(N!) factorial, for every choice, the is a (current-1) recursion
  * 
  */
- 
+
 public class Combinations {
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> result = new LinkedList<>();
-        
+
         List<Integer> current = new LinkedList<>();
         combineHelper(result, current, 1, n, k);
-        
+
         return result;
     }
-    
+
     public void combineHelper(List<List<Integer>> result, List<Integer> current, int start, int n, int k) {
         // k is current size
         // no more to process, add the current temp result
@@ -36,16 +39,16 @@ public class Combinations {
             // make a copy of the result
             result.add(new LinkedList<Integer>(current));
         }
-        
+
         // iterate through all values
-        for (int i=start; i<=n; i++) {
+        for (int i = start; i <= n; i++) {
             // choose our current value
             current.add(i);
-            
+
             // recursively call with this new value
             // update the starting value, and decrease the k size
-            combineHelper(result, current, i+1, n, k-1);
-            
+            combineHelper(result, current, i + 1, n, k - 1);
+
             // remove our latest choice
             current.remove(current.size() - 1);
         }

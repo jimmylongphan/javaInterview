@@ -1,5 +1,8 @@
 package com.javainterview.app.BackTrackingInterview;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * LeetCode 89
  * 
@@ -34,29 +37,29 @@ package com.javainterview.app.BackTrackingInterview;
  * We shift the current value to the right by 1.
  * xor all the values to make a different value by 1 bit.
  */
- 
- public class Solution {
-     public List<Integer> grayCode(int n) {
-         List<Integer> result = new LinkedList<>();
-         
-         // n represents the total bits in the code
-         // max value is one shifted n times
-         // n = 2
-         // 1 << 2:  1 -> 10 -> 100
-         // loop all from 00 to 11, less than 100
-         int maxValue = 1 << n;
-         
-         // loop through all values from 0 to max
-         int xorVal;
-         for (int i=0; i < maxValue; i++) {
-             // shift the current val to the right
-             xorVal = i >> 1;
-             
-             // xor the current number with the xorVal
-             // add to our result
-             result.add(i ^ xorVal);
-         }
-         
-         return result;
-     }
- }
+
+public class GrayCode {
+    public List<Integer> grayCode(int n) {
+        List<Integer> result = new LinkedList<>();
+
+        // n represents the total bits in the code
+        // max value is one shifted n times
+        // n = 2
+        // 1 << 2:  1 -> 10 -> 100
+        // loop all from 00 to 11, less than 100
+        int maxValue = 1 << n;
+
+        // loop through all values from 0 to max
+        int xorVal;
+        for (int i = 0; i < maxValue; i++) {
+            // shift the current val to the right
+            xorVal = i >> 1;
+
+            // xor the current number with the xorVal
+            // add to our result
+            result.add(i ^ xorVal);
+        }
+
+        return result;
+    }
+}
