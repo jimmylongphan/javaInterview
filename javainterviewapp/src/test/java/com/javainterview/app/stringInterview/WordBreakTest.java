@@ -23,7 +23,7 @@ public class WordBreakTest {
         String test = "leetcode";
 
         WordBreak wb = new WordBreak();
-        List<String> result = wb.wordBreak(test, dictionary);
+        List<String> result = wb.wordBreak2(test, dictionary);
         Assert.assertEquals(result, words);
     }
 }
