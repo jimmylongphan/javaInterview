@@ -1,8 +1,6 @@
 package com.javainterview.app.stringInterview;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * LeetCode 139
@@ -68,7 +66,7 @@ public class WordBreak {
         // this shows all characters are breakable
         // off by 1 - accessing the very last index
         if (breakable[s.length()]) {
-            return result;
+            return true;
         }
 
         return false;
@@ -77,7 +75,7 @@ public class WordBreak {
     /**
      * LeetCode 140
      */
-    public List<String> wordBreak(String s, Set<String> wordDict) {
+    public List<String> wordBreak2(String s, Set<String> wordDict) {
         Map<String, List<String>> map = new HashMap<>();
         return wordBreakHelper(s, wordDict, map);
     }
