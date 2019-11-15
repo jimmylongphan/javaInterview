@@ -1,6 +1,6 @@
 package com.javainterview.app.ArrayInterview;
 
-import org.junit.Assert;
+
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -17,7 +17,7 @@ public class RotateArrayTest {
 
         RotateArray rotateArray = new RotateArray();
         rotateArray.rotate(nums, 0);
-        Assert.assertArrayEquals(nums, expected);
+        assertEquals(nums, expected);
     }
 
     @Test
@@ -27,6 +27,6 @@ public class RotateArrayTest {
 
         RotateArray rotateArray = new RotateArray();
         rotateArray.rotate(nums, 1);
-        Assert.assertArrayEquals(nums, expected);
+        assertEquals(nums, expected);
     }
 }
