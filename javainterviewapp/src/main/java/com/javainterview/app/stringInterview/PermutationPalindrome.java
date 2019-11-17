@@ -21,27 +21,17 @@ public class PermutationPalindrome {
             }
         }
 
-        // check if it is a palindrome
-        // only 1 element should have a value of 1 if it is odd
-        // if it is even, then all values should be 2
-        boolean shouldHaveOne = false;
-        if (theString.length() % 2 == 1) {
-            // odd length
-            shouldHaveOne = true;
-        }
-
-        for ( int count : counts.values()) {
-            if (shouldHaveOne) {
-                if (count % 2 == 1) {
-                    shouldHaveOne = false;
-                }
-            } else {
-                if (count % 2 != 0) {
-                    return false;
-                }
+        int oddCounts = 0;
+        for (int count : counts.values()) {
+            // if odd, then update oddcounts
+            if (count % 2 == 1) {
+                oddCounts++;
+            }
+            // if there are more than 1 oddCount, then is not a palindrome
+            if (oddCounts > 1) {
+                return false;
             }
         }
-
         return true;
     }
 
