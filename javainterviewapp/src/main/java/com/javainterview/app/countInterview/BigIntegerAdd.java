@@ -3,10 +3,10 @@ package com.javainterview.app.countInterview;
 /**
  * Created on 2/17/2016.
  */
-public class BigInteger {
+public class BigIntegerAdd {
 
     /**
-     * Method to add two integers as BigInteger
+     * Method to add two integers as BigIntegerAdd
      * @param int1 first val
      * @param int2 second val
      * @return their sum represented as a string
