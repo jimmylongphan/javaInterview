@@ -1,11 +1,33 @@
 package com.javainterview.app.inputs;
 
+import java.io.*;
 import java.util.Scanner;
 
 /**
  * Created on 10/15/2016.
  */
 public class Inputs {
+    public static void readFile(String fileName) throws IOException {
+        File f = new File(fileName);
+        FileReader fileReader;
+        FileWriter fileWriter;
+
+        fileReader = new FileReader(f);
+        fileWriter = new FileWriter(f);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+        // read from file
+        String line;
+        while( (line = bufferedReader.readLine()) != null) {
+            System.out.println(line);
+        }
+
+        // write to file
+        bufferedWriter.write("foo");
+        bufferedWriter.close();
+    }
+
     public static class Inner{
         int i;
     }
