@@ -1,8 +1,11 @@
-package com.javainterview.app.Caffeine;
+package com.javainterview.app.KeyValueStore;
 
+/**
+ * Enum of the supported actions
+ *
+ */
 public enum Action {
     SET("SET"),
-    GET("GET"),
     UNSET("UNSET");
 
     public final String label;
