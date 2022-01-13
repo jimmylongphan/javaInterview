@@ -37,18 +37,18 @@ public class KVStore<K, V> {
     private int size;
 
     // this is the current and most recent values
-    private Map<K, V> currentValues;
+    private Map<K, KVStoreHistoryNode<K, V>> currentValues;
 
     // count the number of used values
     private Map<V, Integer> valuesCount;
 
     // store the actions in a Deque
-    // each transaction is a separate level in the stack
+    // each transaction is a separate level in the map
     // supports nested levels
-    private Stack<Deque<KVStoreHistoryNode>> historyPerTransaction;
+    private Map<Long, Deque<KVStoreHistoryNode<K, V>>> historyPerTransaction;
 
     // this is the current transaction
-    private Deque<KVStoreHistoryNode> historyNodes;
+    private Deque<KVStoreHistoryNode<K, V>> historyNodes;
 
     // we can use a transactionId if we want to compare
     // single counter for all actions
@@ -67,12 +67,16 @@ public class KVStore<K, V> {
         this.writeLock = rwLock.writeLock();
 
         this.transactionIdCounter = 0;
-        this.currentValues = new HashMap<K, V>();
+        this.currentValues = new HashMap<K, KVStoreHistoryNode<K, V>>();
         this.valuesCount = new HashMap<V, Integer>();
         this.historyNodes = new LinkedList<>();
-        this.historyPerTransaction = new Stack<Deque<KVStoreHistoryNode>>();
+        this.historyPerTransaction = new HashMap<>();
 
-        this.historyPerTransaction.push(historyNodes);
+        this.historyPerTransaction.put(transactionIdCounter, historyNodes);
+    }
+
+    public void printHistoryPerTransaction() {
+        System.out.println(this.historyPerTransaction.toString());
     }
 
     public long getTransactionIdCounter() {
@@ -93,8 +97,9 @@ public class KVStore<K, V> {
     public V get(K key) {
         readLock.lock();
         try {
+            KVStoreHistoryNode<K, V> node = currentValues.get(key);
             // reading data
-            return currentValues.get(key);
+            return node.getPreviousValue();
         } finally {
             readLock.unlock();
         }
@@ -130,7 +135,8 @@ public class KVStore<K, V> {
             valuesCount.computeIfPresent(oldValue, (k, v) -> v - 1);
 
             // set the recent value
-            currentValues.put(key, value);
+            KVStoreHistoryNode<K, V> node = new KVStoreHistoryNode(transactionIdCounter, Action.SET, key, value);
+            currentValues.put(key, node);
         } finally {
             writeLock.unlock();
         }
@@ -152,21 +158,25 @@ public class KVStore<K, V> {
     private void set(K key, V value, boolean rollback) {
         writeLock.lock();
         try {
-            V oldVal = currentValues.get(key);
+            KVStoreHistoryNode<K, V> oldNode = currentValues.get(key);
 
             if(!rollback) {
-                // store the old value
-                // will be null if not exists
-                KVStoreHistoryNode n = new KVStoreHistoryNode(transactionIdCounter, Action.SET, key, oldVal);
-                // add to the list
-                historyNodes.add(n);
+                if (oldNode == null) {
+                    oldNode = new KVStoreHistoryNode(transactionIdCounter, Action.SET, key, null);
+                }
+
+                long transactionIdOfNode = oldNode.getTransactionId();
+                // pair this node and its value to its proper transaction list
+                this.historyPerTransaction.get(transactionIdOfNode).add(oldNode);
             } else {
                 // if there is no transaction,
                 // then just set the current values
             }
 
+            V oldVal = oldNode == null ? null : oldNode.getPreviousValue();
             updateCountsAndValues(key, value, oldVal);
         } finally {
+            printHistoryPerTransaction();
             writeLock.unlock();
         }
     }
@@ -222,8 +232,9 @@ public class KVStore<K, V> {
             this.transactionIdCounter++;
 
             // push this new one onto the stack
-            this.historyPerTransaction.push(historyNodes);
+            this.historyPerTransaction.put(this.transactionIdCounter, historyNodes);
         } finally {
+            printHistoryPerTransaction();
             writeLock.unlock();
         }
     }
@@ -233,26 +244,33 @@ public class KVStore<K, V> {
      * The values stay in currentValues
      *
      * Continue with the previous transaction
+     * @return
      */
-    public void commit() {
+    public Deque<KVStoreHistoryNode<K, V>> commit() {
         // current transactions are removed
         // cannot rollback
         // values stay
         writeLock.lock();
 
         try {
+            Deque<KVStoreHistoryNode<K, V>> rollBackHistory;
             if(transactionIdCounter > 0) {
-                historyPerTransaction.pop();
+                rollBackHistory = historyPerTransaction.remove(this.transactionIdCounter);
                 this.transactionIdCounter--;
 
                 // continue with the previous transaction
-                historyNodes = historyPerTransaction.peek();
+                historyNodes = historyPerTransaction.get(this.transactionIdCounter);
             } else {
-                // no more history
-                // keep current values
+                // interate through very first history
+                rollBackHistory = historyPerTransaction.get(this.transactionIdCounter);
+
+                // restart the original state
                 historyNodes = new LinkedList<>();
+                historyPerTransaction.put(transactionIdCounter, historyNodes);
             }
+            return rollBackHistory;
         } finally {
+            printHistoryPerTransaction();
             writeLock.unlock();
         }
     }
@@ -266,18 +284,16 @@ public class KVStore<K, V> {
      * NOTE: commit will decrement the transactionIdCounter
      */
     public void rollback() {
-        // cannot rollback if at original state
-        if(transactionIdCounter == 0) {
-            return;
-        }
-
         writeLock.lock();
         try {
-            // go backwards on the list and execute the values
-            Deque<KVStoreHistoryNode> log = historyNodes;
+            // drop current history
+            // implement the historical values from the history
+            Deque<KVStoreHistoryNode<K, V>> log = commit();
+
+            System.out.println(String.format("rollback transactionId: %d, log size: %d", transactionIdCounter, log.size()));
 
             // initialize the iterator to be at the end
-            Iterator<KVStoreHistoryNode> it = log.descendingIterator();
+            Iterator<KVStoreHistoryNode<K, V>> it = log.iterator();
 
             while(it.hasNext()) {
                 KVStoreHistoryNode<K, V> n = it.next();
@@ -285,15 +301,13 @@ public class KVStore<K, V> {
                 K key = n.getKey();
                 V previousValue = n.getPreviousValue();
 
+                System.out.println(String.format("Inside rollback: commitId: %d, key: %s, value: %s", n.getTransactionId(), n.getKey(), n.getPreviousValue()));
+
                 // set and unset support updating the values and the counts
                 // reuse their methods
                 // set rollback parameter to prevent storing history again
                 set(key, previousValue, true);
             }
-
-            // finalize the reversal by committing which pops the stack
-            // and sets the current transaction list
-            commit();
         } finally {
             writeLock.unlock();
         }

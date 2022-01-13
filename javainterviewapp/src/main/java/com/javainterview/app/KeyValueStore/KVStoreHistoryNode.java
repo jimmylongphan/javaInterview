@@ -61,4 +61,14 @@ public class KVStoreHistoryNode<K, V> {
         this.command = command;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "KVStoreHistoryNode{" +
+                "transactionId=" + transactionId +
+                ", command=" + command +
+                ", key=" + key +
+                ", previousValue=" + previousValue +
+                '}';
+    }
 }
