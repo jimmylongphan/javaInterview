@@ -1,0 +1,4 @@
+SET A 123
+GET A
+SET A 456
+GET A
