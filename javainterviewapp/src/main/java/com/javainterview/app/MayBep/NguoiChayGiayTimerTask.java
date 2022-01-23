@@ -12,6 +12,7 @@ import java.util.TimerTask;
  */
 public class NguoiChayGiayTimerTask extends TimerTask {
     private static final Logger logger = LogManager.getLogger(NguoiChayGiayTimerTask.class);
+    private static final String DELIVERED = "Order {} delivered at {}";
 
     private Bep bep;
     private GoiMon goiMon;
@@ -27,6 +28,7 @@ public class NguoiChayGiayTimerTask extends TimerTask {
     @Override
     public void run() {
         long currentTimeMillis = System.currentTimeMillis();
+        logger.info(DELIVERED, goiMon.getId(), currentTimeMillis);
         bep.removeGoiMon(currentTimeMillis, goiMon);
     }
 }

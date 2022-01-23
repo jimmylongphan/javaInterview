@@ -16,6 +16,7 @@ import java.util.concurrent.BlockingQueue;
 public class NguoiChayGiayTimer implements Runnable {
     private static final Logger logger = LogManager.getLogger(NguoiChayGiayTimer.class);
 
+    private static final String DELIVER = "order id: {} will be delivered in {} milliseconds";
     private static final int TWO = 2;
 
     private Timer timer;
@@ -49,7 +50,7 @@ public class NguoiChayGiayTimer implements Runnable {
                 GoiMon goiMon = blockingQueue.take();
                 long delay = calculateDelay(goiMon);
 
-                logger.info(String.format("order id: %s will have delay %d milliseconds", goiMon.getId(), delay));
+                logger.info(DELIVER, goiMon.getId(), delay);
                 NguoiChayGiayTimerTask timerTask = new NguoiChayGiayTimerTask(bep, goiMon);
                 timer.schedule(timerTask, delay);
             } catch (InterruptedException e) {

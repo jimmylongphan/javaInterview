@@ -15,6 +15,8 @@ import java.util.concurrent.BlockingQueue;
  */
 public class GoiMonTimerTask extends TimerTask {
     private static final Logger logger = LogManager.getLogger(GoiMonTimerTask.class);
+    private static final String READ = "read {} orders";
+    private static final String FINISHED = "Finished reading {} orders.";
 
     private final Timer timer;
     private final ObjectMapper objectMapper;
@@ -48,7 +50,6 @@ public class GoiMonTimerTask extends TimerTask {
                     && currentNumOrders < numOrders && totalOrders < maxOrders) {
                 // Read a contact instance using ObjectMapper and do something with it
                 GoiMon goiMon = objectMapper.readValue(jsonParser, GoiMon.class);
-                goiMon.setStartTime(currentTimeMillis);
 
                 // add it to the kitchen
                 // the kitchen will determine the shelf
@@ -60,12 +61,12 @@ public class GoiMonTimerTask extends TimerTask {
                 currentNumOrders++;
                 totalOrders++;
             }
-            logger.info(String.format("read %d orders", currentNumOrders));
+            logger.info(READ, currentNumOrders);
 
             if (totalOrders >= maxOrders) {
                 cancel();
                 timer.cancel(); // cancel the parent timer
-                logger.info(String.format("Finished reading %d orders.", totalOrders));
+                logger.info(FINISHED, totalOrders);
             }
         } catch (Exception e) {
             cancel();

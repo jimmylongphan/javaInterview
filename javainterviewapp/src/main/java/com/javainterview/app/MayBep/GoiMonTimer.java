@@ -18,6 +18,7 @@ import java.util.concurrent.BlockingQueue;
  */
 public class GoiMonTimer {
     private static final Logger logger = LogManager.getLogger(GoiMonTimer.class);
+    private static final String READING = "Reading file {}";
 
     private final InputStream inputStream;
     private final ObjectMapper objectMapper;
@@ -32,7 +33,7 @@ public class GoiMonTimer {
     private BlockingQueue blockingQueue;
 
     public GoiMonTimer(String fileName, int ordersPerSecond, int periodMilliseconds, int maxOrders, Bep bep, BlockingQueue queue) throws IOException {
-        logger.info(String.format("Reading file %s", fileName));
+        logger.info(READING, fileName);
         this.inputStream = new FileInputStream(fileName);
         this.objectMapper = new ObjectMapper();
         this.jsonParser = objectMapper.getFactory().createParser(inputStream);

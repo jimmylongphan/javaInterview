@@ -18,21 +18,29 @@ public class MayBep {
 
         String ordersFileName = "C:\\Users\\SupraSaiyaJim\\IdeaProjects\\javaInterview\\javainterviewapp\\src\\main\\java\\com\\javainterview\\app\\MayBep\\orders.json";
         int ordersPerSecond = 2;
-        int maxOrders = 3;
-        int periodMilliSeconds = 1000;
-        int hotShelfCapacity = 0;
-        int coldShelfCapacity = 0;
-        int frozenShelfCapacity = 0;
-        int overflowShelfCapacity = 0;
+        int maxOrders = 1000;
+        int periodMilliseconds = 1000;
+        int hotShelfCapacity = 10;
+        int coldShelfCapacity = 10;
+        int frozenShelfCapacity = 10;
+        int overflowShelfCapacity = 15;
+        int sweepPeriodMilliseconds = 1000;
 
         try {
             BlockingQueue queue = new LinkedBlockingDeque();
 
+            // create the shelves
             Bep bep = new Bep(hotShelfCapacity, coldShelfCapacity, frozenShelfCapacity, overflowShelfCapacity);
 
-            GoiMonTimer goiMonTimer = new GoiMonTimer(ordersFileName, ordersPerSecond, periodMilliSeconds, maxOrders, bep, queue);
+            // setup the sweeper
+            NguoiThuGomRacTimer nguoiThuGomRacTimer = new NguoiThuGomRacTimer(bep, sweepPeriodMilliseconds);
+            // nguoiThuGomRacTimer.sweep();
+
+            // setup order readers
+            GoiMonTimer goiMonTimer = new GoiMonTimer(ordersFileName, ordersPerSecond, periodMilliseconds, maxOrders, bep, queue);
             goiMonTimer.readStream();
 
+            // setup couriers
             NguoiChayGiayTimer nguoiChayGiayTimer = new NguoiChayGiayTimer(bep, queue);
             nguoiChayGiayTimer.run();
         } catch (FileNotFoundException e) {

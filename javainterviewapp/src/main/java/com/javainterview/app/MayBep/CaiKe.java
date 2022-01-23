@@ -3,8 +3,9 @@ package com.javainterview.app.MayBep;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * A class representing a shelf
@@ -15,21 +16,34 @@ import java.util.Set;
 public class CaiKe {
     private static final Logger logger = LogManager.getLogger(CaiKe.class);
 
-    private static final String ADD_ORDER = "%s shelf added order id: %s";
-    private static final String REMOVE_ORDER = "%s shelf removed order id: %s, delay: %d";
-    private static final String DOES_NOT_HAVE_ORDER = "%s shelf does not contain order id: %s";
+    private static final String SHELVING = "{} shelf is shelving order: {} at: {}";
+    private static final String UNSHELVING = "{} shelf is unshelving order: {} at: {}";
 
     private int shelfDecayModifier;
     private TempEnum tempEnum;
     private int maxCapacity;
-    private Set<GoiMon> goiMons;
+    private int currentCapacity;
+
+    // private Set<GoiMon> goiMons;
+
+    // 1 thread to write
+    // multiple threads to read
+    // reentrant means same thread can acquire it
+    private ReadWriteLock rwLock;
+    private Lock readLock;
+    private Lock writeLock;
 
     public CaiKe(TempEnum tempEnum, int maxCapacity, int shelfDecayModifier) {
         this.shelfDecayModifier = shelfDecayModifier;
         this.tempEnum = tempEnum;
         this.maxCapacity = maxCapacity;
+        this.currentCapacity = 0;
 
-        this.goiMons = new HashSet<>();
+        // this.goiMons = new HashSet<>();
+
+        this.rwLock = new ReentrantReadWriteLock();
+        this.readLock = rwLock.readLock();
+        this.writeLock = rwLock.writeLock();
     }
 
     public TempEnum getTempEnum() {
@@ -38,6 +52,15 @@ public class CaiKe {
 
     public CaiKe setTempEnum(TempEnum tempEnum) {
         this.tempEnum = tempEnum;
+        return this;
+    }
+
+    public int getShelfDecayModifier() {
+        return shelfDecayModifier;
+    }
+
+    public CaiKe setShelfDecayModifier(int shelfDecayModifier) {
+        this.shelfDecayModifier = shelfDecayModifier;
         return this;
     }
 
@@ -50,52 +73,43 @@ public class CaiKe {
         return this;
     }
 
-    public Set<GoiMon> getGoiMons() {
-        return goiMons;
-    }
+    public void addGoiMon(long currentTimeMillis, GoiMon goiMon) {
+        writeLock.lock();
 
-    public CaiKe setGoiMons(Set<GoiMon> goiMons) {
-        this.goiMons = goiMons;
-        return this;
-    }
-
-    public boolean addGoiMon(long currentTimeMillis, GoiMon goiMon) {
-        if (isFull()) {
-            return false;
+        try {
+            logger.info(SHELVING, tempEnum, goiMon.getId(), currentTimeMillis);
+            this.currentCapacity++;
+        } finally {
+            writeLock.unlock();
         }
-
-        logger.info(String.format(ADD_ORDER, this.tempEnum.toString(), goiMon.getId()));
-        this.goiMons.add(goiMon);
-        // since this order is now on this shelf
-        // update its shelfDecayModifier
-        goiMon.setShelfDecayModifier(this.shelfDecayModifier);
-
-        goiMon.computeExpirationTime(currentTimeMillis);
-        return true;
     }
 
-    public boolean removeGoiMon(long currentTimeMillis, GoiMon goiMon) {
-        if (!contains(goiMon)) {
-            logger.info(String.format(DOES_NOT_HAVE_ORDER, this.tempEnum.toString(), goiMon.getId()));
-            return false;
+    public void removeGoiMon(long currentTimeMillis, GoiMon goiMon) {
+        writeLock.lock();
+
+        try {
+            this.currentCapacity--;
+            logger.info(UNSHELVING, tempEnum, goiMon.getId(), currentTimeMillis);
+        } finally {
+            writeLock.unlock();
         }
-
-        long delay = currentTimeMillis - goiMon.getStartTime();
-        logger.info(String.format(REMOVE_ORDER, this.tempEnum.toString(), goiMon.getId(), delay));
-        this.goiMons.remove(goiMon);
-
-        return true;
     }
 
     public boolean isFull() {
-        return this.maxCapacity == this.goiMons.size();
+        readLock.lock();
+        try {
+            return this.maxCapacity == this.currentCapacity;
+        } finally {
+            readLock.unlock();
+        }
     }
 
     public int size() {
-        return this.goiMons.size();
-    }
-
-    public boolean contains(GoiMon goiMon) {
-        return this.goiMons.contains(goiMon);
+        readLock.lock();
+        try {
+            return this.currentCapacity;
+        } finally {
+            readLock.unlock();
+        }
     }
 }

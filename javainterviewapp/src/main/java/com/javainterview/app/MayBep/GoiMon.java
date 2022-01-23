@@ -1,11 +1,21 @@
 package com.javainterview.app.MayBep;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Order
  */
 public class GoiMon {
+    private static final Logger logger = LogManager.getLogger(GoiMon.class);
+
     // fields from json input
     private String id;
     private String name;
@@ -16,10 +26,29 @@ public class GoiMon {
     // extra metadata
     private long shelfLifeMillis;
     private TempEnum tempEnum;  // handling temp as enum
-    private long startTime;  // this is when the order was created
-    private long expirationTime; // this is the expected expiration time of the order
-    private double value; // this is the value of the order
+    private long shelfTime;  // this is when the order is currently shelved
     private int shelfDecayModifier; // this is the decay modifier
+    private List<Long> unshelfTimes; // keep track if this order moved shelves
+
+    // The order will keep a reference to the shelf it is on
+    private CaiKe caiKe;
+
+    // 1 thread to write
+    // multiple threads to read
+    // reentrant means same thread can acquire it
+    private ReadWriteLock rwLock;
+    private Lock readLock;
+    private Lock writeLock;
+
+    /**
+     * Constructor
+     */
+    public GoiMon() {
+        this.rwLock = new ReentrantReadWriteLock();
+        this.readLock = rwLock.readLock();
+        this.writeLock = rwLock.writeLock();
+        this.unshelfTimes = new LinkedList<>();
+    }
 
     public String getId() {
         return id;
@@ -77,24 +106,6 @@ public class GoiMon {
         return this;
     }
 
-    public long getExpirationTime() {
-        return expirationTime;
-    }
-
-    public GoiMon setExpirationTime(long expirationTime) {
-        this.expirationTime = expirationTime;
-        return this;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public GoiMon setValue(double value) {
-        this.value = value;
-        return this;
-    }
-
     public int getShelfDecayModifier() {
         return shelfDecayModifier;
     }
@@ -104,40 +115,78 @@ public class GoiMon {
         return this;
     }
 
-    public long getStartTime() {
-        return startTime;
+    public CaiKe getCaiKe() {
+        return caiKe;
     }
 
-    public GoiMon setStartTime(long startTime) {
-        this.startTime = startTime;
+    public GoiMon setCaiKe(CaiKe caiKe) {
+        this.caiKe = caiKe;
         return this;
     }
 
     /**
-     * Using the Order Value formula, we can compute the shelf life
-     * and the exact time the value will be 0
+     * Compute the value of this order
+     * Order will have values based on how many shelves it was shelved on
      *
-     * value = (shelfLife - decayRate * orderAge * shelfDecayModifier) / shelfLife
-     *
-     * Since value will be 0, we will solve for orderAge.
-     *
-     * 0 = (shelfLife - decayRate * orderAge * shelfDecayModifier) / shelfLife
-     * 0 = shelfLife - decayRate * orderAge * shelfDecayModifier
-     * decayRate * orderAge * shelfDecayModifier = shelfLife
-     *
-     * orderAge = shelfLife / (decayRate * shelfDecayModifier)
-     * orderAge will be in milliseconds to be consistent
-     *
-     * We add orderAge to the current time stamp to get the expiration time
+     * @param currentTimeMillis
      */
-    public void computeExpirationTime(long currentTimeMillis) {
-        long orderAge = (long) (shelfLifeMillis / (decayRate * shelfDecayModifier));
-        this.expirationTime = currentTimeMillis + orderAge;
+    public double computeValue(long currentTimeMillis) {
+        readLock.lock();
+        try {
+            long orderAge = currentTimeMillis - this.shelfTime;
+            double value = (shelfLifeMillis - decayRate * orderAge * shelfDecayModifier) / shelfLife;
+            return value;
+        } finally {
+            readLock.unlock();
+        }
     }
 
-    public void computeValue(long currentTimeMillis) {
-        long orderAge = currentTimeMillis - this.startTime;
-        this.value = (shelfLifeMillis - decayRate * orderAge * shelfDecayModifier) / shelfLife;
+    /**
+     * Method to shelf this order onto this shelf
+     *
+     * @param currentTimeMillis
+     * @param shelf
+     */
+    public void shelf(long currentTimeMillis, CaiKe shelf) {
+        writeLock.lock();
+        try {
+            // set current shelf values
+            this.caiKe = shelf;
+            this.shelfTime = currentTimeMillis;
+            this.shelfDecayModifier = shelf.getShelfDecayModifier();
+
+            // update the shelf
+            shelf.addGoiMon(currentTimeMillis, this);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    public CaiKe unshelf(long currentTimeMillis) {
+        writeLock.lock();
+        try {
+            CaiKe shelf = this.caiKe;
+
+            // if not already unshelved
+            if (shelf != null) {
+                // update the shelf
+                shelf.removeGoiMon(currentTimeMillis, this);
+            }
+
+            // if this order is already on a shelf and it is reshelving
+            // TODO
+            // save the previous values
+
+            // update any attributes needed to store values
+            unshelfTimes.add(currentTimeMillis);
+
+            // unlink
+            this.caiKe = null;
+
+            return shelf;
+        } finally {
+            writeLock.unlock();
+        }
     }
 
     @Override
